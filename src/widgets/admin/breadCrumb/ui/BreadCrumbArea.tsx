@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
-export const BreadCrumbArea = memo(() => {
+const BreadCrumbArea = memo(() => {
   return (
     <ol className="breadcrumb bg-transparent breadcrumb-sm pl-0 pr-0">
       <li className="breadcrumb-item">
@@ -17,3 +17,4 @@ export const BreadCrumbArea = memo(() => {
 });
 
 BreadCrumbArea.displayName = "BreadCrumbArea";
+export default BreadCrumbArea;
