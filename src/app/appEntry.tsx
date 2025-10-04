@@ -1,10 +1,19 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./styles/index.css";
+import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import { Suspense } from "react";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+const rootElement = document.getElementById("page-wrapper") as HTMLElement;
+if (rootElement.hasChildNodes()) {
+  ReactDOM.hydrateRoot(
+    rootElement,
+    <Suspense fallback={<></>}>
+      <App />
+    </Suspense>
+  );
+} else {
+  ReactDOM.createRoot(rootElement).render(
+    <Suspense fallback={<></>}>
+      <App />
+    </Suspense>
+  );
+}
