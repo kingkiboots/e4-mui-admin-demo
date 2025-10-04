@@ -1,10 +1,13 @@
 import PageContentLayout from "@/widgets/admin/common/ui/PageContentLayout";
+import Meta from "./Meta";
 
 const LimitMngPage = () => {
   return (
-    <PageContentLayout>
-      <div>LimitMngPage</div>
-    </PageContentLayout>
+    <Meta>
+      <PageContentLayout>
+        <div>LimitMngPage</div>
+      </PageContentLayout>
+    </Meta>
   );
 };
 
