@@ -18,6 +18,19 @@ const GlobalStyle = memo(() => {
             letterSpacing: "0.1px",
             backgroundColor: "#fff",
           },
+          "a:link,a:visited": {
+            textDecoration: "none",
+            color: "#886ab5",
+            cursor: "pointer",
+            backgroundColor: "transparent",
+            touchAction: "manipulation",
+          },
+          "a:hover,a:active": {},
+          "ul, ol": {
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+          },
         }}
       />
     </>
