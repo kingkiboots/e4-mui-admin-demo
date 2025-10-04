@@ -1,9 +1,18 @@
+import ThemeProvider from "./provider/ThemeProvider";
 import { appRouter } from "./appRouter";
-import "./styles/App.css";
 import { RouterProvider } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import GlobalStyle from "./styles/GlobalStyle";
 
 function App() {
-  return <RouterProvider router={appRouter} />;
+  return (
+    <HelmetProvider>
+      <ThemeProvider>
+        <GlobalStyle />
+        <RouterProvider router={appRouter} />
+      </ThemeProvider>
+    </HelmetProvider>
+  );
 }
 
 export default App;
