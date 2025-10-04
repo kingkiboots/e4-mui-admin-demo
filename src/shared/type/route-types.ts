@@ -24,12 +24,14 @@ type PathBuilder<Path extends string> = [ExtractParams<Path>] extends [never]
 // 중첩 라우트 변환
 export type NestedRoutes<
   Base extends string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Routes extends Record<string, any>,
   Absolute extends boolean = true
 > = {
   [K in keyof Routes]: Routes[K] extends string
     ? PathBuilder<Join<Base, Routes[K], Absolute>>
-    : Routes[K] extends Record<string, any>
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Routes[K] extends Record<string, any>
     ? NestedRoutes<
         Join<Base, Extract<keyof Routes[K], string>, Absolute>,
         Routes[K],
