@@ -15,6 +15,8 @@ export interface PageInnerProps extends BoxProps {
  */
 export const PageInner = styled(Box, {
   shouldForwardProp: (prop) => prop !== "spacing" && prop !== "maxWidth",
+  name: "PageInner",
+  label: "page-inner",
 })<PageInnerProps>(({ theme, spacing = 0, maxWidth, style }) => ({
   display: "flex",
   alignItems: "stretch",
@@ -35,6 +37,5 @@ export const PageInner = styled(Box, {
   }),
   ...style,
 }));
-PageInner.displayName = "PageInner";
 
 export default PageInner;

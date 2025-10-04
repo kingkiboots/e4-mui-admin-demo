@@ -12,6 +12,8 @@ export interface PageWrapperProps extends BoxProps {
  */
 export const PageWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "fullHeight",
+  name: "PageWrapper",
+  label: "page-wrapper",
 })<PageWrapperProps>(({ theme, fullHeight = false, style }) => ({
   position: "relative",
   display: "flex",
@@ -30,6 +32,5 @@ export const PageWrapper = styled(Box, {
   },
   ...style,
 }));
-PageWrapper.displayName = "PageWrapper";
 
 export default PageWrapper;
