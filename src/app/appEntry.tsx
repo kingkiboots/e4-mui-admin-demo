@@ -2,7 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { Suspense } from "react";
 
-const rootElement = document.getElementById("page-wrapper") as HTMLElement;
+const rootElement = document.getElementById("wrap") as HTMLElement;
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrateRoot(
     rootElement,
