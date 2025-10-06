@@ -4,14 +4,14 @@ import SidebarNav from "./SidebarNav";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
-type ExtraProps = {
+type MuiExtraProps = {
   component: React.ElementType;
 };
 
 const StyledSidebar = styled(Box, {
   name: "Sidebar",
   label: "page-sidebar",
-})<ExtraProps>(({ theme }) => ({
+})<MuiExtraProps>(({ theme }) => ({
   position: "relative",
   flex: "1 0 auto",
   width: "27rem",
