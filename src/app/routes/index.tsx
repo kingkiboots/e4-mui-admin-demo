@@ -1,6 +1,8 @@
 import { domainConfig } from "@/shared/config";
 import type { ExtendedRouteObject } from "@/shared/type/react-router-dom-types";
 import BaseLayout from "../layout/BaseLayout";
+import { Navigate } from "react-router-dom";
+import AdminLayout from "../layout/AdminLayout";
 
 const routes: ExtendedRouteObject[] = [
   {
@@ -10,10 +12,21 @@ const routes: ExtendedRouteObject[] = [
       {
         path: "",
         index: true,
-        lazy: () =>
-          import("../../pages/admin/limitMngPage").then((module) => ({
-            Component: module.default,
-          })),
+        element: <Navigate to={`/${domainConfig.admin.limitMng}`} replace />,
+      },
+      {
+        path: "admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "limitMng",
+            index: true,
+            lazy: () =>
+              import("../../pages/admin/limitMngPage").then((module) => ({
+                Component: module.default,
+              })),
+          },
+        ],
       },
     ],
   },
