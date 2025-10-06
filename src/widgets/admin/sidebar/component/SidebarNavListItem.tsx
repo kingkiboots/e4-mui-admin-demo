@@ -42,13 +42,12 @@ const sidebarItemStateStyles = (
   theme: Theme,
   { isActive, isOpen }: Pick<SidebarNavListItemProps, "isActive" | "isOpen">
 ) => ({
-  color: `${
-    isActive ? theme.palette.sidebar.active : theme.palette.sidebar.menu
-  } !important`,
+  color: `${theme.palette.sidebar.menu} !important`,
   fontWeight: `${isActive ? 600 : 400} !important`,
 
   ...(isActive && {
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    color: `${theme.palette.sidebar.active} !important`,
+    backgroundColor: "rgba(255, 255, 255, 0.04) !important",
     boxShadow: `inset 3px 0 0 ${theme.palette.info.main}`,
   }),
 
@@ -83,7 +82,7 @@ export const SidebarNavSubListItem = styled(Link, {
 })<SidebarNavSubListItemProps>(({ theme, isActive }) => ({
   ...baseSidebarItemStyles({ theme }),
   ...sidebarItemStateStyles(theme, { isActive, isOpen: false }), // 고정값
-  paddingLeft: theme.spacing(6),
+  paddingLeft: "5.3rem",
 
   // 추가 오버라이드
   ...(isActive && {
