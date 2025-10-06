@@ -1,7 +1,7 @@
 import { domainConfig } from "@/shared/config";
 import { Link } from "@/shared/ui/LinkUI";
 import { Logo } from "@/shared/ui/LogoUI";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { memo } from "react";
@@ -53,8 +53,8 @@ const SidebarPageLogo = memo(() => {
           component="span"
           className="page-logo-text mr-1 fw-500"
           sx={{
-            marginRight: "0.4rem",
-            marginLeft: "0.8rem",
+            mr: "0.4rem",
+            ml: "0.8rem",
             fontWeight: 500,
             fontSize: "2.08rem",
             color: (theme) => theme.palette.sidebar?.text,
