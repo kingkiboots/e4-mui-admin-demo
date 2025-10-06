@@ -10,11 +10,15 @@ const GlobalStyle = memo(() => {
         styles={{
           "*": {
             boxSizing: "border-box",
+            margin: 0,
+            padding: 0,
           },
-          "html, body": {
+          html: {
+            fontSize: "62.5%",
             direction: "ltr",
             textRendering: "optimizeLegibility",
-            fontSize: "62.5%",
+          },
+          "html, body": {
             letterSpacing: "0.1px",
             backgroundColor: "#fff",
           },
@@ -28,8 +32,6 @@ const GlobalStyle = memo(() => {
           "a:hover,a:active": {},
           "ul, ol": {
             listStyle: "none",
-            margin: 0,
-            padding: 0,
           },
         }}
       />
