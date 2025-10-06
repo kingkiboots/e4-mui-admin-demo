@@ -24,7 +24,7 @@ const StyledSidebar = styled(Box, {
   backgroundColor: theme.palette.sidebar?.background,
   // 그라디언트 배경
   backgroundImage:
-    "linear-gradient(270deg, rgba(51, 148, 225, 0.18), transparent)",
+    "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
 }));
 
 const Sidebar = memo(() => {
