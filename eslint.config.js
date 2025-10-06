@@ -24,7 +24,7 @@ export default defineConfig([
       "no-restricted-imports": [
         "error",
         {
-          patterns: ["^@mui/[^/]+$"],
+          patterns: [{ regex: "^@mui/[^/]+$" }],
           paths: [
             {
               name: "@mui/material",
