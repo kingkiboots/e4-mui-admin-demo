@@ -1,0 +1,36 @@
+[
+  {
+    "label": "해피페이머니",
+    "icon": "SentimentSatisfiedAltOutlined",
+    "menuUrl": null,
+    "children": [
+      {
+        "label": "한도관리",
+        "icon": null,
+        "menuUrl": "/admin/limitMng"
+      },
+      {
+        "label": "대쉬보드",
+        "icon": null,
+        "menuUrl": "/admin/dashboard"
+      }
+    ]
+  },
+  {
+    "label": "상품/혜택",
+    "icon": "DiamondOutlined",
+    "menuUrl": null,
+    "children": [
+      {
+        "label": "상품정보관리",
+        "icon": null,
+        "menuUrl": "/admin/productMng"
+      },
+      {
+        "label": "챌린지팝업관리",
+        "icon": null,
+        "menuUrl": "/admin/challengePopupMng"
+      }
+    ]
+  }
+]
