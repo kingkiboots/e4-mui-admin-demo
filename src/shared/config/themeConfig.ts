@@ -13,6 +13,10 @@ declare module "@mui/material/styles" {
     };
   }
   interface PaletteOptions extends Partial<Palette> {}
+
+  interface TypeBackground {
+    dark: string;
+  }
 }
 
 export const themeConfig = createTheme({
@@ -25,6 +29,7 @@ export const themeConfig = createTheme({
   palette: {
     primary: {
       main: "#886ab5",
+      dark: "#624292",
     },
     secondary: {
       main: "#7C757D",
@@ -34,6 +39,18 @@ export const themeConfig = createTheme({
     },
     success: {
       main: "#24b3a4",
+    },
+    grey: {
+      "100": "#dbdbdb",
+      "200": "#a6a6a6",
+      "300": "#868e96",
+      "400": "#666666",
+      "500": "#212529",
+      "600": "#333",
+    },
+    background: {
+      default: "#fff",
+      dark: "#505050",
     },
     sidebar: {
       background: "#2e323a",
