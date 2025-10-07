@@ -3,7 +3,8 @@ import type { NestedRoutes } from "../type";
 const routesDef = {
   root: "/",
   admin: {
-    dashboard: "dashboard",
+    limitMng: "admin/limitMng",
+    dashboard: "admin/dashboard",
     user: {
       list: "user/list",
       detail: "user/detail/:id",
