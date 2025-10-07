@@ -10,6 +10,7 @@ import { SidebarNavListItem } from "../component/SidebarNavListItem";
 import { SidebarListItem } from "../component/SidebarListItem";
 import { SidebarListItemText } from "../component/SidebarListItemText";
 import { SidebarNavMenuIcon } from "../component/SidebarNavMenuIcon";
+import { SidebarNavArrowIcon } from "../component/SidebarNavArrowIcon";
 
 interface SidebarNavGroupProps {
   id: string;
@@ -59,9 +60,7 @@ const SidebarNavGroup = memo(
           >
             <SidebarNavMenuIcon icon={icon} />
             <SidebarListItemText label={label} isActive={isActive} />
-            <b className="collapse-sign">
-              <em className={`fal fa-angle-${isOpen ? "up" : "down"}`} />
-            </b>
+            <SidebarNavArrowIcon isOpen={isOpen} />
           </SidebarNavListItem>
         </SidebarListItem>
 
