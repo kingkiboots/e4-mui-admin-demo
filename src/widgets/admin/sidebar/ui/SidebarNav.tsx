@@ -35,6 +35,7 @@ const NavMenu = styled(List, {
   label: "nav-menu",
 })<MuiExtraProps>(({ theme }) => ({
   margin: 0,
+  padding: 0,
   "&:first-of-type": {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
