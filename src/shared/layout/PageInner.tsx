@@ -1,5 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Box, { type BoxProps } from "@mui/material/Box";
+// eslint-disable-next-line no-restricted-imports
 import type { Breakpoint } from "@mui/material";
 
 export interface PageInnerProps extends BoxProps {
