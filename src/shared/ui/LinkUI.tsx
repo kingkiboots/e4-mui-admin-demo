@@ -12,6 +12,8 @@ import {
 } from "react";
 import { useThrottle } from "../lib/timingHelpers";
 
+//FIXME - 왜 이거를 오버라이드한 애들은 우선 순위가 높은가. 그걸 고치고 오버라이드한 애들이 먼저 되게 수정할 것
+
 type LinkProps = (MuiLinkProps | RouterLinkProps) & {
   to?: string;
   href?: string;
