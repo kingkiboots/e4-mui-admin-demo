@@ -5,6 +5,7 @@ declare module "@mui/material/styles" {
   interface Palette {
     sidebar: {
       background: string;
+      backgroundImage: string;
       text: string;
       menu: string;
       active: string;
@@ -36,6 +37,8 @@ export const themeConfig = createTheme({
     },
     sidebar: {
       background: "#2e323a",
+      backgroundImage:
+        "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
       text: "#ffffff",
       menu: "#b5b5b5",
       active: "#ff5a00",

@@ -25,10 +25,8 @@ const PageLogoWrapper = styled(Box, {
   minHeight: 1,
   padding: "0 2rem",
 
-  // 배경색과 구분선
   backgroundColor: theme.palette.sidebar?.background,
-  backgroundImage:
-    "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
+  backgroundImage: theme.palette.sidebar?.backgroundImage,
 
   boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.3)",
 

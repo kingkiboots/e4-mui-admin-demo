@@ -22,9 +22,7 @@ const StyledSidebar = styled(Box, {
   willChange: "left, right",
 
   backgroundColor: theme.palette.sidebar?.background,
-  // 그라디언트 배경
-  backgroundImage:
-    "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
+  backgroundImage: theme.palette.sidebar?.backgroundImage,
 }));
 
 const Sidebar = memo(() => {
