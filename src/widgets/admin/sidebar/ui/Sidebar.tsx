@@ -3,6 +3,8 @@ import SidebarHeader from "./SidebarHeader";
 import SidebarNav from "./SidebarNav";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import { UI_DRAWER_WIDTH } from "@/shared/const";
 
 type MuiExtraProps = {
   component: React.ElementType;
@@ -14,8 +16,8 @@ const StyledSidebar = styled(Box, {
 })<MuiExtraProps>(({ theme }) => ({
   position: "relative",
   flex: "1 0 auto",
-  width: "27rem",
-  maxWidth: "27rem",
+  // width: UI_DRAWER_WIDTH,
+  // maxWidth: UI_DRAWER_WIDTH,
   flexDirection: "column",
   display: "flex",
   zIndex: 1002,
@@ -25,12 +27,26 @@ const StyledSidebar = styled(Box, {
   backgroundImage: theme.palette.sidebar?.backgroundImage,
 }));
 
-const Sidebar = memo(() => {
+const Sidebar = memo(({ isDrawerOpen }: { isDrawerOpen: boolean }) => {
   return (
-    <StyledSidebar component="aside">
-      <SidebarHeader />
-      <SidebarNav />
-    </StyledSidebar>
+    <Drawer
+      sx={{
+        width: UI_DRAWER_WIDTH,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: UI_DRAWER_WIDTH,
+          boxSizing: "border-box",
+        },
+      }}
+      variant="persistent"
+      anchor="left"
+      open={isDrawerOpen}
+    >
+      <StyledSidebar component="aside">
+        <SidebarHeader />
+        <SidebarNav />
+      </StyledSidebar>
+    </Drawer>
   );
 });
 
