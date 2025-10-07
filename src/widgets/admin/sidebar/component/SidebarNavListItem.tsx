@@ -88,5 +88,17 @@ export const SidebarNavSubListItem = styled(Link, {
   ...(isActive && {
     backgroundColor: "transparent",
     boxShadow: "none",
+
+    "&:before": {
+      content: '"\\2022"',
+      color: theme.palette.success.main,
+      display: "flex",
+      alignItems: "center",
+      position: "absolute",
+      fontSize: "3.2rem",
+      height: "1rem",
+      right: "1.1rem",
+      top: "calc(50% - 4px)",
+    },
   }),
 }));
