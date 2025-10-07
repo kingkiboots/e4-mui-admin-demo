@@ -50,6 +50,7 @@ export const themeConfig = createTheme({
     },
     background: {
       default: "#fff",
+      paper: "#f8f8f8",
       dark: "#505050",
     },
     sidebar: {
