@@ -1,3 +1,4 @@
+import { PageContent } from "@/shared/layout/PageContent";
 import { PageContentWrapper } from "@/shared/layout/PageContentWrapper";
 import PageInner from "@/shared/layout/PageInner";
 import PageWrapper from "@/shared/layout/PageWrapper";
@@ -28,14 +29,14 @@ const AdminLayout: React.FC = () => {
               onClickToggleDrawer={handleDrawerToggle}
             />
           </Suspense>
-          <main id="js-page-content" role="main" className="page-content">
+          <PageContent component="main" role="main">
             <Suspense>
               <BreadCrumbArea />
             </Suspense>
             <Suspense>
               <Outlet />
             </Suspense>
-          </main>
+          </PageContent>
         </PageContentWrapper>
       </PageInner>
     </PageWrapper>
