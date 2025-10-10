@@ -1,3 +1,4 @@
+export { APP_CONFIG } from "./appConfig";
 export { domainConfig } from "./domainConfig";
 export { themeConfig } from "./themeConfig";
-export * from "./appConfig";
+export { restApiConfig } from "./restApiConfig";
