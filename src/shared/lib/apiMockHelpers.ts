@@ -1,14 +1,27 @@
-import { AxiosError } from "axios";
+import { AxiosError, AxiosHeaders } from "axios";
 import { type AxiosRequestConfig } from "axios";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type MockArrayResponse = [status: number, data?: any, headers?: AxiosHeaders];
+
+type MockObjectResponse = {
+  status: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
+  headers?: AxiosHeaders;
+  config?: AxiosRequestConfig;
+};
+
+type MockResponse = MockArrayResponse | MockObjectResponse;
 
 type CallbackResponseSpecFunc = (
   config: AxiosRequestConfig
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) => any[] | Promise<any[]>;
+) => MockResponse | Promise<MockResponse>;
 
 export const withDelay =
   (
-    delay: number,
+    // 기본 500ms
+    delay: number = 500,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     response: { status: number; data: any }
   ): CallbackResponseSpecFunc =>
