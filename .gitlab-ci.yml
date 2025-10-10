@@ -1,0 +1,112 @@
+# This file is a template, and might need editing before it works on your project.
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/development/cicd/templates/
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Gradle.gitlab-ci.yml
+
+# This is the Gradle build system for JVM applications
+# https://gradle.org/
+# https://github.com/gradle/gradle
+
+stages:
+  - push
+  - package
+  - deploy
+
+image: gradle:alpine
+
+variables:
+  JAVA_HOME: /usr/lib/jvm/java-17-openjdk
+
+push:
+  stage: push
+  before_script:
+    - apk update
+    - apk add curl
+  script:
+    - echo "merge request to develop"
+    - RESPONSE=$(curl --header "Private-Token:$PRIVATE_KEY" -H "Content-Type:application/json" -X POST -d "{\"source_branch\":\"$CI_COMMIT_REF_NAME\", \"target_branch\":\"develop\",  \"id\":\"$CI_PROJECT_ID\", \"title\":\"$CI_COMMIT_REF_NAME\", \"description\":\"desc\", \"assignee_id\":\"$GITLAB_USER_ID\"}" https://gitlab-msa.letscherry.io/api/v4/projects/$CI_PROJECT_ID/merge_requests)
+    - echo "$RESPONSE"
+    - echo "$RESPONSE" | grep -q '"error":"invalid_token"' && echo "Token expired. Failing." && exit 1 || echo "Token valid."
+  tags:
+    - docker
+  only:
+    - /^feature*$/
+
+package-frontend:
+  image: node:22.13.1
+  stage: package
+  variables:
+    APP_ENV: dev
+    NODE_VERSION: 22.13.1
+    __VITE_ADDITIONAL_SERVER_ALLOWED_HOST: $APP_ENV-msa.letscherry.io
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
+  before_script:
+    # 기본 패키지 설치
+    - apt-get update && apt-get install -y curl ca-certificates gnupg lsb-release
+
+    # Docker 저장소 등록
+    - curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker.gpg
+    - echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+    - apt-get update
+
+    # Docker + buildx plugin 설치
+    - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin python3 python3-pip
+
+    # Docker 데몬 연결 확인
+    - docker version
+    - docker info
+
+    # buildx 설치 확인
+    - docker buildx version
+
+    # buildx 인스턴스 생성 및 사용 설정
+    - docker buildx create --name mybuilder --use
+    - docker buildx inspect --bootstrap
+    - pip3 install awscli --break-system-packages    
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPOSITORY_URL
+  script:
+    - npm install
+    - npm run build:$APP_ENV
+    - echo "Package and push the frontend docker image..."
+    - sed -i "s/ENVIRONMENT/$APP_ENV/g" ezra-bo.conf
+    - docker buildx build --platform linux/amd64,linux/arm64 --cache-from $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA --build-arg APP_ENV=$APP_ENV --tag $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA . --push
+    - echo "Package and push complete."
+  tags:
+    - docker
+  only:
+    - /^develop*$/
+
+deploy-frontend:
+  image: alpine:latest
+  stage: deploy
+  variables:
+    ARGOCD_VERSION: v2.11.2  
+  before_script:
+    - apk update
+    - apk add git openssh
+    - apk add --no-cache curl bash
+    - curl -sSL -o /usr/local/bin/argocd "https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64"
+    - chmod +x /usr/local/bin/argocd
+    - git config --global user.email "you@example.com"
+    - git config --global user.name "deploy-frontend"
+  script:
+    - git clone https://${HELM_ACCESS_ID}:${HELM_ACCESS_TOKEN}@gitlab-msa.letscherry.io/msa_system/msa-helm.git
+    - cd msa-helm/frontend
+    - cat values-test-template.yaml | sed "s/CHECKSUM/$CI_COMMIT_SHORT_SHA/g" > values-test.yaml
+    - git commit -am "deploy-backend-$CI_COMMIT_SHORT_SHA"
+    - git push https://${HELM_ACCESS_ID}:${HELM_ACCESS_TOKEN}@gitlab-msa.letscherry.io/msa_system/msa-helm.git
+    - argocd app sync frontend --prune --grpc-web --server $TEST_ARGOCD_URL --auth-token $TEST_ARGOCD_TOKEN
+    - argocd app wait frontend --health --timeout 180 --grpc-web --server $TEST_ARGOCD_URL --auth-token $TEST_ARGOCD_TOKEN
+  tags:
+    - docker
+  only:
+    - /^develop*$/
+  #when: manual
+  allow_failure:
+    exit_codes:
+      - 1
