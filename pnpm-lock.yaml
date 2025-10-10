@@ -20,6 +20,9 @@ importers:
       '@mui/material':
         specifier: ^7.3.3
         version: 7.3.3(@emotion/react@11.14.0(@types/react@19.2.0)(react@19.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.0)(react@19.2.0))(@types/react@19.2.0)(react@19.2.0))(@types/react@19.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@tanstack/query-core':
+        specifier: ^5.90.2
+        version: 5.90.2
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.2(react@19.2.0)
