@@ -3,3 +3,4 @@
 - [ ] mui 컴포넌트 커스터마이징 정리
 - [ ] fsd, tanstack-query 등 라이브러리별 커스텀 eslint rule 작성
 - [ ] import rule을 error로 낼 게 아니라 특정경로로 강제할 수는 없는지 알아보기
+- [ ] shared/lib or model의 함수에 주석 달면 jsdoc 페이지 띄울 수 있는지 보기
