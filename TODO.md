@@ -1,0 +1,5 @@
+- [ ] mui theme에 컬러, 텍스트 컬러, 폰트 사이즈, spacing, width 및 height systemizing 하기
+- [ ] Header, Breadcrumb 리팩토링
+- [ ] mui 컴포넌트 커스터마이징 정리
+- [ ] fsd, tanstack-query 등 라이브러리별 커스텀 eslint rule 작성
+- [ ] import rule을 error로 낼 게 아니라 특정경로로 강제할 수는 없는지 알아보기
