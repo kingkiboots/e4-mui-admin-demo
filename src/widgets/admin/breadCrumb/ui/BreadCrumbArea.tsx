@@ -33,7 +33,7 @@ const BreadCrumbArea = memo(() => {
     <Breadcrumbs
       aria-label="breadcrumb"
       sx={{
-        mb: "1.28rem",
+        marginBottom: "1.28rem",
         fontSize: "1.1rem",
         color: "grey.300",
       }}

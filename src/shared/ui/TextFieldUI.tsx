@@ -61,7 +61,7 @@ const StyledLabel = styled(FormLabel, {
 })(({ theme }) => ({
   paddingTop: `calc(${theme.spacing(1)} + 1px)`,
   paddingBottom: `calc(${theme.spacing(1)} + 1px)`,
-  mb: 0,
+  marginBottom: 0,
 
   alignSelf: "center",
   fontWeight: "bold",

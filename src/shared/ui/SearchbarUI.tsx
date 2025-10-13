@@ -21,7 +21,7 @@ const SearchContent = styled(MUIPaper, {
   ...theme.typography.body2,
   textAlign: "center",
   color: theme.palette.text.secondary,
-  mb: theme.spacing(2),
+  marginBottom: theme.spacing(2),
   padding: theme.spacing(1),
   backgroundColor: theme.palette.background.paper,
   position: "relative",
