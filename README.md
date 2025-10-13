@@ -30,6 +30,9 @@ MUI로 관리자 페이지 3페이지 정도를 만들 것을 과제로 내주�
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - eslint 커스텀 규칙 적용
 - [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets) - rafc, rafce 등의 유용한 단축키 옵션 제공
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - 코드 포매팅 일괄 적용
+- [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag) - 오픈 태그 변경 시 클로징 태그도 변경
+- [htmltagwrap](https://marketplace.visualstudio.com/items?itemName=bradgashler.htmltagwrap) - html 블럭 선택하고 [alt + w] 입력 시 선택된 html 태그 감쌈
+- [HTML End Tag Labels](https://marketplace.visualstudio.com/items?itemName=anteprimorac.html-end-tag-labels) - html 블럭 선택하고 [alt + w] 입력 시 선택된 html 태그 감쌈
 - [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors)
 - [Color Hightlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
 
