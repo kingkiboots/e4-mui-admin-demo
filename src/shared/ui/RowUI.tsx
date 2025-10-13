@@ -1,15 +1,16 @@
-import Box, { type BoxProps } from "@mui/material/Box";
+import Grid, { type GridProps } from "@mui/material/Grid";
+
 import { styled } from "@mui/material/styles";
 
-const Flexbox = styled(Box)({
-  display: "flex",
-  flexWrap: "wrap",
-  mr: "-1.2rem",
-  ml: "-1.2rem",
+const Flexbox = styled(Grid, {
+  label: "row",
+})({
+  marginRight: "-1.2rem",
+  marginLeft: "-1.2rem",
   width: "100%",
 });
 
-interface RowProps extends Omit<BoxProps, "display"> {}
+interface RowProps extends Omit<GridProps, "display"> {}
 export const Row: React.FC<RowProps> = (props) => {
-  return <Flexbox {...props} />;
+  return <Flexbox container {...props} />;
 };
