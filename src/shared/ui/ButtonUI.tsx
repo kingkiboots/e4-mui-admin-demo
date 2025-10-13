@@ -4,6 +4,9 @@ import MuiButton, {
 } from "@mui/material/Button";
 import { forwardRef, useCallback, type MouseEventHandler } from "react";
 import { useThrottle } from "../lib/timingHelpers";
+import { styled } from "@mui/material/styles";
+
+const StyledButton = styled(MuiButton, { label: "btn", name: "MuiButton" })();
 
 export const Button = forwardRef<HTMLButtonElement, MuiButtonProps>(
   ({ onClick, ...props }, ref) => {
@@ -20,7 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, MuiButtonProps>(
     const throttle = useThrottle();
     const throttledClick = throttle(handleClick, 300);
 
-    return <MuiButton ref={ref} onClick={throttledClick} {...props} />;
+    return <StyledButton ref={ref} onClick={throttledClick} {...props} />;
   }
 );
 
