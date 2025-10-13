@@ -18,9 +18,10 @@ const GlobalStyle = memo(() => {
             direction: "ltr",
             textRendering: "optimizeLegibility",
           },
-          "html, body": {
+          body: {
             letterSpacing: "0.1px",
             backgroundColor: "#fff",
+            fontSize: "1.3rem",
           },
           "a:link,a:visited": {
             textDecoration: "none",
