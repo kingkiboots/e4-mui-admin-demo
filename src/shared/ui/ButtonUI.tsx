@@ -1,8 +1,7 @@
-import {
-  // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
-  Button as MuiButton,
+// eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
+import MuiButton, {
   type ButtonProps as MuiButtonProps,
-} from "@mui/material";
+} from "@mui/material/Button";
 import { forwardRef, useCallback, type MouseEventHandler } from "react";
 import { useThrottle } from "../lib/timingHelpers";
 
