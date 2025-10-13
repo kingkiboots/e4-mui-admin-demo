@@ -39,7 +39,7 @@ const BreadCrumbArea = memo(() => {
       }}
     >
       <StyledBreadcrumb underline="hover" to="/">
-        <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+        <HomeIcon sx={{ marginRight: 0.5 }} fontSize="inherit" />
         Home
       </StyledBreadcrumb>
 

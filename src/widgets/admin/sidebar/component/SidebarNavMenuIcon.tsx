@@ -6,7 +6,7 @@ import { memo } from "react";
 const SidebarNavListItemIcon = styled(ListItemIcon, {
   name: "SidebarNavMenuIcon",
 })(({ theme }) => ({
-  mr: theme.spacing(0),
+  marginRight: theme.spacing(0),
   fontSize: "1.8rem",
   width: theme.spacing(4),
   minWidth: theme.spacing(4),
