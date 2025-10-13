@@ -100,7 +100,7 @@ interface SelectProps
 
 export const Select = memo(
   ({
-    totalColSpan = { xs: 12, sm: 3 },
+    totalColSpan = { xs: 12, sm: 4 },
     labelColSpan = { xs: 12, sm: 3 },
     inputColSpan = { xs: 12, sm: 9 },
     label,
