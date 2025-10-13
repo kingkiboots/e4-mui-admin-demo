@@ -43,8 +43,6 @@ const Header = memo(
       setAnchorElUser(null);
     };
 
-    console.log("isDrawerOpen", isDrawerOpen);
-
     return (
       <AppBar
         position="static"
@@ -73,9 +71,8 @@ const Header = memo(
             sx={{
               color: (theme) =>
                 isDrawerOpen
-                  ? theme.palette.grey[200]
+                  ? theme.palette.grey[300]
                   : theme.palette.background.default,
-              // border: (theme) => `1px solid ${theme.palette.grey[100]}`,
               borderRadius: "4px",
               backgroundColor: (theme) =>
                 isDrawerOpen ? undefined : theme.palette.background.dark,
@@ -91,7 +88,7 @@ const Header = memo(
             sx={{
               display: "flex",
               color: "#000",
-              ml: "auto",
+              marginLeft: "auto",
             }}
           >
             <Typography
@@ -101,7 +98,7 @@ const Header = memo(
                 display: "flex",
                 alignItems: "center",
                 gap: "1rem",
-                color: (theme) => theme.palette.grey[400],
+                color: (theme) => theme.palette.grey[500],
                 fontWeight: 500,
                 fontSize: "1.4rem",
               }}
@@ -123,8 +120,8 @@ const Header = memo(
                   aria-label="display more actions"
                   onClick={handleOpenUserMenu}
                   sx={{
-                    color: (theme) => theme.palette.grey[300],
-                    ml: (theme) => theme.spacing(1),
+                    color: (theme) => theme.palette.grey[400],
+                    marginLeft: (theme) => theme.spacing(1),
                     padding: 0,
                     minWidth: "5rem",
                     textAlign: "center",
@@ -161,7 +158,7 @@ const Header = memo(
                       fontWeight: 400,
 
                       width: "16rem",
-                      color: (theme) => theme.palette.grey[500],
+                      color: (theme) => theme.palette.text.default,
                       padding: (theme) =>
                         `${theme.spacing(2)} ${theme.spacing(1)}`,
 
