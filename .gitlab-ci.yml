@@ -95,7 +95,7 @@ deploy-frontend:
   script:
     - git clone https://${HELM_ACCESS_ID}:${HELM_ACCESS_TOKEN}@gitlab-msa.letscherry.io/msa_system/msa-helm.git
     - cd msa-helm/frontend
-    - cat values-test-template.yaml | sed "s/CHECKSUM/$CI_COMMIT_SHORT_SHA/g" > values-test.yaml
+    - cat values-template.yaml | sed "s/CHECKSUM/$CI_COMMIT_SHORT_SHA/g" > values.yaml
     - git commit -am "deploy-backend-$CI_COMMIT_SHORT_SHA"
     - git push https://${HELM_ACCESS_ID}:${HELM_ACCESS_TOKEN}@gitlab-msa.letscherry.io/msa_system/msa-helm.git
     - argocd app sync frontend --prune --grpc-web --server $TEST_ARGOCD_URL --auth-token $TEST_ARGOCD_TOKEN
