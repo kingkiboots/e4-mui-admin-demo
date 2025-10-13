@@ -1,7 +1,7 @@
 import { domainConfig } from "@/shared/config";
 import { Link } from "@/shared/ui/LinkUI";
 import { Logo } from "@/shared/ui/LogoUI";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { memo } from "react";
@@ -23,7 +23,7 @@ const PageLogoWrapper = styled(Box, {
   flexGrow: 0,
   flexShrink: 0,
   minHeight: 1,
-  padding: "0 2rem",
+  padding: `0 ${theme.spacing(4)}`,
 
   backgroundColor: theme.palette.sidebar?.background,
   backgroundImage: theme.palette.sidebar?.backgroundImage,
@@ -46,8 +46,8 @@ const SidebarPageLogo = memo(() => {
           flex: "1 0 auto",
         }}
       >
-        <Logo sx={{ width: "auto", height: "auto" }} />
-        <Typography
+        <Logo sx={{ width: "auto", height: "auto", maxHeight: "3.4rem" }} />
+        {/* <Typography
           component="span"
           className="page-logo-text mr-1 fw-500"
           sx={{
@@ -61,8 +61,8 @@ const SidebarPageLogo = memo(() => {
             flex: "1 0 auto",
           }}
         >
-          Pay 2.0 System
-        </Typography>
+          케이뱅크
+        </Typography> */}
       </Link>
     </PageLogoWrapper>
   );
