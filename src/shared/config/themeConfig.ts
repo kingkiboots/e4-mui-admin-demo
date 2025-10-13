@@ -26,6 +26,7 @@ export const themeConfig = createTheme({
   },
   spacing: (factor: number) =>
     `${[4, 8, 16, 24, 32, 40, 48, 56, 64][factor] / 10}rem`,
+
   palette: {
     primary: {
       main: "#886ab5",
@@ -41,6 +42,7 @@ export const themeConfig = createTheme({
       main: "#24b3a4",
     },
     grey: {
+      "50": "#d5d5d5",
       "100": "#dbdbdb",
       "200": "#a6a6a6",
       "300": "#868e96",
@@ -49,8 +51,8 @@ export const themeConfig = createTheme({
       "600": "#333",
     },
     background: {
-      default: "#fff",
-      paper: "#f8f8f8",
+      default: "#f8f8f8",
+      paper: "#fff",
       dark: "#505050",
     },
     sidebar: {

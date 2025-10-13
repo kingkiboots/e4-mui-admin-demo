@@ -10,7 +10,7 @@ export const PageContentWrapper = styled(Stack, {
   shouldForwardProp: (prop) => prop !== "isDrawerOpen",
 })<PageContentWrapperProps>(({ theme }) => ({
   flex: 1,
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.background.default,
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
