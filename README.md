@@ -2,6 +2,13 @@
 
 MUI로 관리자화면을 만드는 프로젝트에 대한 설명
 
+## 목차
+
+- [1. 계기](#계기)
+- [2. 개발환경 구성](#개발환경-구성)
+- [3. MUI](#MUI)
+- [4. 프론트엔드 아키텍처](#프론트엔드-아키텍처---fsd)
+
 ## 계기
 
 MUI로 관리자 페이지 3페이지 정도를 만들 것을 과제로 내주었다.
@@ -18,6 +25,7 @@ MUI로 관리자 페이지 3페이지 정도를 만들 것을 과제로 내주�
 
 | 항목       |    버전     |
 | :--------- | :---------: |
+| 형상관리   |     Git     |
 | Typescript |    5.9.3    |
 | Node JS    | LTS 20.12.2 |
 | React JS   |   19.1.1    |
@@ -35,6 +43,16 @@ MUI로 관리자 페이지 3페이지 정도를 만들 것을 과제로 내주�
 - [HTML End Tag Labels](https://marketplace.visualstudio.com/items?itemName=anteprimorac.html-end-tag-labels) - html 블럭 선택하고 [alt + w] 입력 시 선택된 html 태그 감쌈
 - [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors)
 - [Color Hightlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
+
+### 포매터
+
+> 포매터란? 코드 스타일을 일괄된 스타일이 되도록 해주는 도구
+
+1. vscode extenstion 에서 [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) 설치
+2. [ctrl + ,] 입력 후 설정 진입
+3. 설정 검색 창에 format 검색
+4. [Editor: Format On Save] 체크
+5. [Editor: Default Formatter] Prettier - Code formatter 선택
 
 ## MUI
 
