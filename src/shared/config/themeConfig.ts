@@ -1,8 +1,10 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, type PaletteColorOptions } from "@mui/material/styles";
 
 // TypeScript 타입 확장
 declare module "@mui/material/styles" {
   interface Palette {
+    dark: PaletteColorOptions;
+
     sidebar: {
       background: string;
       backgroundImage: string;
@@ -12,10 +14,21 @@ declare module "@mui/material/styles" {
       hover: string;
     };
   }
-  interface PaletteOptions extends Partial<Palette> {}
+  interface PaletteOptions extends Partial<Palette> {
+    dark?: Palette["dark"];
+  }
 
+  interface TypeText {
+    default: string;
+  }
   interface TypeBackground {
     dark: string;
+  }
+}
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    dark: true;
   }
 }
 
@@ -29,6 +42,7 @@ export const themeConfig = createTheme({
 
   palette: {
     text: {
+      default: "#212529",
       primary: "#0114A7",
       disabled: "#F3F3F3",
     },
@@ -42,17 +56,22 @@ export const themeConfig = createTheme({
     info: {
       main: "#0114A7",
     },
+    dark: {
+      main: "#4e4e4e",
+      contrastText: "#fff",
+    },
     success: {
       main: "#24b3a4",
     },
     grey: {
-      "50": "#d5d5d5",
-      "100": "#dbdbdb",
-      "200": "#a6a6a6",
-      "300": "#868e96",
-      "400": "#666666",
-      "500": "#212529",
-      "600": "#333",
+      "50": "#E5E5E5",
+      "100": "#d5d5d5",
+      "200": "#dbdbdb",
+      "300": "#a6a6a6",
+      "400": "#868e96",
+      "500": "#666666",
+      "600": "#495057",
+      "700": "#333",
     },
     background: {
       default: "#f8f8f8",
