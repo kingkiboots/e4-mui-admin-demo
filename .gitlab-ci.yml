@@ -36,12 +36,11 @@ push:
     - /^feature*$/
 
 package-frontend:
-  image: node:22.13.1
+  image: node:20.12.2
   stage: package
   variables:
     APP_ENV: dev
-    NODE_VERSION: 22.13.1
-    __VITE_ADDITIONAL_SERVER_ALLOWED_HOST: $APP_ENV-msa.letscherry.io
+    NODE_VERSION: 20.12.2
     DOCKER_TLS_CERTDIR: ""
   services:
     - docker:dind
@@ -70,10 +69,9 @@ package-frontend:
     - pip3 install awscli --break-system-packages    
     - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPOSITORY_URL
   script:
-    - npm install
-    - npm run build:$APP_ENV
+    - npm install --force
+    - npm run build
     - echo "Package and push the frontend docker image..."
-    - sed -i "s/ENVIRONMENT/$APP_ENV/g" ezra-bo.conf
     - docker buildx build --platform linux/amd64,linux/arm64 --cache-from $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA --build-arg APP_ENV=$APP_ENV --tag $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA . --push
     - echo "Package and push complete."
   tags:
