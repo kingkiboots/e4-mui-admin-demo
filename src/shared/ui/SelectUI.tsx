@@ -23,27 +23,28 @@ export interface SelectOption {
   label: string;
 }
 
-const StyledSelect = styled(MUISelect, {
-  name: "MUISelect",
-  label: "select",
-})(({ theme }) => ({
-  display: "block",
-  width: "100%",
-  textAlign: "left",
-  //   height: "calc(1.8rem + 1.2rem + 2px)",
-
-  //   padding: `0.6rem 1.3054rem`,
-
-  fontSize: "1.2rem",
-  lineHeight: 1.5,
-  borderRadius: "4px",
-  color: theme.palette.grey[600],
-  fontWeight: 400,
+const StyledSelect = styled(MUISelect)(({ theme }) => ({
+  "& .MuiSelect-select": {
+    padding: `0.6rem 1.3054rem`,
+    fontSize: "1.2rem",
+    lineHeight: 1.5,
+    textAlign: "left",
+    color: theme.palette.grey[600],
+    fontWeight: 400,
+    height: "auto",
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: theme.palette.grey[50],
+    borderRadius: "4px",
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: theme.palette.grey[300],
+  },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: theme.palette.primary.main,
+  },
   backgroundColor: theme.palette.background.paper,
-  backgroundClip: "padding-box",
-  border: `1px solid ${theme.palette.grey[50]}`,
-  transition:
-    "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out",
+  height: "calc(1.8rem + 1.2rem + 2px)",
 }));
 
 const StyledMenu = styled(MenuItem, { name: "StyledMenu", label: "option" })(
@@ -139,6 +140,7 @@ export const Select = memo(
                 {...register}
                 id={id}
                 defaultValue={defaultValue}
+                required={required}
                 onChange={handleChange}
                 {...restProps}
               >
