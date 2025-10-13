@@ -13,16 +13,67 @@ import { Col, type ColProps } from "./ColUI";
 import { Row } from "./RowUI";
 import FormLabel from "@mui/material/FormLabel";
 import { type UseFormRegisterReturn } from "react-hook-form";
+import FormControl from "@mui/material/FormControl";
 
-const StyledTextField = styled(MUITextField, {
-  name: "MUITextField",
-  label: "text-field",
+const StyledTextField = styled(MUITextField)(({ theme }) => ({
+  // TextField 컨테이너가 아니라 내부 요소에 적용
+  "& .MuiInputBase-root": {
+    height: "calc(1.8rem + 1.2rem + 2px)",
+    fontSize: "1.2rem",
+    lineHeight: 1.5,
+    color: theme.palette.grey[600],
+    fontWeight: 400,
+    backgroundColor: theme.palette.background.paper,
+  },
+  "& .MuiInputBase-input": {
+    padding: `0.6rem 1.3054rem`,
+  },
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "4px",
+    "& fieldset": {
+      borderColor: theme.palette.grey[50],
+      borderWidth: "1px",
+    },
+    "&:hover fieldset": {
+      borderColor: theme.palette.grey[300],
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
+
+const FormGroupRow = styled(Row, {
+  name: "FormGroupRow",
+  label: "form-group-row",
 })();
 
-// const StyledLabel = styled(FormLabel, {
-//   name: "FormLabel",
-//   label: "form-label",
-// })();
+const FormCol = styled(Col, {
+  name: "FormCol",
+  label: "form-col",
+})({
+  alignSelf: "center",
+});
+
+const StyledLabel = styled(FormLabel, {
+  name: "FormLabel",
+  label: "form-label",
+})(({ theme }) => ({
+  paddingTop: `calc(${theme.spacing(1)} + 1px)`,
+  paddingBottom: `calc(${theme.spacing(1)} + 1px)`,
+  mb: 0,
+
+  alignSelf: "center",
+  fontWeight: "bold",
+  letterSpacing: "-1px",
+  lineHeight: 1.47,
+  fontSize: "1.3rem",
+
+  // 반응형 처리
+  [theme.breakpoints.down("lg")]: {
+    textAlign: "right",
+  },
+}));
 
 interface TextFieldProps
   extends Omit<ComponentPropsWithoutRef<typeof StyledTextField>, "type"> {
@@ -36,7 +87,7 @@ interface TextFieldProps
 
 export const TextField = memo(
   ({
-    totalColSpan = { xs: 12, sm: 3 },
+    totalColSpan = { xs: 12, sm: 4 },
     labelColSpan = { xs: 12, sm: 3 },
     inputColSpan = { xs: 12, sm: 9 },
     label,
@@ -58,26 +109,31 @@ export const TextField = memo(
     );
 
     return (
-      <Col size={totalColSpan}>
-        <Row spacing={2}>
-          {/* 라벨 */}
-          <Col size={labelColSpan} sx={{ textAlign: { lg: "right" } }}>
-            <FormLabel required={required} htmlFor={id}>
+      <Col size={totalColSpan} sx={{ alignSelf: "center" }}>
+        <FormGroupRow>
+          {/* 라벨 */}
+          <FormCol size={labelColSpan} sx={{ textAlign: { lg: "right" } }}>
+            <StyledLabel required={required} htmlFor={id}>
               {label}
-            </FormLabel>
-          </Col>
-          {/* 인풋 */}
-          <Col size={inputColSpan}>
-            <StyledTextField
-              id={id}
-              {...register}
-              fullWidth
-              placeholder={placeholder}
-              onChange={handleChange}
-              {...restProps}
-            />
-          </Col>
-        </Row>
+            </StyledLabel>
+          </FormCol>
+          {/* 인풋 */}
+          <FormCol size={inputColSpan}>
+            <FormControl fullWidth size="small">
+              <StyledTextField
+                type="text"
+                id={id}
+                variant="outlined"
+                {...register}
+                fullWidth
+                required={required}
+                placeholder={placeholder}
+                onChange={handleChange}
+                {...restProps}
+              />
+            </FormControl>
+          </FormCol>
+        </FormGroupRow>
       </Col>
     );
   }
