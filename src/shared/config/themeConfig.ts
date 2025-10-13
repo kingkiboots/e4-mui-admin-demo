@@ -28,15 +28,19 @@ export const themeConfig = createTheme({
     `${[4, 8, 16, 24, 32, 40, 48, 56, 64][factor] / 10}rem`,
 
   palette: {
+    text: {
+      primary: "#0114A7",
+      disabled: "#F3F3F3",
+    },
     primary: {
-      main: "#886ab5",
-      dark: "#624292",
+      main: "#0018CE",
+      dark: "#000f80ff",
     },
     secondary: {
       main: "#7C757D",
     },
     info: {
-      main: "#ff5a00",
+      main: "#0114A7",
     },
     success: {
       main: "#24b3a4",
@@ -61,7 +65,7 @@ export const themeConfig = createTheme({
         "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
       text: "#ffffff",
       menu: "#b5b5b5",
-      active: "#ff5a00",
+      active: "#a8b2ff",
       hover: "rgba(0, 0, 0, 0.1)",
     },
   },

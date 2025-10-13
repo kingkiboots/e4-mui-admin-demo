@@ -7,7 +7,7 @@ const GlobalStyle = memo(() => {
     <>
       <CssBaseline />
       <GlobalStyles
-        styles={{
+        styles={(theme) => ({
           "*": {
             boxSizing: "border-box",
             margin: 0,
@@ -24,7 +24,7 @@ const GlobalStyle = memo(() => {
           },
           "a:link,a:visited": {
             textDecoration: "none",
-            color: "#886ab5",
+            color: theme.palette.text.primary,
             cursor: "pointer",
             backgroundColor: "transparent",
             touchAction: "manipulation",
@@ -33,7 +33,7 @@ const GlobalStyle = memo(() => {
           "ul, ol": {
             listStyle: "none",
           },
-        }}
+        })}
       />
     </>
   );

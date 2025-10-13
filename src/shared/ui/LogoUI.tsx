@@ -1,5 +1,5 @@
 import { memo } from "react";
-import logoImg from "../asset/img/owlog_logo.png";
+import logoImg from "../asset/img/logo.png";
 import { Image } from "./ImgUI";
 
 interface LogoProps
