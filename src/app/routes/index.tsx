@@ -15,12 +15,18 @@ const routes: ExtendedRouteObject[] = [
         element: <Navigate to={`/${domainConfig.admin.limitMng}`} replace />,
       },
       {
+        path: "health",
+        lazy: () =>
+          import("../../pages/common/health").then((module) => ({
+            Component: module.default,
+          })),
+      },
+      {
         path: "admin",
         element: <AdminLayout />,
         children: [
           {
             path: "limitMng",
-            index: true,
             lazy: () =>
               import("../../pages/admin/limitMngPage").then((module) => ({
                 Component: module.default,
