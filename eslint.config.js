@@ -40,6 +40,18 @@ export default defineConfig([
               name: "@mui/material/Link",
               message: "Use Link from @/shared/ui instead",
             },
+            {
+              name: "@mui/material/ButtonGroup",
+              message: "Use ButtonGroup from @/shared/ui instead",
+            },
+            {
+              name: "@mui/material/Select",
+              message: "Use Select from @/shared/ui instead",
+            },
+            {
+              name: "@mui/material/TextField",
+              message: "Use TextField from @/shared/ui instead",
+            },
           ],
         },
       ],
