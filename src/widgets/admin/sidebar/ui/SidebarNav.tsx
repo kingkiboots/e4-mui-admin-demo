@@ -43,17 +43,13 @@ const NavMenu = styled(List, {
 }));
 
 const SidebarNav = memo(() => {
-  const {
-    navigationConfig,
-    openedGroupId,
-    activatedGroupId,
-    handleClickGroup,
-  } = useControlSidebarNavGroup();
+  const { menuList, openedGroupId, activatedGroupId, handleClickGroup } =
+    useControlSidebarNavGroup();
 
   return (
     <StyledNav component="nav" role="navigation">
       <NavMenu component="ul">
-        {navigationConfig.map((group, idx) => {
+        {menuList?.map((group, idx) => {
           const id = `${group.label}-${idx}`;
           return (
             <SidebarNavGroup

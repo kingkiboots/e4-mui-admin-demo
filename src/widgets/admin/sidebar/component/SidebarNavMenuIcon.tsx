@@ -1,3 +1,5 @@
+import type { MenuData } from "@/entities/admin/menu/types";
+import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 import { Icon } from "@/shared/ui/IconUI";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { styled } from "@mui/material/styles";
@@ -15,13 +17,13 @@ const SidebarNavListItemIcon = styled(ListItemIcon, {
 }));
 
 interface SidebarNavMenuIconProps {
-  icon?: string;
+  icon?: MenuData["icon"];
 }
 
 export const SidebarNavMenuIcon = memo<SidebarNavMenuIconProps>(({ icon }) => {
   return (
     <SidebarNavListItemIcon>
-      <Icon name={icon} />
+      {isNullOrEmpty(icon) ? undefined : <Icon name={icon} />}
     </SidebarNavListItemIcon>
   );
 });

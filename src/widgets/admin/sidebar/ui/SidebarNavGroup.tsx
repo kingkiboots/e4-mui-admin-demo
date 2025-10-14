@@ -1,25 +1,19 @@
-import { memo, type MouseEventHandler } from "react";
-import { useLocation } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import SidebarSubNavItem from "./SidebarSubNavItem";
-import Collapse from "@mui/material/Collapse";
-import List from "@mui/material/List";
+import type { MenuData } from "@/entities/admin/menu/types";
 import { isNullOrEmpty, joinClassNames } from "@/shared/lib/commonHelpers";
 import type { MuiExtraProps } from "@/shared/type";
-import { SidebarNavListItem } from "../component/SidebarNavListItem";
+import Collapse from "@mui/material/Collapse";
+import List from "@mui/material/List";
+import { styled } from "@mui/material/styles";
+import { memo, type MouseEventHandler } from "react";
+import { useLocation } from "react-router-dom";
 import { SidebarListItem } from "../component/SidebarListItem";
 import { SidebarListItemText } from "../component/SidebarListItemText";
-import { SidebarNavMenuIcon } from "../component/SidebarNavMenuIcon";
 import { SidebarNavArrowIcon } from "../component/SidebarNavArrowIcon";
+import { SidebarNavListItem } from "../component/SidebarNavListItem";
+import { SidebarNavMenuIcon } from "../component/SidebarNavMenuIcon";
+import SidebarSubNavItem from "./SidebarSubNavItem";
 
-interface SidebarNavGroupProps {
-  id: string;
-  icon: string;
-  label: string;
-  children: Array<{
-    menuUrl: string;
-    label: string;
-  }>;
+interface SidebarNavGroupProps extends MenuData {
   isOpen: boolean;
   isActive: boolean;
   onClick: MouseEventHandler<HTMLAnchorElement>;
@@ -35,6 +29,7 @@ const SidebarNavGroup = memo(
     id,
     icon,
     label,
+    menuUrl,
     isOpen,
     isActive,
     onClick,
@@ -53,7 +48,7 @@ const SidebarNavGroup = memo(
           )}
         >
           <SidebarNavListItem
-            href="#"
+            href={isNullOrEmpty(menuUrl) ? "#" : undefined}
             onClick={hasChildren ? onClick : undefined}
             aria-expanded={isOpen}
             data-menu-id={id}
