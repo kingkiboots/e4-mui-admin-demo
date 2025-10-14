@@ -37,12 +37,15 @@ function DatePickerFieldComponent<T extends FieldValues>({
   shouldUnregister,
   ...props
 }: DatePickerFieldProps<T>) {
+  const isRequired = required || !!rules?.required;
   const mergedRules = {
     ...rules,
-    ...(required &&
-      !rules?.required && { required: VALIDATION_MSG_UNVALID_REQUIRED }),
+    ...(isRequired
+      ? {
+          required: VALIDATION_MSG_UNVALID_REQUIRED,
+        }
+      : undefined),
   };
-
   return (
     <Controller
       name={name}
@@ -55,7 +58,7 @@ function DatePickerFieldComponent<T extends FieldValues>({
           <DatePicker
             value={value}
             onChange={onChange}
-            required={required}
+            required={isRequired}
             format={getFormatOnDateTimeType(dateTimeType)}
             slotProps={{
               textField: {
