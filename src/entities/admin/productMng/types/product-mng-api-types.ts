@@ -1,16 +1,23 @@
 export type ProductMngData = {
-    id : string
-	name : string
-    code : string
-    difCode:string
-    searchCode:string
-    suName:string
-    suSearchCode:string
-    typeName:string
-	stDt : string
-	edDt : string
+    eventId : string
+	mediaId : string
+	giftId : string
+	gifttName : string
+	brandId : string
+	brandName : string
 	useYn : string
-	setdef : string
+	saleEndDate : string
+	salePrice : string
+	saleDisAmt : string
+	img250 : string
+	img500 : string
+	giftTypeCd : string
+	giftSubTypeCd : string
+	subTypeNm : string
+	regStepDt : string
+	regStepId : string
+	updStepDt : string
+	updStepId : string
 }
 
 export type ProductMngList = ProductMngData[]
