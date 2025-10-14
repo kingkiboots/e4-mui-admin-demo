@@ -14,4 +14,4 @@ const themeConfig = createTheme({
 
 // themeConfig = responsiveFontSizes(themeConfig);
 
-export { themeConfig };
+export default themeConfig;
