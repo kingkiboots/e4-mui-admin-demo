@@ -1,5 +1,12 @@
 import type { CssVarsThemeOptions } from "@mui/material/styles";
 
+// TypeScript 타입 확장
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    dark: true;
+  }
+}
+
 export const componentsConfig: CssVarsThemeOptions["components"] = {
   MuiCssBaseline: {
     styleOverrides: (theme) => `
