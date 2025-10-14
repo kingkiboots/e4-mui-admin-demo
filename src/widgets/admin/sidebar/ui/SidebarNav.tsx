@@ -58,11 +58,11 @@ const SidebarNav = memo(() => {
           return (
             <SidebarNavGroup
               key={id}
-              id={id}
               isOpen={openedGroupId === id}
               isActive={activatedGroupId === id}
               onClick={handleClickGroup}
               {...group}
+              id={id}
             />
           );
         })}

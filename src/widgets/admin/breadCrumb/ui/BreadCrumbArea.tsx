@@ -5,6 +5,7 @@ import { Link } from "@/shared/ui/LinkUI";
 import { memo } from "react";
 import { useGetCurrentMenu } from "@/features/admin/sidebar/hook/useGetCurrentMenu";
 import { styled } from "@mui/material/styles";
+import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 
 const StyledBreadcrumb = styled(Link, {
   shouldForwardProp: (prop) => prop !== "isActive",
@@ -43,7 +44,7 @@ const BreadCrumbArea = memo(() => {
         Home
       </StyledBreadcrumb>
 
-      {currentMenuTree.map(({ label, menuUrl }, idx) => {
+      {currentMenuTree.map(({ label, menuUrl, id }, idx) => {
         if (currentMenuTree.length - 1 === idx) {
           return (
             <Typography
@@ -60,6 +61,7 @@ const BreadCrumbArea = memo(() => {
               }}
             >
               {label}
+              {isNullOrEmpty(id) ? "" : `[${id}]`}
             </Typography>
           );
         }

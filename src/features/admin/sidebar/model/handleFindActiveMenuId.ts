@@ -24,11 +24,11 @@ export const findActiveMenuId = (
 export const getCurrentMenuTree = (
   pathname: string,
   navigationConfig: NavigateConfig,
-  menuTree: { label: string; menuUrl: string | null }[] = []
+  menuTree: { label: string; menuUrl: string | null; id: string | null }[] = []
 ) => {
-  for (const { menuUrl, label, ...menu } of navigationConfig) {
+  for (const { menuUrl, label, id, ...menu } of navigationConfig) {
     if (menuUrl === pathname) {
-      menuTree.push({ label, menuUrl });
+      menuTree.push({ label, menuUrl, id });
       break;
     }
 
@@ -36,10 +36,14 @@ export const getCurrentMenuTree = (
       continue;
     }
 
-    for (const { label: subLabel, menuUrl: subMenuUrl } of menu.children) {
+    for (const {
+      label: subLabel,
+      menuUrl: subMenuUrl,
+      id: subMenuId,
+    } of menu.children) {
       if (subMenuUrl === pathname) {
-        menuTree.push({ label: subLabel, menuUrl: subMenuUrl });
-        menuTree.unshift({ label, menuUrl });
+        menuTree.push({ label: subLabel, menuUrl: subMenuUrl, id: subMenuId });
+        menuTree.unshift({ label, menuUrl, id: null });
         break;
       }
     }

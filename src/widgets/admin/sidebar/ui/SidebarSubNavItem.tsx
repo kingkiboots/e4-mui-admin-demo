@@ -1,7 +1,7 @@
 import { memo } from "react";
-import { SidebarNavSubListItem } from "../component/SidebarNavListItem";
 import { SidebarListItem } from "../component/SidebarListItem";
 import { SidebarListItemText } from "../component/SidebarListItemText";
+import { SidebarNavSubListItem } from "../component/SidebarNavListItem";
 
 interface SidebarNavItemProps {
   menuUrl: string;
