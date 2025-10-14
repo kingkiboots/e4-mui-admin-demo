@@ -2,15 +2,8 @@
 import MUIButtonGroup, {
   type ButtonGroupProps as MUIButtonGroupProps,
 } from "@mui/material/ButtonGroup";
-import type { ComponentProps } from "react";
-import type { Button } from "./ButtonUI";
 
-type ButtonType = React.ReactElement<ComponentProps<typeof Button>>;
-
-export interface ButtonGroupProps
-  extends Omit<MUIButtonGroupProps, "children"> {
-  children?: ButtonType | ButtonType[];
-}
+export interface ButtonGroupProps extends MUIButtonGroupProps {}
 
 export const ButtonGroup = ({ children, ...props }: ButtonGroupProps) => {
   return (
