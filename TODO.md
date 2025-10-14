@@ -4,5 +4,5 @@
 - [ ] fsd, tanstack-query 등 라이브러리별 커스텀 eslint rule 작성
 - [ ] import rule을 error로 낼 게 아니라 특정경로로 강제할 수는 없는지 알아보기
 - [ ] shared/lib or model의 함수에 주석 달면 jsdoc 페이지 띄울 수 있는지 보기
-- [ ] 커스텀 컴포넌트 했는데 왜 general style이 우선으로 먹히는지 수정
+- [x] 커스텀 컴포넌트 했는데 왜 general style이 우선으로 먹히는지 수정
 - [ ] small, medium 얘네들 font size font-weight 일괄 적용 못하나?

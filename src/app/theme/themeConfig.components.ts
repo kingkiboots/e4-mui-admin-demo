@@ -18,15 +18,19 @@ export const componentsConfig: CssVarsThemeOptions["components"] = {
       body {
         letter-spacing: 0.1px;
         background-color: #fff;
-        font-size: 1.3rem;
+        font-size: 1.3rem;g
       }
 
-      a:link, a:visited {
+      a {
         text-decoration: none;
         color: ${theme.palette.text.primary};
         cursor: pointer;
         background-color: transparent;
         touch-action: manipulation;
+      }
+        
+      a:hover, a:active {
+        text-decoration: none;          
       }
 
       ul, ol {
