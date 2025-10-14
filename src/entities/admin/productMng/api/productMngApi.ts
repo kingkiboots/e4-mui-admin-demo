@@ -3,5 +3,5 @@ import type { ApiAxiosResponse } from "@/shared/type";
 import type { ProductMngList } from "../types";
 
 export const getProductMng = async (): Promise<ApiAxiosResponse<ProductMngList>> => {
-  return await apiClient.get(`/api/money/getProductMng`);
+  return await apiClient.get(`/api/productMng/list`);
 };
