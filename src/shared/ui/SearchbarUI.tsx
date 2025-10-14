@@ -2,18 +2,19 @@ import MUIPaper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { Row } from "./RowUI";
 
-import {
+import Grid from "@mui/material/Grid";
+import React, {
   createContext,
   useContext,
-  type ChangeEvent,
-  type MouseEventHandler,
   type PropsWithChildren,
 } from "react";
-import { type ColProps } from "./ColUI";
-import React from "react";
 import { isNull, isNullOrEmpty } from "../lib/commonHelpers";
 import { ButtonGroup, type ButtonGroupProps } from "./ButtonGroupUI";
-import Grid from "@mui/material/Grid";
+import { type ColProps } from "./ColUI";
+import {
+  SearchbarButtonGroup,
+  type SearchbarButtonGroupProps,
+} from "./SearchbarButtonGroupUI";
 
 const SearchContent = styled(MUIPaper, {
   label: "search-content",
@@ -39,9 +40,7 @@ interface SearchbarProps {
   // inputsDef: InputsDefProps[];
   inputsDef?: { name: string; value: string; type: string }[];
   searchBarSize?: ColProps["size"];
-  onChange: (e: ChangeEvent) => void;
-  // buttonsDef?: SearchButtonsDefProps;
-  buttonsDef?: { search: MouseEventHandler<HTMLButtonElement> };
+  buttonsDef?: SearchbarButtonGroupProps;
   children?: React.ReactNode;
 }
 type SearchbarSubComponents = {
@@ -84,8 +83,11 @@ export const Searchbar: React.FC<SearchbarProps> & SearchbarSubComponents = ({
             ? inputsDef?.map(() => <InputsArea></InputsArea>)
             : inputsArea}
           {/* button */}
-          {/* {isNull(buttonsArea) ? <ButtonsArea></ButtonsArea> : buttonsArea} */}
-          {buttonsArea}
+          {isNull(buttonsArea) ? (
+            <SearchbarButtonGroup {...buttonsDef} />
+          ) : (
+            buttonsArea
+          )}
         </Grid>
       </SearchContent>
     </SearchbarContext.Provider>
