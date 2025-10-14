@@ -90,7 +90,7 @@ export const Select = memo(
         inputColSpan={inputColSpan}
         label={label}
         id={id}
-        required={required}
+        required={required || register?.required}
       >
         <FormControl fullWidth size="small">
           <StyledSelect
