@@ -1,10 +1,12 @@
-// eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import FormControl from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
+// eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import { DatePicker as MUIDatePicker } from "@mui/x-date-pickers/DatePicker";
 import type { Dayjs } from "dayjs";
-import { memo, useId, type ComponentPropsWithoutRef } from "react";
+import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
+import { isNullOrEmpty } from "../lib/commonHelpers";
+import dayjs from "dayjs";
 
 const StyledDatePicker = styled(MUIDatePicker, {
   name: "StyledDatePicker",
@@ -45,11 +47,15 @@ const StyledDatePicker = styled(MUIDatePicker, {
   },
 }));
 
+export type DatePickerOnChangeFunction = (value: Dayjs | null) => void;
 export interface DatePickerProps
   extends BaseInputProps,
-    ComponentPropsWithoutRef<typeof StyledDatePicker> {
-  value?: Dayjs | null;
-  onChange?: (value: Dayjs | null) => void;
+    Omit<
+      ComponentPropsWithoutRef<typeof StyledDatePicker>,
+      "value" | "onChange"
+    > {
+  value?: string;
+  onChange?: (value: string | null) => void;
 }
 export const DatePicker = memo(
   ({
@@ -67,6 +73,22 @@ export const DatePicker = memo(
   }: DatePickerProps) => {
     const id = useId();
 
+    const dayjsValue = value ? dayjs(value) : null;
+
+    const handleChange: DatePickerOnChangeFunction = useCallback(
+      (newValue) => {
+        if (isNullOrEmpty(newValue) || !newValue.isValid()) {
+          onChange?.(null);
+          return;
+        }
+
+        const formatted = newValue.format("YYYYMMDD");
+
+        onChange?.(formatted);
+      },
+      [onChange]
+    );
+
     return (
       <InputWrapper
         totalColSpan={totalColSpan}
@@ -78,8 +100,10 @@ export const DatePicker = memo(
       >
         <FormControl fullWidth size="small">
           <StyledDatePicker
-            value={value}
-            onChange={onChange}
+            //NOTE - value 에 undefined가 들어가면 안됨. 아니면 아래 같은 에러 발생
+            // MUI: A component is changing the uncontrolled value state of a picker component to be controlled.
+            value={dayjsValue}
+            onChange={handleChange}
             format={format}
             slotProps={{
               textField: {

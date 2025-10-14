@@ -1,36 +1,72 @@
 // shared/ui/form/DatePickerField.tsx
-import { Controller } from "react-hook-form";
-import type { Control, FieldPath, FieldValues } from "react-hook-form";
-import { DatePicker } from "./DatePickerUI";
-import type { BaseInputProps } from "./BaseInputUI";
 import React, { memo } from "react";
-interface DatePickerFieldProps<T extends FieldValues> extends BaseInputProps {
-  name: FieldPath<T>;
-  control: Control<T>;
+import type { ControllerProps, FieldValues } from "react-hook-form";
+import { Controller } from "react-hook-form";
+import { VALIDATION_MSG_UNVALID_REQUIRED } from "../const";
+import type { BaseInputProps } from "./BaseInputUI";
+import { DatePicker, type DatePickerProps } from "./DatePickerUI";
+
+type DateTimeType = "date" | "start" | "end";
+interface DatePickerFieldProps<T extends FieldValues>
+  extends BaseInputProps,
+    Omit<ControllerProps<T>, "render"> {
+  dateTimeType?: DateTimeType;
+  value?: string;
+  onChange?: DatePickerProps["onChange"];
 }
+
+const getFormatOnDateTimeType = (type: DateTimeType): string => {
+  switch (type) {
+    case "start":
+      return "YYYY-MM-DD 00:00:00";
+    case "end":
+      return "YYYY-MM-DD 23:59:59";
+    case "date":
+    default:
+      return "YYYY-MM-DD";
+  }
+};
 
 function DatePickerFieldComponent<T extends FieldValues>({
   name,
   control,
+  rules,
+  required,
+  defaultValue,
+  dateTimeType = "date",
+  shouldUnregister,
   ...props
 }: DatePickerFieldProps<T>) {
+  const mergedRules = {
+    ...rules,
+    ...(required &&
+      !rules?.required && { required: VALIDATION_MSG_UNVALID_REQUIRED }),
+  };
+
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field: { value, onChange }, fieldState: { error } }) => (
-        <DatePicker
-          value={value}
-          onChange={onChange}
-          slotProps={{
-            textField: {
-              error: !!error,
-              helperText: error?.message,
-            },
-          }}
-          {...props}
-        />
-      )}
+      rules={mergedRules}
+      defaultValue={defaultValue}
+      shouldUnregister={shouldUnregister}
+      render={({ field: { value, onChange }, fieldState: { error } }) => {
+        return (
+          <DatePicker
+            value={value}
+            onChange={onChange}
+            required={required}
+            format={getFormatOnDateTimeType(dateTimeType)}
+            slotProps={{
+              textField: {
+                error: !!error,
+                helperText: error?.message,
+              },
+            }}
+            {...props}
+          />
+        );
+      }}
     />
   );
 }
