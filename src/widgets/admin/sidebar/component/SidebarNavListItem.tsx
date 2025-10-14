@@ -42,17 +42,17 @@ const sidebarItemStateStyles = (
   theme: Theme,
   { isActive, isOpen }: Pick<SidebarNavListItemProps, "isActive" | "isOpen">
 ) => ({
-  color: `${theme.palette.sidebar.menu} !important`,
-  fontWeight: `${isActive ? 600 : 400} !important`,
+  color: `${theme.palette.sidebar.menu} `,
+  fontWeight: `${isActive ? 600 : 400}`,
 
   ...(isActive && {
-    color: `${theme.palette.sidebar.active} !important`,
-    backgroundColor: "rgba(255, 255, 255, 0.04) !important",
+    color: `${theme.palette.sidebar.active}`,
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
     boxShadow: `inset 3px 0 0 ${theme.palette.info.main}`,
   }),
 
   ...(isOpen && {
-    color: `${theme.palette.sidebar.text} !important`,
+    color: `${theme.palette.sidebar.text}`,
   }),
 
   "&:hover": {
@@ -66,6 +66,8 @@ const sidebarItemStateStyles = (
 // --------------------
 export const SidebarNavListItem = styled(Link, {
   shouldForwardProp: (prop) => !["isActive", "isOpen"].includes(prop as string),
+  name: "SidebarNavListItem",
+  label: "sidebar-nav-list-item",
 })<SidebarNavListItemProps>(({ theme, isActive, isOpen }) => ({
   ...baseSidebarItemStyles({ theme }),
   ...sidebarItemStateStyles(theme, { isActive, isOpen }),
