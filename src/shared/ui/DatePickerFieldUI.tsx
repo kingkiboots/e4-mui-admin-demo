@@ -2,7 +2,7 @@
 import { Controller } from "react-hook-form";
 import type { Control, FieldPath, FieldValues } from "react-hook-form";
 import { DatePicker } from "./DatePickerUI";
-import type { BaseInputProps } from "./CommontInputUI";
+import type { BaseInputProps } from "./BaseInputUI";
 import React, { memo } from "react";
 interface DatePickerFieldProps<T extends FieldValues> extends BaseInputProps {
   name: FieldPath<T>;

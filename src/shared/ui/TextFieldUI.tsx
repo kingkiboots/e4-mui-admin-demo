@@ -10,7 +10,7 @@ import {
   type ComponentPropsWithoutRef,
 } from "react";
 import { type UseFormRegisterReturn } from "react-hook-form";
-import { InputWrapper, type BaseInputProps } from "./CommontInputUI";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 
 const StyledTextField = styled(MUITextField, {
   name: "StyledTextField",

@@ -8,7 +8,7 @@ import MUISelect, {
 import { styled } from "@mui/material/styles";
 import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
-import { InputWrapper, type BaseInputProps } from "./CommontInputUI";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 
 export interface SelectOption {
   value: string;

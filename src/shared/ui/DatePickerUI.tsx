@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { DatePicker as MUIDatePicker } from "@mui/x-date-pickers/DatePicker";
 import type { Dayjs } from "dayjs";
 import { memo, useId, type ComponentPropsWithoutRef } from "react";
-import { InputWrapper, type BaseInputProps } from "./CommontInputUI";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 
 const StyledDatePicker = styled(MUIDatePicker, {
   name: "StyledDatePicker",
