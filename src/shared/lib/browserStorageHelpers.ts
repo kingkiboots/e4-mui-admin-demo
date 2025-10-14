@@ -144,7 +144,7 @@ class IBrowserStorageController {
   // }
 }
 
-const cookieController = new IBrowserStorageController("cookie");
+// const cookieController = new IBrowserStorageController("cookie");
 const sessionStorageController = new IBrowserStorageController("session");
 const localStorageController = new IBrowserStorageController("local");
 
@@ -159,8 +159,8 @@ export const getBrowserStorageController = (
       return localStorageController;
     case "session":
       return sessionStorageController;
-    case "cookie":
-      return cookieController;
+    // case "cookie":
+    //   return cookieController;
     default:
       throw new Error("Unsupported storage type");
   }
