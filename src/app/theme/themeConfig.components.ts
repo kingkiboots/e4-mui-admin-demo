@@ -36,6 +36,10 @@ export const componentsConfig: CssVarsThemeOptions["components"] = {
         touch-action: manipulation;
       }
         
+      a:link, a:visited {
+        text-decoration: none;          
+      }
+
       a:hover, a:active {
         text-decoration: none;          
       }
