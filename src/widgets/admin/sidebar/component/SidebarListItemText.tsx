@@ -14,6 +14,7 @@ export const SidebarListItemText = memo(
         primary={label}
         slotProps={{
           primary: {
+            textTransform: "uppercase",
             fontWeight: isActive ? 600 : 400,
           },
         }}
