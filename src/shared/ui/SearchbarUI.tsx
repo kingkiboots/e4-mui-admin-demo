@@ -77,7 +77,7 @@ export const Searchbar: React.FC<SearchbarProps> & SearchbarSubComponents = ({
   return (
     <SearchbarContext.Provider value={{ searchBarSize }}>
       <SearchContent elevation={0}>
-        <Grid container>
+        <Grid container alignItems="center">
           {/* input */}
           {isNull(inputsArea)
             ? inputsDef?.map(() => <InputsArea></InputsArea>)
