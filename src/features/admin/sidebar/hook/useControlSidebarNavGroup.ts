@@ -23,7 +23,7 @@ export const useControlSidebarNavGroup = () => {
     return data;
   }, []);
 
-  const { data: menuList } = useGetMenuListQuery({
+  const { data: menuList, ...query } = useGetMenuListQuery({
     select,
   });
 
@@ -69,5 +69,6 @@ export const useControlSidebarNavGroup = () => {
     openedGroupId,
     activatedGroupId,
     handleClickGroup,
+    ...query,
   };
 };

@@ -1,10 +1,12 @@
-import { memo } from "react";
-import { styled } from "@mui/material/styles";
+import { useControlSidebarNavGroup } from "@/features/admin/sidebar/hook/useControlSidebarNavGroup";
+import type { MuiExtraProps } from "@/shared/type";
+import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import type { MuiExtraProps } from "@/shared/type";
+import Skeleton from "@mui/material/Skeleton";
+import { styled } from "@mui/material/styles";
+import { memo } from "react";
 import SidebarNavGroup from "./SidebarNavGroup";
-import { useControlSidebarNavGroup } from "@/features/admin/sidebar/hook/useControlSidebarNavGroup";
 
 const StyledNav = styled(Box, {
   name: "SidebarNav",
@@ -42,26 +44,53 @@ const NavMenu = styled(List, {
   },
 }));
 
+const NavSkeleton = styled(Skeleton, {
+  name: "NavSkeleton",
+  label: "nav-skeleton",
+})(({ theme }) => ({
+  backgroundColor: theme.palette.sidebar.activeMenu,
+  width: "90%",
+  height: "4.8rem",
+  "&::after": {
+    backgroundColor: theme.palette.sidebar.active,
+  },
+}));
+
 const SidebarNav = memo(() => {
-  const { menuList, openedGroupId, activatedGroupId, handleClickGroup } =
-    useControlSidebarNavGroup();
+  const {
+    menuList,
+    openedGroupId,
+    activatedGroupId,
+    handleClickGroup,
+    isPending,
+  } = useControlSidebarNavGroup();
 
   return (
     <StyledNav component="nav" role="navigation">
       <NavMenu component="ul">
-        {menuList?.map((group, idx) => {
-          const id = `${group.label}-${idx}`;
-          return (
-            <SidebarNavGroup
-              key={id}
-              isOpen={openedGroupId === id}
-              isActive={activatedGroupId === id}
-              onClick={handleClickGroup}
-              {...group}
-              id={id}
-            />
-          );
-        })}
+        {isPending ? (
+          <>
+            <Stack gap="16px" alignItems="center">
+              {new Array(5).fill(null).map(() => (
+                <NavSkeleton variant="rounded" />
+              ))}
+            </Stack>
+          </>
+        ) : (
+          menuList?.map((group, idx) => {
+            const id = `${group.label}-${idx}`;
+            return (
+              <SidebarNavGroup
+                key={id}
+                isOpen={openedGroupId === id}
+                isActive={activatedGroupId === id}
+                onClick={handleClickGroup}
+                {...group}
+                id={id}
+              />
+            );
+          })
+        )}
       </NavMenu>
     </StyledNav>
   );
