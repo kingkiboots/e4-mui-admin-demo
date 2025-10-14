@@ -1,29 +1,24 @@
-import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
 // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import MUISelect, {
   type BaseSelectProps,
   type SelectChangeEvent,
 } from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import {
-  memo,
-  useCallback,
-  useId,
-  type ComponentPropsWithoutRef,
-  type ReactNode,
-} from "react";
+import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
-import { Col, type ColProps } from "./ColUI";
-import { Row } from "./RowUI";
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
+import { InputWrapper, type BaseInputProps } from "./CommontInputUI";
 
 export interface SelectOption {
   value: string;
   label: string;
 }
 
-const StyledSelect = styled(MUISelect)(({ theme }) => ({
+const StyledSelect = styled(MUISelect, {
+  name: "StyledSelect",
+  label: "styled-select",
+})(({ theme }) => ({
   "& .MuiSelect-select": {
     padding: `0.6rem 1.3054rem`,
     fontSize: "1.2rem",
@@ -55,55 +50,19 @@ const StyledMenu = styled(MenuItem, { name: "StyledMenu", label: "option" })(
   })
 );
 
-const FormGroupRow = styled(Row, {
-  name: "FormGroupRow",
-  label: "form-group-row",
-})();
-
-const FormCol = styled(Col, {
-  name: "FormCol",
-  label: "form-col",
-})({
-  alignSelf: "center",
-});
-
-const StyledLabel = styled(FormLabel, {
-  name: "FormLabel",
-  label: "form-label",
-})(({ theme }) => ({
-  paddingTop: `calc(${theme.spacing(1)} + 1px)`,
-  paddingBottom: `calc(${theme.spacing(1)} + 1px)`,
-  marginBottom: 0,
-
-  alignSelf: "center",
-  fontWeight: "bold",
-  letterSpacing: "-1px",
-  lineHeight: 1.47,
-  fontSize: "1.3rem",
-
-  // 반응형 처리
-  [theme.breakpoints.down("lg")]: {
-    textAlign: "right",
-  },
-}));
-
 interface SelectProps
-  extends Omit<ComponentPropsWithoutRef<typeof StyledSelect>, "onChange"> {
-  totalColSpan?: ColProps["size"];
-  labelColSpan?: ColProps["size"];
-  inputColSpan?: ColProps["size"];
-  label?: ReactNode;
+  extends BaseInputProps,
+    Omit<ComponentPropsWithoutRef<typeof StyledSelect>, "onChange"> {
   options: SelectOption[];
-  placeholder?: string;
   register?: UseFormRegisterReturn;
   onChange?: BaseSelectProps["onChange"];
 }
 
 export const Select = memo(
   ({
-    totalColSpan = { xs: 12, sm: 4 },
-    labelColSpan = { xs: 12, sm: 3 },
-    inputColSpan = { xs: 12, sm: 9 },
+    totalColSpan,
+    labelColSpan,
+    inputColSpan,
     label,
     required,
     options,
@@ -125,36 +84,32 @@ export const Select = memo(
     );
 
     return (
-      <Col size={totalColSpan} sx={{ alignSelf: "center" }}>
-        <FormGroupRow>
-          {/* 라벨 */}
-          <FormCol size={labelColSpan} sx={{ textAlign: { lg: "right" } }}>
-            <StyledLabel required={required} htmlFor={id}>
-              {label}
-            </StyledLabel>
-          </FormCol>
-          {/* 인풋 */}
-          <FormCol size={inputColSpan}>
-            <FormControl fullWidth size="small">
-              <StyledSelect
-                {...register}
-                id={id}
-                defaultValue={defaultValue}
-                required={required}
-                onChange={handleChange}
-                {...restProps}
-              >
-                {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
-                {options.map((option) => (
-                  <StyledMenu key={option.value} value={option.value}>
-                    {option.label}
-                  </StyledMenu>
-                ))}
-              </StyledSelect>
-            </FormControl>
-          </FormCol>
-        </FormGroupRow>
-      </Col>
+      <InputWrapper
+        totalColSpan={totalColSpan}
+        labelColSpan={labelColSpan}
+        inputColSpan={inputColSpan}
+        label={label}
+        id={id}
+        required={required}
+      >
+        <FormControl fullWidth size="small">
+          <StyledSelect
+            {...register}
+            id={id}
+            defaultValue={defaultValue}
+            required={required}
+            onChange={handleChange}
+            {...restProps}
+          >
+            {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
+            {options.map((option) => (
+              <StyledMenu key={option.value} value={option.value}>
+                {option.label}
+              </StyledMenu>
+            ))}
+          </StyledSelect>
+        </FormControl>
+      </InputWrapper>
     );
   }
 );
