@@ -17,10 +17,6 @@ const StyledBreadcrumb = styled(Link, {
   whiteSpace: "nowrap",
   overflow: "hidden",
   transition: "all 0.3s ease-in-out;",
-
-  "&:hover": {
-    maxWidth: "25rem !important",
-  },
 }));
 
 const BreadCrumbArea = memo(() => {
@@ -58,6 +54,10 @@ const BreadCrumbArea = memo(() => {
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 transition: "all 0.3s ease-in-out;",
+
+                "&:hover": {
+                  maxWidth: "25rem !important",
+                },
               }}
             >
               {label}
