@@ -1,5 +1,11 @@
 import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
-import { useCallback, useMemo, useState, type MouseEventHandler } from "react";
+import {
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type MouseEventHandler,
+} from "react";
 import { useLocation } from "react-router-dom";
 
 import { useGetMenuListQuery } from "@/entities/admin/menu/lib/useMenuApiQueries";
@@ -24,11 +30,21 @@ export const useControlSidebarNavGroup = () => {
   const { pathname } = useLocation();
   const activatedGroupId = useMemo(() => {
     return findActiveMenuId(pathname, menuList);
-  }, [pathname]);
+  }, [pathname, menuList]);
 
   const [openedGroupId, setOpenedGroupId] = useState<string | null>(
     activatedGroupId
   );
+
+  useLayoutEffect(() => {
+    if (isNullOrEmpty(activatedGroupId) || activatedGroupId === openedGroupId) {
+      return;
+    }
+
+    setTimeout(() => {
+      setOpenedGroupId(activatedGroupId);
+    }, 100);
+  }, [activatedGroupId]);
 
   const handleClickGroup: MouseEventHandler<HTMLAnchorElement> = useCallback(
     (evt) => {
