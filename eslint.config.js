@@ -52,6 +52,10 @@ export default defineConfig([
               name: "@mui/material/TextField",
               message: "Use TextField from @/shared/ui instead",
             },
+            {
+              name: "@mui/x-date-pickers/DatePicker",
+              message: "Use DatePicker from @/shared/ui instead",
+            },
           ],
         },
       ],
