@@ -1,14 +1,21 @@
-import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
+import type { MenuList } from "@/entities/admin/menu/types";
+import { isEmpty, isNull, isNullOrEmpty } from "@/shared/lib/commonHelpers";
 
-type NavigateConfig = typeof import("@/entities/admin/menu/config/menus.json");
+export const findActiveMenuId = (pathname: string, menuList?: MenuList) => {
+  if (isNull(menuList)) {
+    return null;
+  }
 
-export const findActiveMenuId = (
-  pathname: string,
-  navigationConfig: NavigateConfig
-) => {
+  if (isEmpty(menuList)) {
+    console.warn(
+      "[handleFindActiveMenuId,findActiveMenuId] MenuList is Empty!"
+    );
+    return null;
+  }
+
   let targetIdx = 0;
 
-  const activatedGroup = navigationConfig.find((group, idx) => {
+  const activatedGroup = menuList?.find((group, idx) => {
     const result = group.children.some((item) => item.menuUrl === pathname);
     if (result == true) {
       targetIdx = idx;
@@ -20,13 +27,13 @@ export const findActiveMenuId = (
   return activatedGroup ? `${activatedGroup.label}-${targetIdx}` : null;
 };
 
-// NOTE - navigationConfig에서 현재 메뉴 찾고, 부모부터 순서대로 배열로 담는다.
+// NOTE - menuList에서 현재 메뉴 찾고, 부모부터 순서대로 배열로 담는다.
 export const getCurrentMenuTree = (
   pathname: string,
-  navigationConfig: NavigateConfig,
+  menuList: MenuList,
   menuTree: { label: string; menuUrl: string | null; id: string | null }[] = []
 ) => {
-  for (const { menuUrl, label, id, ...menu } of navigationConfig) {
+  for (const { menuUrl, label, id, ...menu } of menuList) {
     if (menuUrl === pathname) {
       menuTree.push({ label, menuUrl, id });
       break;
