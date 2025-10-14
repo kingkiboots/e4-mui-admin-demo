@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import SidebarSubNavItem from "./SidebarSubNavItem";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
-import { joinClassNames } from "@/shared/lib/commonHelpers";
+import { isNullOrEmpty, joinClassNames } from "@/shared/lib/commonHelpers";
 import type { MuiExtraProps } from "@/shared/type";
 import { SidebarNavListItem } from "../component/SidebarNavListItem";
 import { SidebarListItem } from "../component/SidebarListItem";
@@ -42,6 +42,8 @@ const SidebarNavGroup = memo(
   }: SidebarNavGroupProps) => {
     const location = useLocation();
 
+    const hasChildren = !isNullOrEmpty(children);
+
     return (
       <>
         <SidebarListItem
@@ -52,7 +54,7 @@ const SidebarNavGroup = memo(
         >
           <SidebarNavListItem
             href="#"
-            onClick={onClick}
+            onClick={hasChildren ? onClick : undefined}
             aria-expanded={isOpen}
             data-menu-id={id}
             isActive={isActive}
@@ -60,7 +62,7 @@ const SidebarNavGroup = memo(
           >
             <SidebarNavMenuIcon icon={icon} />
             <SidebarListItemText label={label} isActive={isActive} />
-            <SidebarNavArrowIcon isOpen={isOpen} />
+            {hasChildren ? <SidebarNavArrowIcon isOpen={isOpen} /> : undefined}
           </SidebarNavListItem>
         </SidebarListItem>
 
