@@ -3,7 +3,6 @@ import { appRouter } from "./appRouter";
 import { RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClientProvider } from "@tanstack/react-query";
-import GlobalStyle from "./styles/GlobalStyle";
 import appMockWorker from "./appMockWorker";
 import queryClient from "@/shared/config/queryClientConfig";
 
@@ -15,7 +14,6 @@ function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <GlobalStyle />
           <RouterProvider router={appRouter} />
         </ThemeProvider>
       </QueryClientProvider>
