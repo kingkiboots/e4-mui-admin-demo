@@ -1,8 +1,9 @@
+import { restApiConfig } from "@/shared/config";
 import { withDelay } from "@/shared/lib/apiMockHelpers";
 import MockAdapter from "axios-mock-adapter";
 
 export const evnetMngApiMockHandler = (mockInstance: MockAdapter) => {
-  mockInstance.onGet("/api/money/getEventMng").reply(
+  mockInstance.onGet(restApiConfig.api.eventMng.list).reply(
     withDelay(500, {
       status: 200,
       data: {
