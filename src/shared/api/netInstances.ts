@@ -25,6 +25,8 @@ apiClient.interceptors.request.use(apiRequestHandler);
 apiClient.interceptors.response.use(apiResponseHandler, apiErrorHandler);
 
 /* api mocker */
-const apiClientMock = new MockAdapter(apiClient, { onNoMatch: "passthrough" });
+const apiClientMocker = new MockAdapter(apiClient, {
+  onNoMatch: "passthrough",
+});
 
-export { apiClient, apiClientMock };
+export { apiClient, apiClientMocker };
