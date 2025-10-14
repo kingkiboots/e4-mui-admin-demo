@@ -12,7 +12,7 @@ const routes: ExtendedRouteObject[] = [
       {
         path: "",
         index: true,
-        element: <Navigate to={`/${domainConfig.admin.limitMng}`} replace />,
+        element: <Navigate to={`/admin/pushMsgMng`} replace />,
       },
       {
         path: "health",
@@ -26,9 +26,23 @@ const routes: ExtendedRouteObject[] = [
         element: <AdminLayout />,
         children: [
           {
-            path: "limitMng",
+            path: "eventMng",
             lazy: () =>
-              import("../../pages/admin/limitMngPage").then((module) => ({
+              import("../../pages/admin/eventMng").then((module) => ({
+                Component: module.default,
+              })),
+          },
+          {
+            path: "productMng",
+            lazy: () =>
+              import("../../pages/admin/productMng").then((module) => ({
+                Component: module.default,
+              })),
+          },
+          {
+            path: "pushMsgMng",
+            lazy: () =>
+              import("../../pages/admin/pushMsgMng").then((module) => ({
                 Component: module.default,
               })),
           },
