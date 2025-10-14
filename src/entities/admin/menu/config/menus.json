@@ -1,36 +1,35 @@
 [
   {
-    "label": "해피페이머니",
+    "label": "Sample Menu1",
+    "id": null,
     "icon": "SentimentSatisfiedAltOutlined",
     "menuUrl": null,
     "children": [
       {
-        "label": "한도관리",
+        "label": "이벤트관리",
+        "id": "SKBBF0200101",
         "icon": null,
-        "menuUrl": "/admin/limitMng"
+        "menuUrl": "/admin/eventMng"
       },
       {
-        "label": "대쉬보드",
-        "icon": null,
-        "menuUrl": "/admin/dashboard"
-      }
-    ]
-  },
-  {
-    "label": "상품/혜택",
-    "icon": "DiamondOutlined",
-    "menuUrl": null,
-    "children": [
-      {
-        "label": "상품정보관리",
+        "label": "상품전시관리",
+        "id": "SKBBF0400501",
         "icon": null,
         "menuUrl": "/admin/productMng"
       },
       {
-        "label": "챌린지팝업관리",
+        "label": "MSA 방송푸시 메시지관리",
+        "id": "SKBFP0400104",
         "icon": null,
-        "menuUrl": "/admin/challengePopupMng"
+        "menuUrl": "/admin/pushMsgMng"
       }
     ]
+  },
+  {
+    "label": "Sample Menu2",
+    "id": null,
+    "icon": "DiamondOutlined",
+    "menuUrl": null,
+    "children": []
   }
 ]
