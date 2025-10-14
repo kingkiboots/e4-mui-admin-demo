@@ -47,7 +47,7 @@ const sidebarItemStateStyles = (
 
   ...(isActive && {
     color: `${theme.palette.sidebar.active}`,
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    backgroundColor: theme.palette.sidebar.activeMenu,
     boxShadow: `inset 3px 0 0 ${theme.palette.info.main}`,
   }),
 

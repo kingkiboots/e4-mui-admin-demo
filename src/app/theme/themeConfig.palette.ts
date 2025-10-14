@@ -10,6 +10,7 @@ declare module "@mui/material/styles" {
       backgroundImage: string;
       text: string;
       menu: string;
+      activeMenu: string;
       active: string;
       hover: string;
     };
@@ -70,6 +71,7 @@ export const paletteConfig: PaletteOptions = {
       "linear-gradient(270deg, rgba(255, 255, 255, 0), transparent)",
     text: "#ffffff",
     menu: "#b5b5b5",
+    activeMenu: "rgba(255, 255, 255, 0.04)",
     active: "#a8b2ff",
     hover: "rgba(0, 0, 0, 0.1)",
   },
