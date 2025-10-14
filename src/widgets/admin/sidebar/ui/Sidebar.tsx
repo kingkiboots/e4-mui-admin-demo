@@ -23,6 +23,8 @@ const StyledSidebar = styled(Box, {
   zIndex: 1002,
   willChange: "left, right",
 
+  overflowX: "hidden",
+
   backgroundColor: theme.palette.sidebar?.background,
   backgroundImage: theme.palette.sidebar?.backgroundImage,
 }));

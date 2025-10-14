@@ -91,14 +91,14 @@ export const SidebarNavSubListItem = styled(Link, {
 
     "&:before": {
       content: '"\\2022"',
-      color: theme.palette.success.main,
+      color: theme.palette.sidebar.active,
       display: "flex",
       alignItems: "center",
       position: "absolute",
-      fontSize: "3.2rem",
+      fontSize: "2.8rem",
       height: "1rem",
       right: "1.1rem",
-      top: "calc(50% - 4px)",
+      top: "calc(50% - 8px)",
     },
   }),
 }));
