@@ -18,7 +18,7 @@ export const componentsConfig: CssVarsThemeOptions["components"] = {
       body {
         letter-spacing: 0.1px;
         background-color: #fff;
-        font-size: 1.3rem;g
+        font-size: 1.3rem;
       }
 
       a {
