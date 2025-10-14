@@ -23,13 +23,18 @@ MUI로 관리자 페이지 3페이지 정도를 만들 것을 과제로 내주�
 
 ### Languages & Environment
 
-| 항목       |    버전     |
-| :--------- | :---------: |
-| 형상관리   |     Git     |
-| Typescript |    5.9.3    |
-| Node JS    | LTS 20.12.2 |
-| React JS   |   19.1.1    |
-| VS Code    |             |
+| 항목       |    버전     |                    다운로드                    |
+| :--------- | :---------: | :--------------------------------------------: |
+| 형상관리   |     Git     |         https://git-scm.com/downloads          |
+| Node JS    | LTS 20.12.2 |         https://nodejs.org/ko/download         |
+| pnpm       |   10.18.2   |    cmd 열어 npm `npm install -g pnpm` 실행     |
+| Typescript |    5.9.3    | 프로젝트 위치의 터미널에서 `pnpm install` 실행 |
+| React JS   |   19.1.1    | 프로젝트 위치의 터미널에서 `pnpm install` 실행 |
+| VS Code    |             |     https://code.visualstudio.com/download     |
+
+### 실행
+
+- 프로젝트 위치의 터미널에서 `pnpm dev` 실행
 
 ### VS Code Extensions
 
