@@ -1,13 +1,7 @@
 // prefix + path 합치기 (절대/상대 구분)
-type Join<
-  Base extends string,
-  Path extends string,
-  Absolute extends boolean = true
-> = Absolute extends true
-  ? Path extends `/${string}`
-    ? `${Base}${Path}` // 절대경로
-    : `${Base}/${Path}` // 기본적으로 앞에 /
-  : Path; // 상대경로 유지
+type Join<Base extends string, Path extends string> = Path extends `/${string}`
+  ? `${Base}${Path}` // 절대경로
+  : `${Base}/${Path}`; // 기본적으로 앞에 /
 
 // 동적 파라미터 추출
 type ExtractParams<T extends string> =
@@ -25,17 +19,12 @@ type PathBuilder<Path extends string> = [ExtractParams<Path>] extends [never]
 export type NestedRoutes<
   Base extends string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Routes extends Record<string, any>,
-  Absolute extends boolean = true
+  Routes extends Record<string, any>
 > = {
   [K in keyof Routes]: Routes[K] extends string
-    ? PathBuilder<Join<Base, Routes[K], Absolute>>
+    ? PathBuilder<Join<Base, Routes[K]>>
     : // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Routes[K] extends Record<string, any>
-    ? NestedRoutes<
-        Join<Base, Extract<keyof Routes[K], string>, Absolute>,
-        Routes[K],
-        Absolute
-      >
+    ? NestedRoutes<Join<Base, Extract<keyof Routes[K], string>>, Routes[K]>
     : never;
 };
