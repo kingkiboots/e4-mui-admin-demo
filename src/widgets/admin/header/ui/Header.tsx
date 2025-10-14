@@ -132,7 +132,7 @@ const Header = memo(
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "5rem" }}
+                sx={{ marginTop: "5rem" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
