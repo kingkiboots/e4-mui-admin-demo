@@ -1,18 +1,24 @@
+import type { ApiAxiosResponse } from "@/shared/type";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 import { useQuery } from "@tanstack/react-query";
-import { type AxiosResponse } from "axios";
-import { getPushMsgMng } from "../api/pushMsgMngApi";
+import { getPushMsgList } from "../api/pushMsgMngApi";
+import type { PushMsgMngList, PushMsgMngListSearchData } from "../types";
 
 export const pushMsgMngApiQueryKey = createQueryKeys("pushMsgMngApiQueryKey", {
-  get: () => ["get"],
+  list: (params) => [params],
 });
 
-export const useGetPushMsgMngQuery = <TData>(options?: {
-  select: (res: AxiosResponse) => TData;
-}) => {
+export const useGetPushMsgListQuery = <TData>(
+  params: PushMsgMngListSearchData,
+  options?: {
+    enabled?: boolean;
+    select: (res: ApiAxiosResponse<PushMsgMngList>) => TData;
+  }
+) => {
   return useQuery({
-    queryKey: pushMsgMngApiQueryKey.get().queryKey,
+    queryKey: pushMsgMngApiQueryKey.list(params).queryKey,
+    enabled: options?.enabled,
     select: options?.select,
-    queryFn: () => getPushMsgMng(),
+    queryFn: () => getPushMsgList(params),
   });
 };

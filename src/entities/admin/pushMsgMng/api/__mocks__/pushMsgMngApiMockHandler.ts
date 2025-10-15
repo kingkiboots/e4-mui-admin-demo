@@ -4,41 +4,58 @@ import MockAdapter from "axios-mock-adapter";
 
 export const pushMsgMngApiMockHandler = (mockInstance: MockAdapter) => {
   mockInstance.onGet(restApiConfig.api.pushMsgMng.list).reply(
-    withDelay(500, {
+    withDelay(0, {
       status: 200,
       data: {
         code: "0000",
         message: "정상 처리 되었습니다.",
         timestamp: "20240726092207",
-        data: Array(4)
-          .fill([
-            {
-              title: "생일 쿠폰 발급 안내",
-              date: "05/03",
-              content: "Hello World!",
-              read: true,
-            },
-            {
-              title: "소멸예정 포인트 안내",
-              date: "05/03",
-              content: "Hello World!",
-              read: true,
-            },
-            {
-              title: "회원정보 업데이트",
-              date: "05/03",
-              content: "Hello Dude!",
-              read: true,
-            },
-            {
-              title: "신규 고객 포인트 제공",
-              date: "05/03",
-              content: "Hello Dude!",
-              read: true,
-            },
-          ])
-          .flat(),
+        data: Array(10)
+          .fill(null)
+          .map((_, idx) => ({
+            serviceCd: String(115515451 + idx),
+            seq: String(5665456 + idx),
+            name: "	푸시제목 테스트" + idx,
+            content: "푸시내용 테스트" + idx,
+            url: "https://www.test.com/event/push?q=" + idx,
+            useYn: idx % 2 === 0 ? "Y" : "N",
+          })),
       },
     })
   );
 };
+
+/*
+
+import { restApiConfig } from "@/shared/config";
+import { withDelay } from "@/shared/lib/apiMockHelpers";
+import type { AxiosRequestConfig } from "axios";
+import MockAdapter from "axios-mock-adapter";
+
+export const pushMsgMngApiMockHandler = (mockInstance: MockAdapter) => {
+  mockInstance
+    .onGet(restApiConfig.api.pushMsgMng.list)
+    .reply((config: AxiosRequestConfig) => {
+    console.log('config.params', config.params)
+      return withDelay(500, {
+        status: 200,
+        data: {
+          code: "0000",
+          message: "정상 처리 되었습니다.",
+          timestamp: "20240726092207",
+          data: Array(10)
+            .fill(null)
+            .map((_, idx) => ({
+              serviceCd: String(115515451 + idx),
+              seq: String(5665456 + idx),
+              name: "	푸시제목 테스트" + idx,
+              content: "푸시내용 테스트" + idx,
+              url: "https://www.test.com/event/push?q=" + idx,
+              useYn: idx % 2 === 0 ? "Y" : "N",
+            })),
+        },
+      })(config);
+    });
+};
+
+*/
