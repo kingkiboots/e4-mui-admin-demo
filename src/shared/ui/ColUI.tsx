@@ -6,7 +6,6 @@ const Cell = styled(Grid, {
   label: "col",
 })({
   position: "relative",
-  width: "100%",
   paddingRight: "1.2rem",
   paddingLeft: "1.2rem",
 });
