@@ -12,7 +12,12 @@ export const ProductMngDetailEventWidget = () => {
     <Detail
       key={"product-mng-detail-info"}
       title="이벤트 정보"
-      information="이벤트 정보의 혜택유형이 [상품권]이 아닐 경우 해당 상품권 서비스를 이용할 수 없습니다."
+      information={
+        <>
+          이벤트 정보의 혜택유형이 <span>[상품권]</span>이 아닐 경우 해당 상품권
+          서비스를 이용할 수 없습니다.
+        </>
+      }
     >
       <Select
         label="한도구분"
