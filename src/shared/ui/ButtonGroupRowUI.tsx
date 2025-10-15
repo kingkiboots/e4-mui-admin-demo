@@ -7,7 +7,7 @@ interface ButtonGroupRowProps extends PropsWithChildren {}
 export const ButtonGroupRow = ({ children }: ButtonGroupRowProps) => {
   return (
     <Row marginBottom="0.5rem">
-      <Col size={12}>
+      <Col size={12} textAlign="right">
         <ButtonGroup>{children}</ButtonGroup>
       </Col>
     </Row>
