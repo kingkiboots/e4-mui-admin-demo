@@ -104,6 +104,7 @@ const ProductMngListWidget = memo(() => {
       getRowId={(row) => row.eventId}
       columns={columns}
       rows={rows}
+      key={`product-mng-list-key`}
     />
   );
 });
