@@ -1,3 +1,8 @@
+export type ProductMngListSearchData = {
+  serviceCd: string;
+  seq: string;
+};
+
 export type ProductMngData = {
     eventId : string
 	mediaId : string
