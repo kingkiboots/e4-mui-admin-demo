@@ -1,18 +1,25 @@
+import type { ApiAxiosResponse } from "@/shared/type";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 import { useQuery } from "@tanstack/react-query";
-import { type AxiosResponse } from "axios";
-import { getEventMng } from "../api/eventMngApi";
+import { getEventMngList } from "../api/eventMngApi";
+import type { EventMngList, EventMngListSearchData } from "../types";
+
 
 export const eventMngApiQueryKey = createQueryKeys("eventMngApiQueryKey", {
-  get: () => ["get"],
+  list: (params) => [params],
 });
 
-export const useGetEventMngQuery = <TData>(options?: {
-  select: (res: AxiosResponse) => TData;
-}) => {
+export const useGetEventListQuery = <TData>(
+  params: EventMngListSearchData,
+  options?: {
+    enabled?: boolean;
+    select: (res: ApiAxiosResponse<EventMngList>) => TData;
+  }
+) => {
   return useQuery({
-    queryKey: eventMngApiQueryKey.get().queryKey,
+    queryKey: eventMngApiQueryKey.list(params).queryKey,
+    enabled: options?.enabled,
     select: options?.select,
-    queryFn: () => getEventMng(),
+    queryFn: () => getEventMngList(params),
   });
 };
