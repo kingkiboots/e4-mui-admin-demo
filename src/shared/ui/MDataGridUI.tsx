@@ -4,6 +4,7 @@ import {
   type DataGridProps as MUIDataGridProps,
 } from "@mui/x-data-grid";
 
+//LINK - https://mui.com/x/api/data-grid/data-grid
 export interface MDataGridProps extends MUIDataGridProps {}
 export const MDataGrid = ({ ...props }: MDataGridProps) => {
   return (
