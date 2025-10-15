@@ -3,6 +3,7 @@ import Meta from "./Meta";
 import PushMsgMngSearchbarWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngSearchbarWidget";
 import PushMsgMngMsgListWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgListWidget";
 import PushMsgMngMsgDetailWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgDetailWidget";
+import PushMsgMngMsgDetailMngWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgDetailMngWidget";
 
 const PushMsgMngPage = () => {
   return (
@@ -10,6 +11,7 @@ const PushMsgMngPage = () => {
       <PageContentLayout>
         <PushMsgMngSearchbarWidget />
         <PushMsgMngMsgDetailWidget />
+        <PushMsgMngMsgDetailMngWidget />
         <PushMsgMngMsgListWidget />
       </PageContentLayout>
     </Meta>
