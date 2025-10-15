@@ -56,6 +56,10 @@ export default defineConfig([
               name: "@mui/x-date-pickers/DatePicker",
               message: "Use DatePicker from @/shared/ui instead",
             },
+            {
+              name: "@mui/x-data-grid",
+              message: "Use DataGrid from @/shared/ui instead",
+            },
           ],
         },
       ],
