@@ -71,12 +71,14 @@ package-frontend:
   script:
     - npm install --force
     - npm run build
+    - npm run build-storybook
     - echo "Package and push the frontend docker image..."
     - docker buildx build --platform linux/amd64,linux/arm64 --cache-from $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA --build-arg APP_ENV=$APP_ENV --tag $IMAGE_URL/$APP_ENV:frontend_$CI_COMMIT_SHORT_SHA . --push
     - echo "Package and push complete."
   artifacts:
     paths:
       - dist
+      - storybook-static
     expire_in: 1 week
   tags:
     - docker
