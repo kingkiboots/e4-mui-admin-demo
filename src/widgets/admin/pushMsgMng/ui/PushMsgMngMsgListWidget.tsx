@@ -55,6 +55,12 @@ const PushMsgMngMsgListWidget = memo(() => {
       getRowId={(row) => row.serviceCd}
       columns={columns}
       rows={rows}
+      information={
+        <>
+          혜택기본식별자를 <span>더블 클릭하면</span> 상세 정보 조회가
+          가능합니다.
+        </>
+      }
     />
   );
 });
