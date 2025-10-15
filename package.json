@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node config.js | dotenv -e .env.local vite",
     "build": "tsc -b && vite build --mode dev",
     "lint": "eslint .",
     "preview": "vite preview",
