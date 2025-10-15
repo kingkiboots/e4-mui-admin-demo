@@ -1,14 +1,9 @@
-import { Select, type SelectOption } from "@/shared/ui/SelectUI";
-import { TextField } from "@/shared/ui/TextFieldUI";
 import { Detail } from "@/shared/ui/DetailUI";
+import { Select } from "@/shared/ui/SelectUI";
+import { TextField } from "@/shared/ui/TextFieldUI";
 import { memo } from "react";
 
 const ProductMngDetailEventWidget = memo(() => {
-  const options: SelectOption[] = [
-    { value: "1", label: "하나" },
-    { value: "2", label: "둘" },
-    { value: "3", label: "셋" },
-  ];
   return (
     <Detail
       key={"product-mng-detail-info"}
@@ -20,21 +15,66 @@ const ProductMngDetailEventWidget = memo(() => {
         </>
       }
     >
-      <Select
-        label="한도구분"
-        options={options}
-        defaultValue={"1"}
-        labelColSpan={{ xs: 4, sm: 4 }}
-        inputColSpan={{ xs: 12, sm: 8 }}
+      <TextField
+        label="이벤트명"
+        placeholder="테스트이벤트2"
+        // register={register("serviceCd")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
       />
       <TextField
-        label="계좌번호"
-        labelColSpan={{ xs: 12, sm: 4 }}
-        inputColSpan={{ xs: 12, sm: 8 }}
-        // register={register("account", {
-        //   required: true,
-        // })}
-        required
+        label="시작일자"
+        placeholder="UMS서비스코드 입력"
+        // register={register("serviceCd")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
+      />
+      <TextField
+        label="종료일자"
+        placeholder="UMS서비스코드 입력"
+        // register={register("serviceCd")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
+      />
+      <Select
+        label="삭제여부"
+        options={[
+          {
+            label: "Y",
+            value: "Y",
+          },
+          {
+            label: "N",
+            value: "N",
+          },
+        ]}
+        defaultValue={"Y"}
+        // register={register("useYn")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
+      />
+      <Select
+        label="혜택유형"
+        options={[
+          {
+            label: "Y",
+            value: "Y",
+          },
+          {
+            label: "N",
+            value: "N",
+          },
+        ]}
+        disabled={true}
+        defaultValue={"Y"}
+        // register={register("useYn")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
       />
     </Detail>
   );
