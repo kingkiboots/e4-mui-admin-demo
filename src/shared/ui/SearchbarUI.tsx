@@ -15,6 +15,7 @@ import {
   SearchbarButtonGroup,
   type SearchbarButtonGroupProps,
 } from "./SearchbarButtonGroupUI";
+import { Information, type PropsWithInformation } from "./InformationUI";
 
 const SearchContent = styled(MUIPaper, {
   label: "search-content",
@@ -36,7 +37,7 @@ interface SearchbarContextValue {
 
 const SearchbarContext = createContext<SearchbarContextValue | null>(null);
 
-interface SearchbarProps {
+interface SearchbarProps extends PropsWithInformation {
   // inputsDef: InputsDefProps[];
   inputsDef?: { name: string; value: string; type: string }[];
   searchBarSize?: ColProps["size"];
@@ -51,6 +52,7 @@ export const Searchbar: React.FC<SearchbarProps> & SearchbarSubComponents = ({
   searchBarSize = 10,
   inputsDef,
   buttonsDef,
+  information,
   children,
 }) => {
   const { inputsArea, buttonsArea } = (() => {
@@ -75,22 +77,27 @@ export const Searchbar: React.FC<SearchbarProps> & SearchbarSubComponents = ({
   })();
 
   return (
-    <SearchbarContext.Provider value={{ searchBarSize }}>
-      <SearchContent elevation={0}>
-        <Grid container alignItems="center">
-          {/* input */}
-          {isNull(inputsArea)
-            ? inputsDef?.map(() => <InputsArea></InputsArea>)
-            : inputsArea}
-          {/* button */}
-          {isNull(buttonsArea) ? (
-            <SearchbarButtonGroup {...buttonsDef} />
-          ) : (
-            buttonsArea
-          )}
-        </Grid>
-      </SearchContent>
-    </SearchbarContext.Provider>
+    <>
+      <SearchbarContext.Provider value={{ searchBarSize }}>
+        <SearchContent elevation={0}>
+          <Grid container alignItems="center">
+            {/* input */}
+            {isNull(inputsArea)
+              ? inputsDef?.map(() => <InputsArea></InputsArea>)
+              : inputsArea}
+            {/* button */}
+            {isNull(buttonsArea) ? (
+              <SearchbarButtonGroup {...buttonsDef} />
+            ) : (
+              buttonsArea
+            )}
+          </Grid>
+        </SearchContent>
+      </SearchbarContext.Provider>
+      {isNullOrEmpty(information) ? null : (
+        <Information>{information}</Information>
+      )}
+    </>
   );
 };
 
