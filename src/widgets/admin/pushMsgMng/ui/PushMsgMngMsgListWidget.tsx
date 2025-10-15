@@ -1,6 +1,7 @@
 import type { PushMsgMngList } from "@/entities/admin/pushMsgMng/types";
 import { useGetPushMsgList } from "@/features/admin/pushMsgMng/lib/useGetPushMsgList";
 import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
+import { memo } from "react";
 
 const columns: GridColDef<PushMsgMngList>[] = [
   {
@@ -45,7 +46,7 @@ const columns: GridColDef<PushMsgMngList>[] = [
   },
 ];
 
-export const PushMsgMngMsgListWidget = () => {
+const PushMsgMngMsgListWidget = memo(() => {
   const { data: rows } = useGetPushMsgList();
 
   return (
@@ -56,4 +57,7 @@ export const PushMsgMngMsgListWidget = () => {
       rows={rows}
     />
   );
-};
+});
+
+PushMsgMngMsgListWidget.displayName = "PushMsgMngMsgListWidget";
+export default PushMsgMngMsgListWidget;

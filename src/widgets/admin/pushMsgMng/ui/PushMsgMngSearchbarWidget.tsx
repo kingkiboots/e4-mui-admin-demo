@@ -75,4 +75,5 @@ const PushMsgMngSearchbarWidget = memo(() => {
   );
 });
 
+PushMsgMngSearchbarWidget.displayName = "PushMsgMngSearchbarWidget";
 export default PushMsgMngSearchbarWidget;
