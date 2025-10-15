@@ -71,8 +71,8 @@ const SidebarNav = memo(() => {
         {isPending ? (
           <>
             <Stack gap="16px" alignItems="center">
-              {new Array(5).fill(null).map(() => (
-                <NavSkeleton variant="rounded" />
+              {new Array(5).fill(null).map((_, idx) => (
+                <NavSkeleton key={idx} variant="rounded" />
               ))}
             </Stack>
           </>
