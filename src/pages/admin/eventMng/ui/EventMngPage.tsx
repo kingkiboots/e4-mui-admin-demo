@@ -1,12 +1,14 @@
 import PageContentLayout from "@/widgets/admin/common/ui/PageContentLayout";
 import Meta from "./Meta";
-import PushMsgMngSearchbarWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngSearchbarWidget";
+import EventMngSearchbarWidget from "@/widgets/admin/eventMng/ui/EventMngSearchbarWidget";
+import { EventMngListWidget } from "@/widgets/admin/eventMng/ui/EventMngListWidget";
 
 const EventMngPage = () => {
   return (
     <Meta>
       <PageContentLayout>
-        <PushMsgMngSearchbarWidget />
+        <EventMngSearchbarWidget />
+         <EventMngListWidget />
       </PageContentLayout>
     </Meta>
   );

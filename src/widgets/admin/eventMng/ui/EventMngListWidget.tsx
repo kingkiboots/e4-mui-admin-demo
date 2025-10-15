@@ -81,7 +81,7 @@ export const EventMngListWidget = () => {
   return (
     <DataGrid
       title="메시지 목록"
-      getRowId={(row) => row.serviceCd}
+      getRowId={(row) => row.id}
       columns={columns}
       rows={rows}
     />
