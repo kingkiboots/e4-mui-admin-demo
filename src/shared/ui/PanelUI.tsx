@@ -15,7 +15,7 @@ const StyledPaper = styled(MUIPaper, {
   ...theme.typography.body2,
   backgroundColor: theme.palette.background.paper,
   borderBottom: `1px solid ${theme.palette.grey[40]}`,
-  marginTop: "1.6rem",
+  marginBottom: theme.spacing(2),
 
   boxShadow: "0px 0px 13px 0px rgba(62, 44, 90, 0.08)",
   border: "1px solid rgba(0, 0, 0, 0.09)",

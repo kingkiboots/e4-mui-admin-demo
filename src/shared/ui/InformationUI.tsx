@@ -6,7 +6,7 @@ const InformationTypography = styled(Typography, {
   label: "msg",
   name: "InformationTypography",
 })({
-  fontSize: "1.2rme",
+  fontSize: "1.2rem",
   margin: "0 0 2rem 0",
   marginTop: "-1rem",
   padding: 0,
@@ -14,7 +14,7 @@ const InformationTypography = styled(Typography, {
   lineHeight: "100%",
 
   "&::before": {
-    content: '"\\002A "',
+    content: '"\\002A\\00a0"',
   },
 });
 
