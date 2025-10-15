@@ -33,16 +33,17 @@ const ProductMngSearchbarWidget = memo(() => {
     <Searchbar buttonsDef={buttonsDef}>
       <Searchbar.InputsArea>
         <Select
-          label="한도구분"
+          label="이벤트식별자"
           options={options}
           defaultValue={"1"}
           labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 8 }}
+          inputColSpan={{ xs: 12, sm: 6 }}
+          required
         />
         <TextField
-          label="계좌번호"
+          label="매체식별자"
           labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 8 }}
+          inputColSpan={{ xs: 12, sm: 6 }}
           register={register("account", {
             required: true,
           })}
