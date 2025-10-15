@@ -12,7 +12,7 @@ interface SearchFormData {
   startDate: Dayjs | null;
 }
 
-const eventMngSearchbarWidget = memo(() => {
+const EventMngSearchbarWidget = memo(() => {
   const options: SelectOption[] = [
     { value: "1", label: "이벤트_1" },
     { value: "2", label: "이벤트_2" },
@@ -74,4 +74,5 @@ const eventMngSearchbarWidget = memo(() => {
   );
 });
 
-export default eventMngSearchbarWidget;
+EventMngSearchbarWidget.displayName = "EventMngSearchbarWidget";
+export default EventMngSearchbarWidget;

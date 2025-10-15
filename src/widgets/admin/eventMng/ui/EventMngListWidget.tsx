@@ -80,10 +80,13 @@ export const EventMngListWidget = () => {
 
   return (
     <DataGrid
-      title="메시지 목록"
+      title="혜택 목록"
       getRowId={(row) => row.id}
       columns={columns}
       rows={rows}
     />
   );
 };
+
+EventMngListWidget.displayName = "EventMngListWidget";
+export default EventMngListWidget;
