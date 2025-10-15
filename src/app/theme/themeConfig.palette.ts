@@ -53,8 +53,7 @@ export const paletteConfig: PaletteOptions = {
     contrastText: "#fff",
   },
   success: {
-    main: "#24b3a4",
-    
+    main: "#868e96",
   },
   grey: {
     "40": "#e0e0e0",
