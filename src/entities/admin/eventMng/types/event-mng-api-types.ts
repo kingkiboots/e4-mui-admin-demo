@@ -1,3 +1,8 @@
+export type EventMngListSearchData = {
+  id: string;
+  code: string;
+};
+
 export type EventMngData = {
     id : string
 	name : string
