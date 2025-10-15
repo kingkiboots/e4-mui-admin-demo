@@ -1,4 +1,3 @@
-import { DatePickerField } from "@/shared/ui/DatePickerFieldUI";
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { Select, type SelectOption } from "@/shared/ui/SelectUI";
@@ -19,7 +18,7 @@ const ProductMngSearchbarWidget = memo(() => {
     { value: "3", label: "셋" },
   ];
 
-  const { register, control } = useForm<SearchFormData>();
+  const { register } = useForm<SearchFormData>();
 
   const buttonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
@@ -48,18 +47,6 @@ const ProductMngSearchbarWidget = memo(() => {
             required: true,
           })}
           required
-        />
-        <DatePickerField
-          labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 8 }}
-          name="startDate"
-          control={control}
-          dateTimeType="start"
-          label="시작일"
-          placeholder="날짜 선택"
-          rules={{
-            required: true,
-          }}
         />
       </Searchbar.InputsArea>
       {/* <Searchbar.ButtonsArea>
