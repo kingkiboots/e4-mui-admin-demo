@@ -1,6 +1,7 @@
 import type { ProductMngList } from "@/entities/admin/productMng/types";
 import { useGetProductList } from "@/features/admin/productMng/lib/useGetProductList";
 import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
+import { memo } from "react";
 
 const columns: GridColDef<ProductMngList>[] = [
   {
@@ -94,8 +95,7 @@ const columns: GridColDef<ProductMngList>[] = [
     headerName: "최종변경사용자",
   },
 ];
-
-export const ProductMngListWidget = () => {
+const ProductMngListWidget = memo(() => {
   const { data: rows } = useGetProductList();
 
   return (
@@ -106,4 +106,6 @@ export const ProductMngListWidget = () => {
       rows={rows}
     />
   );
-};
+});
+
+export default ProductMngListWidget;

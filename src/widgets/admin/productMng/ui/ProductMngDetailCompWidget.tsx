@@ -1,7 +1,8 @@
 import { Col } from "@/shared/ui/ColUI";
 import { Detail } from "@/shared/ui/DetailUI";
+import { memo } from "react";
 
-export const ProductMngDetailCompWidget = () => {
+const ProductMngDetailCompWidget = memo(() => {
   return (
     <Detail
       key={"product-mng-detail-info"}
@@ -12,4 +13,6 @@ export const ProductMngDetailCompWidget = () => {
       <Col size={3}> hello 3</Col> <Col size={3}> hello 4</Col>
     </Detail>
   );
-};
+});
+
+export default ProductMngDetailCompWidget;

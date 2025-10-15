@@ -1,8 +1,9 @@
 import { Select, type SelectOption } from "@/shared/ui/SelectUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
 import { Detail } from "@/shared/ui/DetailUI";
+import { memo } from "react";
 
-export const ProductMngDetailEventWidget = () => {
+const ProductMngDetailEventWidget = memo(() => {
   const options: SelectOption[] = [
     { value: "1", label: "하나" },
     { value: "2", label: "둘" },
@@ -37,4 +38,6 @@ export const ProductMngDetailEventWidget = () => {
       />
     </Detail>
   );
-};
+});
+
+export default ProductMngDetailEventWidget;
