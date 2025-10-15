@@ -7,7 +7,6 @@ const Flexbox = styled(Grid, {
 })({
   marginRight: "-1.2rem",
   marginLeft: "-1.2rem",
-  width: "100%",
 });
 
 interface RowProps extends Omit<GridProps, "display"> {}
