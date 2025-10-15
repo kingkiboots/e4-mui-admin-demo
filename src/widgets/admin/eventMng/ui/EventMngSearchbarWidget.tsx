@@ -31,7 +31,15 @@ const eventMngSearchbarWidget = memo(() => {
   };
 
   return (
-    <Searchbar buttonsDef={buttonsDef} information="* 표준데이터 시스템에 혜택이벤트 코드를 등록 후 이벤트 설정이 가능합니다.">
+    <Searchbar
+      buttonsDef={buttonsDef}
+      information={
+        <>
+          표준데이터 시스셈테 <span>혜택이벤트 코드</span>를 등록 후 이벤트
+          설정이 가능합니다.
+        </>
+      }
+    >
       <Searchbar.InputsArea>
         <Select
           label="이벤트"
@@ -62,7 +70,6 @@ const eventMngSearchbarWidget = memo(() => {
           }}
         />
       </Searchbar.InputsArea>
-      
     </Searchbar>
   );
 });
