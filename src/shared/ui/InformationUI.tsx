@@ -13,6 +13,12 @@ const InformationTypography = styled(Typography, {
   color: "grey.500",
   lineHeight: "100%",
 
+  "& span": {
+    fontWeight: 600,
+    textDecoration: "underline",
+    textDecorationLine: "underline",
+  },
+
   "&::before": {
     content: '"\\002A\\00a0"',
   },
