@@ -22,11 +22,14 @@ const StyledSelect = styled(MUISelect, {
   "& .MuiSelect-select": {
     padding: `0.6rem 1.3054rem`,
     fontSize: "1.2rem",
+    textAlign: "center",
     lineHeight: 1.5,
-    textAlign: "left",
     color: theme.palette.grey[600],
     fontWeight: 400,
     height: "auto",
+  },
+  "& .MuiMenu-list": {
+    textAlign: "center",
   },
   "& .MuiOutlinedInput-notchedOutline": {
     borderColor: theme.palette.grey[50],
@@ -99,6 +102,15 @@ export const Select = memo(
             defaultValue={defaultValue}
             required={required}
             onChange={handleChange}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  "& .MuiMenuItem-root": {
+                    justifyContent: "center",
+                  },
+                },
+              },
+            }}
             {...restProps}
           >
             {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
