@@ -62,7 +62,7 @@ const rows = [
 
 export const Default: Story = {
   args: {},
-  render: (args) => {
+  render: () => {
     return (
       <DataGrid
         rows={rows}
