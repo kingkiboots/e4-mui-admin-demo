@@ -19,6 +19,10 @@ declare module "@mui/material/styles" {
     dark?: Palette["dark"];
   }
 
+  interface Color {
+    40: string;
+  }
+
   interface TypeText {
     default: string;
   }
@@ -40,6 +44,7 @@ export const paletteConfig: PaletteOptions = {
   secondary: {
     main: "#7C757D",
   },
+
   info: {
     main: "#0114A7",
   },
@@ -49,8 +54,10 @@ export const paletteConfig: PaletteOptions = {
   },
   success: {
     main: "#24b3a4",
+    
   },
   grey: {
+    "40": "#e0e0e0",
     "50": "#E5E5E5",
     "100": "#d5d5d5",
     "200": "#dbdbdb",
