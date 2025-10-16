@@ -5,6 +5,7 @@ import { memo } from "react";
 
 const EventMngSearchbarWidget = memo(() => {
   const options: SelectOption[] = [
+    { value: "0", label: "전체" },
     { value: "1", label: "이벤트_1" },
     { value: "2", label: "이벤트_2" },
     { value: "3", label: "이벤트_3" },
@@ -34,7 +35,7 @@ const EventMngSearchbarWidget = memo(() => {
         <Select
           label="이벤트"
           options={options}
-          defaultValue={"1"}
+          defaultValue={"0"}
           labelColSpan={{ xs: 12, sm: 4 }}
           inputColSpan={{ xs: 12, sm: 8 }}
         />
