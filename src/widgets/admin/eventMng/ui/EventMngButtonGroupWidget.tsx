@@ -1,19 +1,19 @@
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
 import { Button } from "@/shared/ui/ButtonUI";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { memo } from "react";
 
 const EventMngButtonGroupWidget = memo(() => {
   return (
     <ButtonGroupRow>
-      <Button size="small" color="success" variant="contained">
+      <Button size="small" color="success" variant="contained"> 
         <AddOutlinedIcon fontSize="small" />
         &nbsp;행추가
       </Button>
-      <Button size="small" color="success" variant="contained">
-        <DeleteOutlineIcon fontSize="small" />
+      <Button size="small" color="success" variant="contained" >
+        <RemoveOutlinedIcon fontSize="small" />
         &nbsp;행삭제
       </Button>
       <Button size="small" color="dark" variant="contained">
