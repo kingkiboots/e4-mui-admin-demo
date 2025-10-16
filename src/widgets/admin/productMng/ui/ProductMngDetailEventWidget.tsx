@@ -66,18 +66,9 @@ const ProductMngDetailEventWidget = memo(() => {
       />
       <Select
         label="혜택유형"
-        options={[
-          {
-            label: "Y",
-            value: "Y",
-          },
-          {
-            label: "N",
-            value: "N",
-          },
-        ]}
+        options={SELECT_OPTION_YN}
         disabled={true}
-        defaultValue={"Y"}
+        defaultValue={USE_YN_Y}
         // register={register("useYn")}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
