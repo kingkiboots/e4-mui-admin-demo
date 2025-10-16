@@ -1,10 +1,11 @@
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
+import { SearchInput } from "@/shared/ui/SearchInputUI";
 import { Select, type SelectOption } from "@/shared/ui/SelectUI";
-import { TextField } from "@/shared/ui/TextFieldUI";
 import type { Dayjs } from "dayjs";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
+import { ProductMngAccountSearchModal } from "../modal/ProductMngAccountSearchModal";
 
 interface SearchFormData {
   account: string;
@@ -37,17 +38,19 @@ const ProductMngSearchbarWidget = memo(() => {
           options={options}
           defaultValue={"1"}
           labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 6 }}
+          inputColSpan={{ xs: 12, sm: 8 }}
           required
         />
-        <TextField
+        <SearchInput
           label="매체식별자"
           labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 6 }}
+          inputColSpan={{ xs: 12, sm: 8 }}
           register={register("account", {
             required: true,
           })}
           required
+          placeholder="매체식별자 입력"
+          SearchModal={ProductMngAccountSearchModal}
         />
       </Searchbar.InputsArea>
       {/* <Searchbar.ButtonsArea>
