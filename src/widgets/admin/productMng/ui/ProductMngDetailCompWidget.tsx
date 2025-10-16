@@ -1,3 +1,4 @@
+import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const";
 import { Detail } from "@/shared/ui/DetailUI";
 import { Select } from "@/shared/ui/SelectUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
@@ -36,17 +37,8 @@ const ProductMngDetailCompWidget = memo(() => {
       />
       <Select
         label="삭제여부"
-        options={[
-          {
-            label: "Y",
-            value: "Y",
-          },
-          {
-            label: "N",
-            value: "N",
-          },
-        ]}
-        defaultValue={"Y"}
+        options={SELECT_OPTION_YN}
+        defaultValue={USE_YN_Y}
         // register={register("useYn")}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}

@@ -5,6 +5,7 @@ import { TextField } from "@/shared/ui/TextFieldUI";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import type { Dayjs } from "dayjs";
+import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const";
 
 interface SearchFormData {
   account: string;
@@ -56,17 +57,8 @@ const ProductMngDetailEventWidget = memo(() => {
       />
       <Select
         label="삭제여부"
-        options={[
-          {
-            label: "Y",
-            value: "Y",
-          },
-          {
-            label: "N",
-            value: "N",
-          },
-        ]}
-        defaultValue={"Y"}
+        options={SELECT_OPTION_YN}
+        defaultValue={USE_YN_Y}
         // register={register("useYn")}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
