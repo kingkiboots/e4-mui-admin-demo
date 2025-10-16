@@ -5,7 +5,9 @@ import PageWrapper from "@/shared/layout/PageWrapper";
 import BreadCrumbArea from "@/widgets/admin/breadCrumb/ui/BreadCrumbArea";
 import Header from "@/widgets/admin/header/ui/Header";
 import Sidebar from "@/widgets/admin/sidebar/ui/Sidebar";
+import ErrorFallback from "@/widgets/error/5xx/ui/ErrorFallback";
 import React, { Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 
 const AdminLayout: React.FC = () => {
@@ -34,7 +36,9 @@ const AdminLayout: React.FC = () => {
               <BreadCrumbArea />
             </Suspense>
             <Suspense>
-              <Outlet />
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <Outlet />
+              </ErrorBoundary>
             </Suspense>
           </PageContent>
         </PageContentWrapper>
