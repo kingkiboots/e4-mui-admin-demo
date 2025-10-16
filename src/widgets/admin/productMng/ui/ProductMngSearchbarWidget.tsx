@@ -1,7 +1,6 @@
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { SearchInput } from "@/shared/ui/SearchInputUI";
-import { Select, type SelectOption } from "@/shared/ui/SelectUI";
 import type { Dayjs } from "dayjs";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -13,12 +12,6 @@ interface SearchFormData {
 }
 
 const ProductMngSearchbarWidget = memo(() => {
-  const options: SelectOption[] = [
-    { value: "1", label: "하나" },
-    { value: "2", label: "둘" },
-    { value: "3", label: "셋" },
-  ];
-
   const { register } = useForm<SearchFormData>();
 
   const buttonsDef: SearchbarButtonGroupProps = {
@@ -33,13 +26,16 @@ const ProductMngSearchbarWidget = memo(() => {
   return (
     <Searchbar buttonsDef={buttonsDef}>
       <Searchbar.InputsArea>
-        <Select
+        <SearchInput
           label="이벤트식별자"
-          options={options}
-          defaultValue={"1"}
           labelColSpan={{ xs: 12, sm: 4 }}
           inputColSpan={{ xs: 12, sm: 8 }}
+          register={register("account", {
+            required: true,
+          })}
           required
+          placeholder="이벤트식별자 조회"
+          SearchModal={ProductMngAccountSearchModal}
         />
         <SearchInput
           label="매체식별자"
@@ -49,7 +45,7 @@ const ProductMngSearchbarWidget = memo(() => {
             required: true,
           })}
           required
-          placeholder="매체식별자 입력"
+          placeholder="매체식별자 조회"
           SearchModal={ProductMngAccountSearchModal}
         />
       </Searchbar.InputsArea>
