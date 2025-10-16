@@ -7,6 +7,7 @@ import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 import { isNullOrEmpty } from "../lib/commonHelpers";
 import dayjs from "dayjs";
+import { disabledInputStyles } from "../model/commonStyles";
 
 const StyledDatePicker = styled(MUIDatePicker, {
   name: "StyledDatePicker",
@@ -45,6 +46,8 @@ const StyledDatePicker = styled(MUIDatePicker, {
       backgroundColor: theme.palette.grey[100],
     },
   },
+
+  ...disabledInputStyles(theme),
 }));
 
 export type DatePickerOnChangeFunction = (value: Dayjs | null) => void;

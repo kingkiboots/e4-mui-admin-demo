@@ -11,6 +11,7 @@ import {
 } from "react";
 import { type UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
+import { disabledInputStyles } from "../model/commonStyles";
 
 const StyledTextField = styled(MUITextField, {
   name: "StyledTextField",
@@ -41,6 +42,8 @@ const StyledTextField = styled(MUITextField, {
       borderColor: theme.palette.primary.main,
     },
   },
+
+  ...disabledInputStyles(theme),
 }));
 
 interface TextFieldProps

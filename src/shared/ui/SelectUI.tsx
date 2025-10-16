@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
+import { disabledInputStyles } from "../model/commonStyles";
 
 export interface SelectOption {
   value: string;
@@ -41,6 +42,7 @@ const StyledSelect = styled(MUISelect, {
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
     borderColor: theme.palette.primary.main,
   },
+  ...disabledInputStyles(theme),
   backgroundColor: theme.palette.background.paper,
   height: "calc(1.8rem + 1.2rem + 2px)",
 }));
