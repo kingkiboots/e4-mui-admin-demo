@@ -19,6 +19,10 @@ const StyledDataGrid = styled(MUIDataGrid, {
   marginBottom: theme.spacing(2),
   color: theme.palette.text.default,
 
+  "& .MuiDataGrid-columnHeaderTitleContainer": {
+    justifyContent: "center",
+  },
+
   "& .MuiDataGrid-columnHeader": {
     textAlign: "center",
     "& .MuiDataGrid-columnHeaderTitle": {
