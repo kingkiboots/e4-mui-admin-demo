@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { Link as MuiLink, type LinkProps as MuiLinkProps } from "@mui/material";
+import MuiLink, { type LinkProps as MuiLinkProps } from "@mui/material/Link";
 import {
   Link as RouterLink,
   type LinkProps as RouterLinkProps,

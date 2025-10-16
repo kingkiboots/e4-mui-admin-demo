@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-restricted-imports
 import * as MUIcon from "@mui/icons-material";
 // eslint-disable-next-line no-restricted-imports
-import type { IconTypeMap } from "@mui/material";
+import type { IconTypeMap } from "@mui/material/Icon";
 import { memo } from "react";
 
 type IconProps = IconTypeMap["props"];
