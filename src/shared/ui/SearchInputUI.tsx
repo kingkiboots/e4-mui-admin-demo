@@ -9,12 +9,16 @@ import {
   type ChangeEventHandler,
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
+  type ReactNode,
 } from "react";
 import { inputEndAdorementStyles } from "../model/commonStyles";
 import { type ModalProps } from "./ModalUI";
 import { TextField } from "./TextFieldUI";
 
-export interface SearchModalProps extends ModalProps {}
+export interface SearchModalProps extends Omit<ModalProps, "children"> {
+  onSelectValue: (obj: { name: string; value: string }) => void;
+  children?: ReactNode;
+}
 interface SearchInputProps
   extends Omit<ComponentPropsWithoutRef<typeof TextField>, "type"> {
   SearchModal: React.ComponentType<SearchModalProps>;
@@ -55,6 +59,15 @@ export const SearchInput = memo(
       [onChange, register?.onChange]
     );
 
+    const handleSelectValue = useCallback(
+      ({ name, value }: { name: string; value: string }) => {
+        handleChange({
+          target: { name, value },
+        } as React.ChangeEvent<HTMLInputElement>);
+      },
+      [handleChange]
+    );
+
     return (
       <>
         <StyledSearchInput
@@ -80,6 +93,7 @@ export const SearchInput = memo(
         <SearchModal
           isOpen={isSearchModalOpen}
           setIsOpen={setIsSearchModalOpen}
+          onSelectValue={handleSelectValue}
         />
       </>
     );
