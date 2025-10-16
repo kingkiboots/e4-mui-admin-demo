@@ -7,7 +7,10 @@ import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
 import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 import { isNullOrEmpty } from "../lib/commonHelpers";
 import dayjs from "dayjs";
-import { disabledInputStyles } from "../model/commonStyles";
+import {
+  disabledInputStyles,
+  inputEndAdorementStyles,
+} from "../model/commonStyles";
 
 const StyledDatePicker = styled(MUIDatePicker, {
   name: "StyledDatePicker",
@@ -34,18 +37,7 @@ const StyledDatePicker = styled(MUIDatePicker, {
   },
 
   // 캘린더 아이콘 버튼
-  "& .MuiInputAdornment-root .MuiIconButton-root": {
-    height: "calc(1.8rem + 1.2rem + 2px)",
-    padding: "0.4rem 0.8rem",
-    marginRight: "-13px",
-    borderRadius: "0 4px 4px 0",
-    backgroundColor: theme.palette.grey[50],
-    border: `1px solid ${theme.palette.grey[50]}`,
-    borderLeft: "none",
-    "&:hover": {
-      backgroundColor: theme.palette.grey[100],
-    },
-  },
+  ...inputEndAdorementStyles(theme),
 
   ...disabledInputStyles(theme),
 }));

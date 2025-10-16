@@ -15,3 +15,18 @@ export const disabledInputStyles = (theme: Theme) => ({
     },
   },
 });
+
+export const inputEndAdorementStyles = (theme: Theme) => ({
+  "& .MuiInputAdornment-root .MuiIconButton-root": {
+    height: "calc(1.8rem + 1.2rem + 2px)",
+    padding: "0.4rem 0.8rem",
+    marginRight: "-13px",
+    borderRadius: "0 4px 4px 0",
+    backgroundColor: theme.palette.grey[50],
+    border: `1px solid ${theme.palette.grey[50]}`,
+    borderLeft: "none",
+    "&:hover": {
+      backgroundColor: theme.palette.grey[100],
+    },
+  },
+});
