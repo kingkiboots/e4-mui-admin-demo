@@ -1,9 +1,20 @@
+import { DatePickerField } from "@/shared/ui/DatePickerFieldUI";
 import { Detail } from "@/shared/ui/DetailUI";
 import { Select } from "@/shared/ui/SelectUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
 import { memo } from "react";
+import { useForm } from "react-hook-form";
+import type { Dayjs } from "dayjs";
+
+interface SearchFormData {
+  account: string;
+  startDate: Dayjs | null;
+  endDate: Dayjs | null;
+}
 
 const ProductMngDetailEventWidget = memo(() => {
+  const { control } = useForm<SearchFormData>();
+
   return (
     <Detail
       key={"product-mng-detail-info"}
@@ -23,21 +34,25 @@ const ProductMngDetailEventWidget = memo(() => {
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
       />
-      <TextField
+      <DatePickerField
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
+        name="startDate"
+        control={control}
+        dateTimeType="start"
         label="시작일자"
-        placeholder="UMS서비스코드 입력"
-        // register={register("serviceCd")}
-        totalColSpan={{ xs: 12, sm: 3 }}
-        labelColSpan={{ xs: 12, lg: 4 }}
-        inputColSpan={{ xs: 12, lg: 8 }}
+        placeholder="시작일"
       />
-      <TextField
-        label="종료일자"
-        placeholder="UMS서비스코드 입력"
-        // register={register("serviceCd")}
+      <DatePickerField
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
+        name="endDate"
+        control={control}
+        dateTimeType="end"
+        label="종료일자"
+        placeholder="종료일"
       />
       <Select
         label="삭제여부"
