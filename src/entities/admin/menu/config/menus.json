@@ -31,5 +31,12 @@
     "icon": "DiamondOutlined",
     "menuUrl": null,
     "children": []
+  },
+  {
+    "label": "Storybook",
+    "id": null,
+    "icon": "MenuBookOutlined",
+    "menuUrl": "https://frontend.letscherry.io/storybook-static/",
+    "children": []
   }
 ]

@@ -48,7 +48,7 @@ const SidebarNavGroup = memo(
           )}
         >
           <SidebarNavListItem
-            href={isNullOrEmpty(menuUrl) ? "#" : undefined}
+            href={isNullOrEmpty(menuUrl) ? "#" : menuUrl}
             onClick={hasChildren ? onClick : undefined}
             aria-expanded={isOpen}
             data-menu-id={id}
@@ -63,7 +63,7 @@ const SidebarNavGroup = memo(
 
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <SubNavMenu component="ul">
-            {children.map((menu, idx) => (
+            {children?.map((menu, idx) => (
               <SidebarSubNavItem
                 key={`${id}-${idx}`}
                 menuUrl={menu.menuUrl}
