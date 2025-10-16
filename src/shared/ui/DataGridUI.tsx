@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import type {
+  GridRowParams,
   GridValidRowModel,
   GridColDef as MUIGridColDef,
 } from "@mui/x-data-grid";
@@ -20,7 +21,10 @@ export type GridColDef<R extends GridValidRowModel = any> = MUIGridColDef<
   R[number]
 >;
 
-interface DataGridProps extends PropsWithPanelProps, MDataGridProps {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type GridRowCallbackParams<R extends GridValidRowModel = any> =
+  GridRowParams<R>;
+export interface DataGridProps extends PropsWithPanelProps, MDataGridProps {
   isPending?: boolean;
 }
 export const DataGrid = ({
