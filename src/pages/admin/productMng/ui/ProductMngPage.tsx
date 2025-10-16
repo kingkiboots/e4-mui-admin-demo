@@ -5,6 +5,7 @@ import ProductMngDetailEventWidget from "@/widgets/admin/productMng/ui/ProductMn
 import ProductMngDetailCompWidget from "@/widgets/admin/productMng/ui/ProductMngDetailCompWidget";
 import ProductMngDetailTypeWidget from "@/widgets/admin/productMng/ui/ProductMngDetailTypeWidget";
 import ProductMngListWidget from "@/widgets/admin/productMng/ui/ProductMngListWidget";
+import ProductMngButtonGroupWidget from "@/widgets/admin/productMng/ui/ProductMngButtonGroupWidget";
 
 const ProductMngPage = () => {
   return (
@@ -14,6 +15,7 @@ const ProductMngPage = () => {
         <ProductMngDetailEventWidget />
         <ProductMngDetailCompWidget />
         <ProductMngDetailTypeWidget />
+        <ProductMngButtonGroupWidget />
         <ProductMngListWidget />
       </PageContentLayout>
     </Meta>
