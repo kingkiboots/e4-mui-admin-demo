@@ -28,11 +28,11 @@ const meta: Meta<typeof DataGrid> = {
         type: {
           summary: "Array Data (예시)",
           detail: `
-    [
-      { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
-      { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
-      { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-      { id: 4, lastName: "Stark", firstName: "Arya", age: 11 }
+[
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 11 }
 ]`,
         },
       },
@@ -44,31 +44,31 @@ const meta: Meta<typeof DataGrid> = {
         type: {
           summary: "Array Data (예시)",
           detail: `
-    [
-      { 
-        field: "id", //서버에서 가져오는 데이터 칼럼명
-        headerName: "ID", // 화면에 보여줄 헤더명
-        width: 90 // 길이
-      },
-      {
-        field: "firstName",
-        headerName: "First name",
-        width: 150,
-        editable: true,
-      },
-      {
-        field: "lastName",
-        headerName: "Last name",
-        width: 150,
-        editable: true,
-      },
-      {
-        field: "age",
-        headerName: "Age",
-        type: "number",
-        width: 110,
-        editable: true,
-      },
+[
+  { 
+    field: "id", //서버에서 가져오는 데이터 칼럼명
+    headerName: "ID", // 화면에 보여줄 헤더명
+    width: 90 // 길이
+  },
+  {
+    field: "firstName",
+    headerName: "First name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "lastName",
+    headerName: "Last name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "age",
+    headerName: "Age",
+    type: "number",
+    width: 110,
+    editable: true,
+  },
 ]`,
         },
       },
