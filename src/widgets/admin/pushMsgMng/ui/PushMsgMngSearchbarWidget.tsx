@@ -2,7 +2,7 @@ import type { PushMsgMngListSearchData } from "@/entities/admin/pushMsgMng/types
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 const PushMsgMngSearchbarWidget = memo(() => {
@@ -10,7 +10,6 @@ const PushMsgMngSearchbarWidget = memo(() => {
     control,
     reset,
     getValues,
-    setValue,
     handleSubmit,
     // formState: { errors },
   } = useForm<PushMsgMngListSearchData>();
@@ -27,12 +26,6 @@ const PushMsgMngSearchbarWidget = memo(() => {
       reset();
     },
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setValue("serviceCd", "mother fucker");
-    }, 2000);
-  }, []);
 
   return (
     <Searchbar buttonsDef={buttonsDef}>
