@@ -17,19 +17,12 @@ type AlertDialogData = {
 
 export const Dialog = memo(
   ({ type, title, description, open, setOpen }: AlertDialogData) => {
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-
     const handleClose = () => {
       setOpen(false);
     };
 
     return (
       <React.Fragment>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          {title}
-        </Button>
         <MUIDialog
           open={open}
           onClose={handleClose}
