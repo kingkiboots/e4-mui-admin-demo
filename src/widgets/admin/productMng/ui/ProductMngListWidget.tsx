@@ -105,6 +105,12 @@ const ProductMngListWidget = memo(() => {
       columns={columns}
       rows={rows}
       key={`product-mng-list-key`}
+      information={
+        <>
+          조회한 상품 목록 중 <span>전시정보/사용여부</span>를 변경할 수
+          있습니다.
+        </>
+      }
     />
   );
 });
