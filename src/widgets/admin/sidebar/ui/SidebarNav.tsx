@@ -1,4 +1,4 @@
-import { useControlSidebarNavGroup } from "@/features/admin/sidebar/hook/useControlSidebarNavGroup";
+import { useControlSidebarNavGroup } from "@/features/admin/sidebar/lib/useControlSidebarNavGroup";
 import type { MuiExtraProps } from "@/shared/type";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
