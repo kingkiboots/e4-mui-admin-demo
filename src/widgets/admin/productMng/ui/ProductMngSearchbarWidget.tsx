@@ -5,6 +5,7 @@ import { SearchInput } from "@/shared/ui/SearchInputUI";
 import { memo, useCallback } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import ProductMngAccountSearchModal from "../modal/ProductMngAccountSearchModal";
+import { ProductMngEventSearchModal } from "../modal/ProductMngEventSearchModal";
 
 const ProductMngSearchbarWidget = memo(() => {
   const { reset, control, handleSubmit } = useForm<ProductMngListSearchData>();
@@ -32,7 +33,7 @@ const ProductMngSearchbarWidget = memo(() => {
           inputColSpan={{ xs: 12, sm: 8 }}
           required
           placeholder="이벤트식별자 조회"
-          SearchModal={ProductMngAccountSearchModal}
+          SearchModal={ProductMngEventSearchModal}
         />
         <SearchInput
           name="seq"

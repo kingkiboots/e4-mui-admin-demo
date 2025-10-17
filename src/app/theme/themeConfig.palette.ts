@@ -28,6 +28,7 @@ declare module "@mui/material/styles" {
   }
   interface TypeBackground {
     dark: string;
+    cell: string;
   }
 }
 
@@ -70,6 +71,7 @@ export const paletteConfig: PaletteOptions = {
     default: "#f8f8f8",
     paper: "#fff",
     dark: "#505050",
+    cell: "#fcfcfc",
   },
   sidebar: {
     background: "#2e323a",
