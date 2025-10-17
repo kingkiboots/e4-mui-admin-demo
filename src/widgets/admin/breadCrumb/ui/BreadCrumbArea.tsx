@@ -3,7 +3,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "@/shared/ui/LinkUI";
 import { memo } from "react";
-import { useGetCurrentMenu } from "@/features/admin/sidebar/hook/useGetCurrentMenu";
+import { useGetCurrentMenu } from "@/features/admin/sidebar/lib/useGetCurrentMenu";
 import { styled } from "@mui/material/styles";
 import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 import Skeleton from "@mui/material/Skeleton";
