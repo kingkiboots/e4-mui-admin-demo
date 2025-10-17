@@ -48,3 +48,23 @@ export type ProductMngDetailData = {
   updStepDt?: string;
   updStepId?: string;
 };
+
+export type ProductMngDetailEventData = {
+  eventNm?: string;
+  startDate?: string;
+  endDate?: string;
+  delYn?: string;
+  benefitYn?: string;
+};
+
+export type ProductMngDetailCompData = {
+  mediaNm?: string;
+  productProviderCd?: string;
+  affModelCd?: string;
+  delYn?: string;
+};
+
+export type ProductMngDetailTypeData = {
+  category?: string;
+  brand?: string;
+};

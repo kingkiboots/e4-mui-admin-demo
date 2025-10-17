@@ -1,45 +1,52 @@
+import type { ProductMngDetailCompData } from "@/entities/admin/productMng/types";
 import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const";
 import { Detail } from "@/shared/ui/DetailUI";
 import { Select } from "@/shared/ui/SelectUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
 import { memo } from "react";
+import { useForm } from "react-hook-form";
 
 const ProductMngDetailCompWidget = memo(() => {
+  const { control } = useForm<ProductMngDetailCompData>();
+
   return (
     <Detail
-      key={"product-mng-detail-info"}
       title="매체 정보"
       information="상품 전시 목록 생성 전 매체식별자가 해당 이벤트에 적합한지 반드시 확인해주세요"
     >
       <TextField
         label="매체명"
-        placeholder="테스트이벤트2"
-        // register={register("serviceCd")}
+        placeholder="매체명을 입력하세요"
+        name="mediaNm"
+        control={control}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
       />
       <TextField
         label="상품제공자코드"
-        placeholder="UMS서비스코드 입력"
-        // register={register("serviceCd")}
+        placeholder="상품제공자 코드를 입력하세요"
+        name="productProviderCd"
+        control={control}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
       />
       <TextField
-        label="업무로델코드"
-        placeholder="UMS서비스코드 입력"
-        // register={register("serviceCd")}
+        label="업무모델코드"
+        placeholder="업무모델 코드를 입력하세요"
+        name="affModelCd"
+        control={control}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
       />
       <Select
+        control={control}
+        name="delYn"
         label="삭제여부"
         options={SELECT_OPTION_YN}
         defaultValue={USE_YN_Y}
-        // register={register("useYn")}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}

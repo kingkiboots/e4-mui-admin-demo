@@ -1,5 +1,5 @@
-import type { ProductMngDetailEventData } from "@/entities/admin/productMng/types";
-import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const";
+import type { EventMngDetailData } from "@/entities/admin/eventMng/types";
+import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const/dataConst";
 import { DatePickerField } from "@/shared/ui/DatePickerFieldUI";
 import { Detail } from "@/shared/ui/DetailUI";
 import { Select } from "@/shared/ui/SelectUI";
@@ -7,28 +7,21 @@ import { TextField } from "@/shared/ui/TextFieldUI";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 
-const ProductMngDetailEventWidget = memo(() => {
-  const { control } = useForm<ProductMngDetailEventData>();
+const EventMngDetailWidget = memo(() => {
+  const { control } = useForm<EventMngDetailData>();
 
   return (
-    <Detail
-      key={"product-mng-detail-info"}
-      title="이벤트 정보"
-      information={
-        <>
-          이벤트 정보의 혜택유형이 <span>[상품권]</span>이 아닐 경우 해당 상품권
-          서비스를 이용할 수 없습니다.
-        </>
-      }
-    >
+    <Detail title="이벤트 정보">
       <TextField
         label="이벤트명"
-        placeholder="테스트이벤트2"
-        name="eventNm"
+        name="eventId"
         control={control}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
+        rules={{
+          required: true,
+        }}
       />
       <DatePickerField
         totalColSpan={{ xs: 12, sm: 3 }}
@@ -38,7 +31,10 @@ const ProductMngDetailEventWidget = memo(() => {
         control={control}
         dateTimeType="start"
         label="시작일자"
-        placeholder="시작일"
+        placeholder="날짜 선택"
+        rules={{
+          required: true,
+        }}
       />
       <DatePickerField
         totalColSpan={{ xs: 12, sm: 3 }}
@@ -48,33 +44,45 @@ const ProductMngDetailEventWidget = memo(() => {
         control={control}
         dateTimeType="end"
         label="종료일자"
-        placeholder="종료일"
+        placeholder="날짜 선택"
+        rules={{
+          required: true,
+        }}
       />
       <Select
-        label="삭제여부"
         name="delYn"
         control={control}
+        label="삭제여부"
         options={SELECT_OPTION_YN}
         defaultValue={USE_YN_Y}
-        // register={register("useYn")}
+        totalColSpan={{ xs: 12, sm: 3 }}
+        labelColSpan={{ xs: 12, lg: 4 }}
+        inputColSpan={{ xs: 12, lg: 8 }}
+        rules={{
+          required: true,
+        }}
+      />
+
+      <TextField
+        label="등록부서식별자"
+        name="regDeptId"
+        control={control}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
       />
-      <Select
-        label="혜택유형"
-        name="benefitYn"
+
+      <TextField
+        label="등록스테프식별자"
+        name="regStaffId"
         control={control}
-        options={SELECT_OPTION_YN}
-        defaultValue={USE_YN_Y}
-        // register={register("useYn")}
         totalColSpan={{ xs: 12, sm: 3 }}
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
-        disabled
       />
     </Detail>
   );
 });
 
-export default ProductMngDetailEventWidget;
+EventMngDetailWidget.displayName = "EventMngDetailWidget";
+export default EventMngDetailWidget;

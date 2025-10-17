@@ -1,9 +1,13 @@
+import type { EventMngListSearchData } from "@/entities/admin/eventMng/types";
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { Select, type SelectOption } from "@/shared/ui/SelectUI";
 import { memo } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 const EventMngSearchbarWidget = memo(() => {
+  const { control, reset, handleSubmit } = useForm<EventMngListSearchData>();
+
   const options: SelectOption[] = [
     { value: "0", label: "전체" },
     { value: "1", label: "이벤트_1" },
@@ -11,13 +15,15 @@ const EventMngSearchbarWidget = memo(() => {
     { value: "3", label: "이벤트_3" },
   ];
 
-
   const buttonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
-      console.log("부다");
+      const handleValid: SubmitHandler<EventMngListSearchData> = (data) => {
+        console.log(data);
+      };
+      handleSubmit(handleValid)();
     },
     onClickClearSearchbar: () => {
-      console.log("페슽");
+      reset();
     },
   };
 
@@ -33,9 +39,12 @@ const EventMngSearchbarWidget = memo(() => {
     >
       <Searchbar.InputsArea>
         <Select
+          name="eventType"
+          control={control}
           label="이벤트"
           options={options}
           defaultValue={"0"}
+          totalColSpan={{ xs: 12, sm: 4 }}
           labelColSpan={{ xs: 12, sm: 4 }}
           inputColSpan={{ xs: 12, sm: 8 }}
         />
