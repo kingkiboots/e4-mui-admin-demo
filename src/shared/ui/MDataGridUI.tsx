@@ -19,11 +19,6 @@ const StyledDataGrid = styled(MUIDataGrid, {
   border: `1px solid #e9e9e9`,
   color: theme.palette.text.default,
 
-  "& .MuiDataGrid-filler": {
-    flex: "0!important",
-    display: "none",
-  },
-
   "& .MuiDataGrid-cell": {
     flex: "1",
     padding: "2px 12px",
@@ -36,12 +31,17 @@ const StyledDataGrid = styled(MUIDataGrid, {
     display: "none",
   },
 
-  // "& MuiDataGrid-row": {
-  //   height: "10px",
-  // },
+  "& .MuiDataGrid-columnHeaders .MuiDataGrid-filler": {
+    flex: "0 !important",
+    display: "none",
+  },
 
-  "& .MuiDataGrid-topContainer": {
+  "& .MuiDataGrid-columnHeaders": {
     borderBottom: "2px solid #0114a7 !important",
+  },
+
+  "& .MuiDataGrid-row:nth-child(odd)": {
+    backgroundColor: theme.palette.background.cell,
   },
 
   "& .MuiDataGrid-columnHeaderTitleContainer": {
