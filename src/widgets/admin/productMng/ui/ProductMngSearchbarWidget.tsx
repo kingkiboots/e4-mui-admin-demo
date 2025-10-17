@@ -1,41 +1,31 @@
+import type { ProductMngListSearchData } from "@/entities/admin/productMng/types";
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { SearchInput } from "@/shared/ui/SearchInputUI";
-import type { Dayjs } from "dayjs";
-import { memo, useCallback, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { memo, useCallback } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import ProductMngAccountSearchModal from "../modal/ProductMngAccountSearchModal";
 
-interface SearchFormData {
-  account: string;
-  startDate: Dayjs | null;
-}
-
 const ProductMngSearchbarWidget = memo(() => {
-  const { reset, watch, setValue, control } = useForm<SearchFormData>({});
+  const { reset, control, handleSubmit } = useForm<ProductMngListSearchData>();
 
   const buttonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
-      console.log("부다");
+      const handleValid: SubmitHandler<ProductMngListSearchData> = (data) => {
+        console.log(data);
+      };
+      handleSubmit(handleValid)();
     },
     onClickClearSearchbar: useCallback(() => {
       reset();
     }, [reset]),
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setValue("account", "hello mother fucker");
-    }, 5000);
-  }, [watch("account")]);
-
-  console.log('watch("account")', watch("account"));
-
   return (
     <Searchbar buttonsDef={buttonsDef}>
       <Searchbar.InputsArea>
         <SearchInput
-          name="account"
+          name="serviceCd"
           control={control}
           label="이벤트식별자"
           labelColSpan={{ xs: 12, sm: 4 }}
@@ -45,7 +35,7 @@ const ProductMngSearchbarWidget = memo(() => {
           SearchModal={ProductMngAccountSearchModal}
         />
         <SearchInput
-          name="account"
+          name="seq"
           control={control}
           label="매체식별자"
           labelColSpan={{ xs: 12, sm: 4 }}
