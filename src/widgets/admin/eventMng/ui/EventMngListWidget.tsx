@@ -4,6 +4,8 @@ import { useGetEventList } from "@/features/admin/eventMng/lib/useGetEventList";
 import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
 import { memo, useCallback } from "react";
 import EventMngButtonGroupWidget from "./EventMngButtonGroupWidget";
+import { useState } from "react";
+import { Dialog } from "@/shared/ui/DialogUI";
 
 const baseDataColumns: GridColDef<EventMngData>[] = [
   {
@@ -98,6 +100,8 @@ const baseDataColumns: GridColDef<EventMngData>[] = [
 ];
 
 export const EventMngListWidget = memo(() => {
+  const [alerts, setAlerts] = useState(false);
+
   const { data } = useGetEventList();
 
   const { rows, columns, handleAdd, handleRemove } = useAddRemoveRows(
@@ -107,7 +111,7 @@ export const EventMngListWidget = memo(() => {
 
   // 이벤트 핸들러
   const handleSave = useCallback(() => {
-    alert("저장되었습니다");
+    setAlerts(true);
   }, []);
 
   return (
@@ -122,6 +126,13 @@ export const EventMngListWidget = memo(() => {
         rows={rows}
         columns={columns}
         getRowId={(row) => row.id}
+      />
+      <Dialog
+        type="alert"
+        title="완료"
+        description="저장이 완료 되었습니다."
+        open={alerts}
+        setOpen={setAlerts}
       />
     </>
   );
