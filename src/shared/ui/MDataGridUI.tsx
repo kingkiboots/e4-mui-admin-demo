@@ -14,9 +14,9 @@ const StyledDataGrid = styled(MUIDataGrid, {
   label: "table",
 })(({ theme }) => ({
   width: "100%",
+  fontSize: "1.3rem",
   whiteSpace: "nowrap",
   border: `1px solid #e9e9e9`,
-  marginBottom: theme.spacing(2),
   color: theme.palette.text.default,
 
   "& .MuiDataGrid-columnHeaderTitleContainer": {
