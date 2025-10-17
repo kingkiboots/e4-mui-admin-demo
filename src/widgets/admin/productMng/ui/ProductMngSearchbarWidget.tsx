@@ -5,6 +5,7 @@ import type { Dayjs } from "dayjs";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { ProductMngAccountSearchModal } from "../modal/ProductMngAccountSearchModal";
+import { ProductMngEventSearchModal } from "../modal/ProductMngEventSearchModal";
 
 interface SearchFormData {
   account: string;
@@ -35,7 +36,7 @@ const ProductMngSearchbarWidget = memo(() => {
           })}
           required
           placeholder="이벤트식별자 조회"
-          SearchModal={ProductMngAccountSearchModal}
+          SearchModal={ProductMngEventSearchModal}
         />
         <SearchInput
           label="매체식별자"
