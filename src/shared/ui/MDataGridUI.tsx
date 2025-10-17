@@ -19,12 +19,39 @@ const StyledDataGrid = styled(MUIDataGrid, {
   border: `1px solid #e9e9e9`,
   color: theme.palette.text.default,
 
+  "& .MuiDataGrid-filler": {
+    flex: "0!important",
+    display: "none",
+  },
+
+  "& .MuiDataGrid-cell": {
+    flex: "1",
+    padding: "2px 12px",
+    display: "flex",
+    alignItems: "center",
+  },
+
+  "& .MuiDataGrid-cell:last-child": {
+    flex: "0",
+    display: "none",
+  },
+
+  // "& MuiDataGrid-row": {
+  //   height: "10px",
+  // },
+
+  "& .MuiDataGrid-topContainer": {
+    borderBottom: "2px solid #0114a7 !important",
+  },
+
   "& .MuiDataGrid-columnHeaderTitleContainer": {
     justifyContent: "center",
+    padding: "2px 12px",
   },
 
   "& .MuiDataGrid-columnHeader": {
     textAlign: "center",
+    flex: "1",
     "& .MuiDataGrid-columnHeaderTitle": {
       textAlign: "center",
       width: "100%",
@@ -51,5 +78,13 @@ export const MDataGrid = ({ autosizeOptions, ...props }: MDataGridProps) => {
     return () => clearTimeout(timer);
   }, [autosizeOptions]);
 
-  return <StyledDataGrid apiRef={apiRef} {...props} />;
+  return (
+    <StyledDataGrid
+      apiRef={apiRef}
+      columnHeaderHeight={32}
+      rowHeight={32}
+      showCellVerticalBorder
+      {...props}
+    />
+  );
 };
