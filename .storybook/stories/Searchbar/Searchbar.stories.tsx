@@ -25,6 +25,7 @@ type Story = StoryObj<typeof Searchbar>;
 interface SearchFormData {
   account: string;
   startDate: Dayjs | null;
+  onetwothree: string;
 }
 
 const SearchbarExample = () => {
@@ -34,7 +35,7 @@ const SearchbarExample = () => {
     { value: "3", label: "셋" },
   ];
 
-  const { register, control } = useForm<SearchFormData>();
+  const { control } = useForm<SearchFormData>();
 
   const buttonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
@@ -50,6 +51,8 @@ const SearchbarExample = () => {
       <Searchbar.InputsArea>
         <Select
           label="한도구분"
+          name="onetwothree"
+          control={control}
           options={options}
           defaultValue={"1"}
           labelColSpan={{ xs: 12, sm: 4 }}
@@ -57,11 +60,10 @@ const SearchbarExample = () => {
         />
         <TextField
           label="계좌번호"
+          name="account"
           labelColSpan={{ xs: 12, sm: 4 }}
           inputColSpan={{ xs: 12, sm: 8 }}
-          register={register("account", {
-            required: true,
-          })}
+          control={control}
           required
         />
         <DatePickerField

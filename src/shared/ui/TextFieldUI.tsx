@@ -1,17 +1,12 @@
 import FormControl from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
+import { useId, type ComponentProps } from "react";
+import { type FieldValues } from "react-hook-form";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import MUITextField from "@mui/material/TextField";
-import {
-  memo,
-  useCallback,
-  useId,
-  type ChangeEventHandler,
-  type ComponentPropsWithoutRef,
-} from "react";
-import { type UseFormRegisterReturn } from "react-hook-form";
-import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 import { disabledInputStyles } from "../model/commonStyles";
+import { withController } from "./ControlledFieldUI";
 
 const StyledTextField = styled(MUITextField, {
   name: "StyledTextField",
@@ -45,62 +40,71 @@ const StyledTextField = styled(MUITextField, {
 
   ...disabledInputStyles(theme),
 }));
-
-interface TextFieldProps
+export interface BaseTextFieldProps
   extends BaseInputProps,
-    Omit<ComponentPropsWithoutRef<typeof StyledTextField>, "type"> {
-  register?: UseFormRegisterReturn;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+    ComponentProps<typeof StyledTextField> {}
+
+function BaseTextField({
+  name,
+  value,
+  defaultValue,
+  slotProps,
+  totalColSpan,
+  labelColSpan,
+  inputColSpan,
+  label,
+  required,
+  placeholder,
+  helperText,
+  error,
+  onChange,
+  ...restProps
+}: BaseTextFieldProps) {
+  const id = useId();
+
+  return (
+    <InputWrapper
+      totalColSpan={totalColSpan}
+      labelColSpan={labelColSpan}
+      inputColSpan={inputColSpan}
+      label={label}
+      id={id}
+      required={required}
+    >
+      <FormControl fullWidth size="small">
+        <StyledTextField
+          name={name}
+          //NOTE - value 에 undefined가 들어가면 안됨. 아니면 아래 같은 에러 발생
+          // MUI: A component is changing the uncontrolled value state of a picker component to be controlled.
+          value={value ?? ""}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          required={required}
+          error={error}
+          helperText={helperText}
+          slotProps={{
+            input: {
+              id,
+              placeholder,
+              fullWidth: true,
+              size: "small",
+              ...slotProps?.input, // 외부 slotProps 병합
+            },
+            ...slotProps,
+          }}
+          {...restProps}
+        />
+      </FormControl>
+    </InputWrapper>
+  );
 }
 
-export const TextField = memo(
-  ({
-    totalColSpan,
-    labelColSpan,
-    inputColSpan,
-    label,
-    placeholder,
-    required,
-    register,
-    onChange,
-    ...restProps
-  }: TextFieldProps) => {
-    const id = useId();
-
-    const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-      (evt) => {
-        onChange?.(evt);
-        register?.onChange?.(evt);
-      },
-
-      [onChange, register?.onChange]
-    );
-
-    return (
-      <InputWrapper
-        totalColSpan={totalColSpan}
-        labelColSpan={labelColSpan}
-        inputColSpan={inputColSpan}
-        label={label}
-        id={id}
-        required={required || register?.required}
-      >
-        <FormControl fullWidth size="small">
-          <StyledTextField
-            type="text"
-            id={id}
-            variant="outlined"
-            {...register}
-            fullWidth
-            required={required}
-            placeholder={placeholder}
-            onChange={handleChange}
-            {...restProps}
-          />
-        </FormControl>
-      </InputWrapper>
-    );
-  }
+const TextField = withController<FieldValues, BaseTextFieldProps>(
+  BaseTextField
 );
 
-TextField.displayName = "TextField";
+/**
+ * TextField: controller 있는 버전
+ * BaseTextField: controller 없는 기본 버전
+ */
+export { BaseTextField, TextField };

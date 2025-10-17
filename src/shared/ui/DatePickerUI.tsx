@@ -3,14 +3,14 @@ import { styled } from "@mui/material/styles";
 // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import { DatePicker as MUIDatePicker } from "@mui/x-date-pickers/DatePicker";
 import type { Dayjs } from "dayjs";
-import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
-import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
-import { isNullOrEmpty } from "../lib/commonHelpers";
 import dayjs from "dayjs";
+import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
+import { isNullOrEmpty } from "../lib/commonHelpers";
 import {
   disabledInputStyles,
   inputEndAdorementStyles,
 } from "../model/commonStyles";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
 
 const StyledDatePicker = styled(MUIDatePicker, {
   name: "StyledDatePicker",
@@ -42,6 +42,22 @@ const StyledDatePicker = styled(MUIDatePicker, {
   ...disabledInputStyles(theme),
 }));
 
+export type DateTimeType = "date" | "start" | "end";
+const getFormatOnDateTimeType = (
+  type: DateTimeType,
+  format = "YYYY-MM-DD"
+): string => {
+  switch (type) {
+    case "start":
+      return `${format} 00:00:00`;
+    case "end":
+      return `${format} 23:59:59`;
+    case "date":
+    default:
+      return format;
+  }
+};
+
 export type DatePickerOnChangeFunction = (value: Dayjs | null) => void;
 export interface DatePickerProps
   extends BaseInputProps,
@@ -50,6 +66,7 @@ export interface DatePickerProps
       "value" | "onChange"
     > {
   value?: string;
+  dateTimeType?: DateTimeType;
   onChange?: (value: string | null) => void;
 }
 export const DatePicker = memo(
@@ -60,6 +77,7 @@ export const DatePicker = memo(
     label,
     value,
     required,
+    dateTimeType = "date",
     format = "YYYY-MM-DD",
     placeholder,
     onChange,
@@ -99,7 +117,7 @@ export const DatePicker = memo(
             // MUI: A component is changing the uncontrolled value state of a picker component to be controlled.
             value={dayjsValue}
             onChange={handleChange}
-            format={format}
+            format={getFormatOnDateTimeType(dateTimeType, format)}
             slotProps={{
               textField: {
                 id,

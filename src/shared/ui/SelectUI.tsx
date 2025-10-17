@@ -1,15 +1,17 @@
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import MenuItem from "@mui/material/MenuItem";
 // eslint-disable-next-line no-restricted-imports -- MUI Button을 Override 하기 위해 사용
 import MUISelect, {
-  type BaseSelectProps,
-  type SelectChangeEvent,
+  type BaseSelectProps as MUIBaseSelectProps,
 } from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import { memo, useCallback, useId, type ComponentPropsWithoutRef } from "react";
-import type { UseFormRegisterReturn } from "react-hook-form";
-import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
+import { useId, type ComponentProps } from "react";
+import { type FieldValues } from "react-hook-form";
+import { isNullOrEmpty } from "../lib/commonHelpers";
 import { disabledInputStyles } from "../model/commonStyles";
+import { InputWrapper, type BaseInputProps } from "./BaseInputUI";
+import { withController } from "./ControlledFieldUI";
 
 export interface SelectOption {
   value: string;
@@ -55,77 +57,88 @@ const StyledMenu = styled(MenuItem, { name: "StyledMenu", label: "option" })(
   })
 );
 
-interface SelectProps
+interface BaseSelectProps
   extends BaseInputProps,
-    Omit<ComponentPropsWithoutRef<typeof StyledSelect>, "onChange"> {
+    ComponentProps<typeof StyledSelect> {
   options: SelectOption[];
-  register?: UseFormRegisterReturn;
-  onChange?: BaseSelectProps["onChange"];
+  helperText?: React.ReactNode;
+  onChange?: MUIBaseSelectProps["onChange"];
 }
 
-export const Select = memo(
-  ({
-    totalColSpan,
-    labelColSpan,
-    inputColSpan,
-    label,
-    required,
-    options,
-    defaultValue,
-    placeholder,
-    register,
-    onChange,
-    ...restProps
-  }: SelectProps) => {
-    const id = useId();
+function BaseSelect({
+  name,
+  value,
 
-    const handleChange: BaseSelectProps["onChange"] = useCallback(
-      (evt: SelectChangeEvent<unknown>, child: React.ReactNode) => {
-        onChange?.(evt, child);
-        register?.onChange?.(evt);
-      },
+  defaultValue,
+  slotProps,
+  totalColSpan,
+  labelColSpan,
+  inputColSpan,
+  label,
+  required,
+  options,
+  placeholder,
+  helperText,
+  error,
+  MenuProps,
+  onChange,
+  ...restProps
+}: BaseSelectProps) {
+  const id = useId();
 
-      [onChange, register?.onChange]
-    );
-
-    return (
-      <InputWrapper
-        totalColSpan={totalColSpan}
-        labelColSpan={labelColSpan}
-        inputColSpan={inputColSpan}
-        label={label}
-        id={id}
-        required={required || register?.required}
-      >
-        <FormControl fullWidth size="small">
-          <StyledSelect
-            {...register}
-            id={id}
-            defaultValue={defaultValue}
-            required={required}
-            onChange={handleChange}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  "& .MuiMenuItem-root": {
-                    justifyContent: "center",
-                  },
+  return (
+    <InputWrapper
+      totalColSpan={totalColSpan}
+      labelColSpan={labelColSpan}
+      inputColSpan={inputColSpan}
+      label={label}
+      id={id}
+      required={required}
+    >
+      <FormControl fullWidth size="small">
+        <StyledSelect
+          name={name}
+          value={value ?? ""}
+          onChange={onChange}
+          defaultValue={defaultValue}
+          required={required}
+          error={!!error}
+          slotProps={{
+            input: {
+              id,
+              placeholder,
+              ...slotProps?.input, // 외부 slotProps 병합
+            },
+            ...slotProps,
+          }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                "& .MuiMenuItem-root": {
+                  justifyContent: "center",
                 },
+                ...MenuProps?.PaperProps?.sx,
               },
-            }}
-            {...restProps}
-          >
-            {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
-            {options.map((option) => (
-              <StyledMenu key={option.value} value={option.value}>
-                {option.label}
-              </StyledMenu>
-            ))}
-          </StyledSelect>
-        </FormControl>
-      </InputWrapper>
-    );
-  }
-);
+              ...MenuProps?.PaperProps,
+            },
+            ...MenuProps,
+          }}
+          {...restProps}
+        >
+          {placeholder && <MenuItem value="">{placeholder}</MenuItem>}
+          {options.map((option) => (
+            <StyledMenu key={option.value} value={option.value}>
+              {option.label}
+            </StyledMenu>
+          ))}
+        </StyledSelect>
+        {isNullOrEmpty(helperText) ? undefined : (
+          <FormHelperText>{helperText}</FormHelperText>
+        )}
+      </FormControl>
+    </InputWrapper>
+  );
+}
 
-Select.displayName = "Select";
+const Select = withController<FieldValues, BaseSelectProps>(BaseSelect);
+export { Select };
