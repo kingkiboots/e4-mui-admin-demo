@@ -9,14 +9,12 @@ const PushMsgMngSearchbarWidget = memo(() => {
   const {
     control,
     reset,
-    getValues,
     handleSubmit,
     // formState: { errors },
   } = useForm<PushMsgMngListSearchData>();
 
   const buttonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
-      console.log('getValues("serviceCd")123', getValues("serviceCd"));
       const handleValid: SubmitHandler<PushMsgMngListSearchData> = (data) => {
         console.log(data);
       };

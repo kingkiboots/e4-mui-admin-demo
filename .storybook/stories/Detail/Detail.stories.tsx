@@ -4,6 +4,7 @@ import { Select } from "@/shared/ui/SelectUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { useForm } from "react-hook-form";
 
 const meta: Meta<typeof Detail> = {
   title: "Detail/Detail - v0.1",
@@ -75,6 +76,8 @@ export default meta;
 type Story = StoryObj<typeof Detail>;
 
 const DetailExample = () => {
+  const { control } = useForm<{ one: string; yn: string }>();
+
   return (
     <Detail
       key={"product-mng-detail-info"}
@@ -82,6 +85,8 @@ const DetailExample = () => {
       information="분류 정보는 이벤트식별자, 매체식별자를 조회한 다음 선택이 가능합니다."
     >
       <TextField
+        name="one"
+        control={control}
         label="이벤트명"
         placeholder="테스트이벤트2"
         // register={register("serviceCd")}
@@ -90,6 +95,8 @@ const DetailExample = () => {
         inputColSpan={{ xs: 12, lg: 8 }}
       />
       <Select
+        name="yn"
+        control={control}
         label="카테고리"
         options={SELECT_OPTION_YN}
         defaultValue={USE_YN_Y}
@@ -98,15 +105,6 @@ const DetailExample = () => {
         labelColSpan={{ xs: 12, lg: 4 }}
         inputColSpan={{ xs: 12, lg: 8 }}
         disabled
-      />
-      <Select
-        label="브랜드"
-        options={SELECT_OPTION_YN}
-        defaultValue={USE_YN_Y}
-        // register={register("useYn")}
-        totalColSpan={{ xs: 12, sm: 3 }}
-        labelColSpan={{ xs: 12, lg: 4 }}
-        inputColSpan={{ xs: 12, lg: 8 }}
       />
     </Detail>
   );

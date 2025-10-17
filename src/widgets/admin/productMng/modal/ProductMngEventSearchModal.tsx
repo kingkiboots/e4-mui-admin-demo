@@ -1,3 +1,4 @@
+import type { ProductEvtKeySearchData } from "@/entities/admin/productMng/types";
 import {
   DataGrid,
   type GridColDef,
@@ -8,7 +9,10 @@ import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroup
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import type { SearchModalProps } from "@/shared/ui/SearchInputUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
-import { useCallback, useRef, type ComponentType } from "react";
+import ErrorFallback from "@/widgets/error/5xx/ui/ErrorFallback";
+import { useCallback, type ComponentType } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
   {
@@ -38,15 +42,14 @@ export const ProductMngEventSearchModal: ComponentType<SearchModalProps> = ({
   isOpen,
   setIsOpen,
 }) => {
-  const accountRef = useRef<HTMLInputElement>(null);
+  const { control, handleSubmit } = useForm<ProductEvtKeySearchData>();
 
   const searchButtonsDef: SearchbarButtonGroupProps = {
     onClickSearch: () => {
-      if (!accountRef.current) {
-        return;
-      }
-
-      console.log(accountRef.current.value);
+      const handleValid: SubmitHandler<ProductEvtKeySearchData> = (data) => {
+        console.log(data);
+      };
+      handleSubmit(handleValid)();
     },
   };
 
@@ -59,31 +62,34 @@ export const ProductMngEventSearchModal: ComponentType<SearchModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="이벤트식별자 검색">
-      <Searchbar buttonsDef={searchButtonsDef}>
-        <Searchbar.InputsArea>
-          <TextField
-            inputRef={accountRef}
-            label="이벤트식별자"
-            totalColSpan={12}
-            labelColSpan={{ xs: 12, sm: 2 }}
-            inputColSpan={{ xs: 12, sm: 10 }}
-            placeholder="이벤트식별자 입력"
-            required
-          />
-        </Searchbar.InputsArea>
-      </Searchbar>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        onRowDoubleClick={handleRowDoubleClick}
-        disableRowSelectionOnClick
-        information={
-          <>
-            이벤트식별자를&nbsp;
-            <span>더블 클릭하면</span> 선택이 가능합니다.
-          </>
-        }
-      />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Searchbar buttonsDef={searchButtonsDef}>
+          <Searchbar.InputsArea>
+            <TextField
+              name="evtKey"
+              control={control}
+              label="이벤트식별자"
+              totalColSpan={12}
+              labelColSpan={{ xs: 12, sm: 2 }}
+              inputColSpan={{ xs: 12, sm: 10 }}
+              placeholder="이벤트식별자 입력"
+              required
+            />
+          </Searchbar.InputsArea>
+        </Searchbar>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          onRowDoubleClick={handleRowDoubleClick}
+          disableRowSelectionOnClick
+          information={
+            <>
+              이벤트식별자를&nbsp;
+              <span>더블 클릭하면</span> 선택이 가능합니다.
+            </>
+          }
+        />
+      </ErrorBoundary>
     </Modal>
   );
 };

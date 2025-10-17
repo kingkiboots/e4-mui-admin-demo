@@ -68,3 +68,11 @@ export type ProductMngDetailTypeData = {
   category?: string;
   brand?: string;
 };
+
+export type ProductMediaKeySearchData = {
+  mediaKey: string;
+};
+
+export type ProductEvtKeySearchData = {
+  evtKey: string;
+};

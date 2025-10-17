@@ -14,8 +14,7 @@ export const useGetEventList = () => {
   }, []);
 
   const params = {
-    id: "",
-    code: "",
+    eventType: "",
   };
   const query = useGetEventListQuery(params, {
     select,
