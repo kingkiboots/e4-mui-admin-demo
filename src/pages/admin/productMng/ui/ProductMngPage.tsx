@@ -6,7 +6,7 @@ import ProductMngDetailCompWidget from "@/widgets/admin/productMng/ui/ProductMng
 import ProductMngDetailTypeWidget from "@/widgets/admin/productMng/ui/ProductMngDetailTypeWidget";
 import ProductMngListWidget from "@/widgets/admin/productMng/ui/ProductMngListWidget";
 import ProductMngButtonGroupWidget from "@/widgets/admin/productMng/ui/ProductMngButtonGroupWidget";
-import AlertDialog from "@/shared/ui/DialogUI";
+import { Dialog } from "@/shared/ui/DialogUI";
 import { useState } from "react";
 
 const ProductMngPage = () => {
@@ -21,7 +21,8 @@ const ProductMngPage = () => {
         <ProductMngDetailTypeWidget />
         <ProductMngButtonGroupWidget setAlert={setAlerts} />
         <ProductMngListWidget />
-        <AlertDialog
+        <Dialog
+          type="alert"
           title="완료"
           description="저장이 완료 되었습니다."
           open={alerts}

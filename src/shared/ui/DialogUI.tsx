@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./ButtonUI";
-import Dialog from "@mui/material/Dialog";
+import MUIDialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -8,14 +8,15 @@ import DialogActions from "@mui/material/DialogActions";
 import { memo } from "react";
 
 type AlertDialogData = {
+  type: "alert" | "confirm";
   title: string;
   description: string;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AlertDialog = memo(
-  ({ title, description, open, setOpen }: AlertDialogData) => {
+export const Dialog = memo(
+  ({ type, title, description, open, setOpen }: AlertDialogData) => {
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -29,7 +30,7 @@ const AlertDialog = memo(
         <Button variant="outlined" onClick={handleClickOpen}>
           {title}
         </Button>
-        <Dialog
+        <MUIDialog
           open={open}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
@@ -42,15 +43,17 @@ const AlertDialog = memo(
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            {/* <Button onClick={handleClose}>Disagree</Button> */}
+            {type == "confirm" ? (
+              <Button onClick={handleClose}>취소</Button>
+            ) : (
+              <></>
+            )}
             <Button onClick={handleClose} autoFocus>
               확인
             </Button>
           </DialogActions>
-        </Dialog>
+        </MUIDialog>
       </React.Fragment>
     );
   }
 );
-
-export default AlertDialog;
