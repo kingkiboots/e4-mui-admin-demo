@@ -46,10 +46,10 @@ export const updatePushMsgDetail = async (
  * @param params
  * @returns 삭제 결과
  */
-export const deletePushMsg = async ({
-  serviceCd,
-}: PushMsgDeleteParams): Promise<ApiAxiosResponse<boolean>> => {
+export const deletePushMsg = async (
+  params: PushMsgDeleteParams
+): Promise<ApiAxiosResponse<boolean>> => {
   return await apiClient.delete(restApiConfig.api.pushMsgMng.delete, {
-    params: { serviceCd },
+    params,
   });
 };
