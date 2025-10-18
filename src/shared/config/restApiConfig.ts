@@ -11,6 +11,9 @@ export const restApiConfig = {
     },
     pushMsgMng: {
       list: "/api/pushMsgMng/list",
+      add: "/api/pushMsgMng/add",
+      update: "/api/pushMsgMng/update",
+      delete: "/api/pushMsgMng/delete",
     },
     menu: {
       list: "/api/menu/list",
