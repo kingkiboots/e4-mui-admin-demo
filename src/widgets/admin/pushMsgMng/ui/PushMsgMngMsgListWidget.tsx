@@ -1,7 +1,16 @@
-import type { PushMsgMngList } from "@/entities/admin/pushMsgMng/types";
+import type {
+  PushMsgMngDetailData,
+  PushMsgMngList,
+} from "@/entities/admin/pushMsgMng/types";
 import { useGetPushMsgList } from "@/features/admin/pushMsgMng/lib/useGetPushMsgList";
-import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
-import { memo } from "react";
+import { isNullOrEmpty, isObject } from "@/shared/lib/commonHelpers";
+import {
+  DataGrid,
+  type GridColDef,
+  type GridRowCallbackParams,
+} from "@/shared/ui/DataGridUI";
+import { memo, useCallback } from "react";
+import type { UseFormSetValue } from "react-hook-form";
 
 const columns: GridColDef<PushMsgMngList>[] = [
   {
@@ -46,24 +55,48 @@ const columns: GridColDef<PushMsgMngList>[] = [
   },
 ];
 
-const PushMsgMngMsgListWidget = memo(() => {
-  const { data: rows } = useGetPushMsgList();
+interface PushMsgMngMsgListWidgetProps {
+  detailFormSetValue: UseFormSetValue<PushMsgMngDetailData>;
+}
+const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
+  ({ detailFormSetValue }) => {
+    const { data: rows } = useGetPushMsgList();
 
-  return (
-    <DataGrid
-      title="메시지 목록"
-      getRowId={(row) => row.serviceCd}
-      columns={columns}
-      rows={rows}
-      information={
-        <>
-          혜택기본식별자를 <span>더블 클릭하면</span> 상세 정보 조회가
-          가능합니다.
-        </>
-      }
-    />
-  );
-});
+    const handleRowDoubleClick = useCallback(
+      (params: GridRowCallbackParams<PushMsgMngList[number]>) => {
+        if (isNullOrEmpty(params?.row) && !isObject(params?.row)) {
+          return;
+        }
+        const { row } = params;
+
+        detailFormSetValue("serviceCd", row.serviceCd);
+        detailFormSetValue("seq", row.seq);
+        detailFormSetValue("name", row.name);
+        detailFormSetValue("content", row.content);
+        detailFormSetValue("url", row.url);
+        detailFormSetValue("useYn", row.useYn);
+      },
+      []
+    );
+
+    return (
+      <DataGrid
+        title="메시지 목록"
+        getRowId={(row) => row.serviceCd}
+        columns={columns}
+        rows={rows}
+        onRowDoubleClick={handleRowDoubleClick}
+        disableRowSelectionOnClick
+        information={
+          <>
+            혜택기본식별자를 <span>더블 클릭하면</span> 상세 정보 조회가
+            가능합니다.
+          </>
+        }
+      />
+    );
+  }
+);
 
 PushMsgMngMsgListWidget.displayName = "PushMsgMngMsgListWidget";
 export default PushMsgMngMsgListWidget;
