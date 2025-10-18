@@ -1,7 +1,7 @@
 /**
  * 푸쉬 목록 조회 파라미터
  */
-export type PushMsgListSearchData = {
+export type PushMsgListSearchParams = {
   serviceCd: string /* UMS 서비스코드 */;
   seq: string /* 푸시 일련번호 */;
 };
@@ -38,6 +38,6 @@ export type PushMsgDetailData = {
 /**
  * 푸쉬 데이터 삭제 파라미터
  */
-export type PushMsgDeleteParam = {
+export type PushMsgDeleteParams = {
   serviceCd: string /* UMS 서비스코드 */;
 };

@@ -1,10 +1,10 @@
 import { apiClient } from "@/shared/api/netInstances";
 import type { ApiAxiosResponse } from "@/shared/type";
 import type {
-  PushMsgDeleteParam,
+  PushMsgDeleteParams,
   PushMsgDetailData,
   PushMsgList,
-  PushMsgListSearchData,
+  PushMsgListSearchParams,
 } from "../types";
 import { restApiConfig } from "@/shared/config";
 
@@ -14,7 +14,7 @@ import { restApiConfig } from "@/shared/config";
  * @returns 푸쉬 메세지 목록
  */
 export const getPushMsgList = async (
-  params: PushMsgListSearchData
+  params: PushMsgListSearchParams
 ): Promise<ApiAxiosResponse<PushMsgList>> => {
   return await apiClient.get(restApiConfig.api.pushMsgMng.list, { params });
 };
@@ -48,7 +48,7 @@ export const updatePushMsgDetail = async (
  */
 export const deletePushMsg = async ({
   serviceCd,
-}: PushMsgDeleteParam): Promise<ApiAxiosResponse<boolean>> => {
+}: PushMsgDeleteParams): Promise<ApiAxiosResponse<boolean>> => {
   return await apiClient.delete(restApiConfig.api.pushMsgMng.delete, {
     params: { serviceCd },
   });
