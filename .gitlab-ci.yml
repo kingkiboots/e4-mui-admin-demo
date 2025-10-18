@@ -14,6 +14,7 @@ stages:
   - push
   - package
   - deploy
+  - backup
 
 image: gradle:alpine
 
@@ -114,3 +115,17 @@ deploy-frontend:
   allow_failure:
     exit_codes:
       - 1
+backup:
+  stage: backup
+  before_script:
+    - apk update
+    - apk add curl
+  script:
+    - echo "merge request to develop"
+    - RESPONSE=$(curl --header "Private-Token:$PRIVATE_KEY" -H "Content-Type:application/json" -X POST -d "{\"source_branch\":\"$CI_COMMIT_REF_NAME\", \"target_branch\":\"main\",  \"id\":\"$CI_PROJECT_ID\", \"title\":\"$CI_COMMIT_REF_NAME\", \"description\":\"desc\", \"assignee_id\":\"$GITLAB_USER_ID\"}" https://gitlab-msa.letscherry.io/api/v4/projects/$CI_PROJECT_ID/merge_requests)
+    - echo "$RESPONSE"
+    - echo "$RESPONSE" | grep -q '"error":"invalid_token"' && echo "Token expired. Failing." && exit 1 || echo "Token valid."
+  tags:
+    - docker
+  only:
+    - /^develop*$/
