@@ -22,3 +22,7 @@ export type PushMsgMngDetailData = {
   url?: string;
   useYn?: string;
 };
+
+export type PushMsgDeleteParam = {
+  serviceCd: string;
+};
