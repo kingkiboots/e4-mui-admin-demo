@@ -9,6 +9,8 @@ import {
   type GridColDef,
   type GridRowCallbackParams,
 } from "@/shared/ui/DataGridUI";
+import type { SetStateAction } from "react";
+import type { Dispatch } from "react";
 import { memo, useCallback } from "react";
 import type { UseFormSetValue } from "react-hook-form";
 
@@ -56,10 +58,11 @@ const columns: GridColDef<PushMsgMngList>[] = [
 ];
 
 interface PushMsgMngMsgListWidgetProps {
+  setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
   detailFormSetValue: UseFormSetValue<PushMsgMngDetailData>;
 }
 const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
-  ({ detailFormSetValue }) => {
+  ({ setIsUpdatingDetail, detailFormSetValue }) => {
     const { data: rows } = useGetPushMsgList();
 
     const handleRowDoubleClick = useCallback(
@@ -68,6 +71,8 @@ const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
           return;
         }
         const { row } = params;
+
+        setIsUpdatingDetail(true);
 
         detailFormSetValue("serviceCd", row.serviceCd);
         detailFormSetValue("seq", row.seq);

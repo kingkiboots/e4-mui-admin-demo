@@ -7,10 +7,11 @@ import { memo } from "react";
 import type { Control } from "react-hook-form";
 
 interface PushMsgMngMsgDetailWidgetProps {
+  isUpdatingDetail: boolean;
   detailFormControl: Control<PushMsgMngDetailData>;
 }
 const PushMsgMngMsgDetailWidget = memo<PushMsgMngMsgDetailWidgetProps>(
-  ({ detailFormControl: control }) => {
+  ({ isUpdatingDetail, detailFormControl: control }) => {
     return (
       <Detail title="메시지 상세정보">
         <TextField
@@ -21,6 +22,7 @@ const PushMsgMngMsgDetailWidget = memo<PushMsgMngMsgDetailWidgetProps>(
           totalColSpan={{ xs: 12, sm: 3 }}
           labelColSpan={{ xs: 12, lg: 4 }}
           inputColSpan={{ xs: 12, lg: 8 }}
+          disabled={isUpdatingDetail}
         />
         <TextField
           name="seq"
@@ -30,6 +32,7 @@ const PushMsgMngMsgDetailWidget = memo<PushMsgMngMsgDetailWidgetProps>(
           totalColSpan={{ xs: 12, sm: 3 }}
           labelColSpan={{ xs: 12, lg: 4 }}
           inputColSpan={{ xs: 12, lg: 8 }}
+          disabled={isUpdatingDetail}
         />
         <TextField
           name="name"

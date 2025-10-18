@@ -7,17 +7,32 @@ import PushMsgMngSearchbarWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngS
 import PushMsgMngMsgListWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgListWidget";
 import PushMsgMngMsgDetailWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgDetailWidget";
 import PushMsgMngMsgDetailMngWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngMsgDetailMngWidget";
+import { useState } from "react";
 
 const PushMsgMngPage = () => {
-  const { control, setValue } = useForm<PushMsgMngDetailData>();
+  const { control, setValue, handleSubmit, reset } =
+    useForm<PushMsgMngDetailData>();
+
+  const [isUpdatingDetail, setIsUpdatingDetail] = useState<boolean>(false);
 
   return (
     <Meta>
       <PageContentLayout>
         <PushMsgMngSearchbarWidget />
-        <PushMsgMngMsgDetailWidget detailFormControl={control} />
-        <PushMsgMngMsgDetailMngWidget />
-        <PushMsgMngMsgListWidget detailFormSetValue={setValue} />
+        <PushMsgMngMsgDetailWidget
+          isUpdatingDetail={isUpdatingDetail}
+          detailFormControl={control}
+        />
+        <PushMsgMngMsgDetailMngWidget
+          isUpdatingDetail={isUpdatingDetail}
+          setIsUpdatingDetail={setIsUpdatingDetail}
+          resetDetailForm={reset}
+          handleSubmitDetailForm={handleSubmit}
+        />
+        <PushMsgMngMsgListWidget
+          setIsUpdatingDetail={setIsUpdatingDetail}
+          detailFormSetValue={setValue}
+        />
       </PageContentLayout>
     </Meta>
   );
