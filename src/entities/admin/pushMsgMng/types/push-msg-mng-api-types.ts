@@ -1,9 +1,9 @@
-export type PushMsgMngListSearchData = {
+export type PushMsgListSearchData = {
   serviceCd: string;
   seq: string;
 };
 
-export type PushMsgMngData = {
+export type PushMsgData = {
   serviceCd: string;
   seq: string;
   name: string;
@@ -12,9 +12,9 @@ export type PushMsgMngData = {
   useYn: string;
 };
 
-export type PushMsgMngList = PushMsgMngData[];
+export type PushMsgList = PushMsgData[];
 
-export type PushMsgMngDetailData = {
+export type PushMsgDetailData = {
   serviceCd?: string;
   seq?: string;
   name?: string;

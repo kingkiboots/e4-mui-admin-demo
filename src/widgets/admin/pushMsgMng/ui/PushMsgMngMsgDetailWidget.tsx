@@ -1,4 +1,4 @@
-import type { PushMsgMngDetailData } from "@/entities/admin/pushMsgMng/types";
+import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
 import { SELECT_OPTION_YN, USE_YN_Y } from "@/shared/const/dataConst";
 import { Detail } from "@/shared/ui/DetailUI";
 import { Select } from "@/shared/ui/SelectUI";
@@ -8,7 +8,7 @@ import type { Control } from "react-hook-form";
 
 interface PushMsgMngMsgDetailWidgetProps {
   isUpdatingDetail: boolean;
-  detailFormControl: Control<PushMsgMngDetailData>;
+  detailFormControl: Control<PushMsgDetailData>;
 }
 const PushMsgMngMsgDetailWidget = memo<PushMsgMngMsgDetailWidgetProps>(
   ({ isUpdatingDetail, detailFormControl: control }) => {

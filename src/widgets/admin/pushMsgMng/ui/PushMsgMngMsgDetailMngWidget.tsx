@@ -1,4 +1,4 @@
-import type { PushMsgMngDetailData } from "@/entities/admin/pushMsgMng/types";
+import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
 import { checkIfDataIsNullOrEmpty } from "@/shared/lib/validationHelpers";
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
 import { Button } from "@/shared/ui/ButtonUI";
@@ -13,8 +13,8 @@ import type { UseFormHandleSubmit, UseFormReset } from "react-hook-form";
 interface PushMsgMngMsgDetailMngWidgetProps {
   isUpdatingDetail: boolean;
   setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
-  resetDetailForm: UseFormReset<PushMsgMngDetailData>;
-  handleSubmitDetailForm: UseFormHandleSubmit<PushMsgMngDetailData>;
+  resetDetailForm: UseFormReset<PushMsgDetailData>;
+  handleSubmitDetailForm: UseFormHandleSubmit<PushMsgDetailData>;
 }
 
 const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(

@@ -1,6 +1,6 @@
 import PageContentLayout from "@/widgets/admin/common/ui/PageContentLayout";
 import Meta from "./Meta";
-import type { PushMsgMngDetailData } from "@/entities/admin/pushMsgMng/types";
+import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
 import { useForm } from "react-hook-form";
 
 import PushMsgMngSearchbarWidget from "@/widgets/admin/pushMsgMng/ui/PushMsgMngSearchbarWidget";
@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const PushMsgMngPage = () => {
   const { control, setValue, handleSubmit, reset } =
-    useForm<PushMsgMngDetailData>();
+    useForm<PushMsgDetailData>();
 
   const [isUpdatingDetail, setIsUpdatingDetail] = useState<boolean>(false);
 

@@ -1,6 +1,6 @@
 import type {
-  PushMsgMngDetailData,
-  PushMsgMngList,
+  PushMsgDetailData,
+  PushMsgList,
 } from "@/entities/admin/pushMsgMng/types";
 import { useGetPushMsgList } from "@/features/admin/pushMsgMng/lib/useGetPushMsgList";
 import { isNullOrEmpty, isObject } from "@/shared/lib/commonHelpers";
@@ -14,7 +14,7 @@ import type { Dispatch } from "react";
 import { memo, useCallback } from "react";
 import type { UseFormSetValue } from "react-hook-form";
 
-const columns: GridColDef<PushMsgMngList>[] = [
+const columns: GridColDef<PushMsgList>[] = [
   {
     field: "id",
     headerName: "No.",
@@ -59,14 +59,14 @@ const columns: GridColDef<PushMsgMngList>[] = [
 
 interface PushMsgMngMsgListWidgetProps {
   setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
-  detailFormSetValue: UseFormSetValue<PushMsgMngDetailData>;
+  detailFormSetValue: UseFormSetValue<PushMsgDetailData>;
 }
 const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
   ({ setIsUpdatingDetail, detailFormSetValue }) => {
     const { data: rows } = useGetPushMsgList();
 
     const handleRowDoubleClick = useCallback(
-      (params: GridRowCallbackParams<PushMsgMngList[number]>) => {
+      (params: GridRowCallbackParams<PushMsgList[number]>) => {
         if (isNullOrEmpty(params?.row) && !isObject(params?.row)) {
           return;
         }
