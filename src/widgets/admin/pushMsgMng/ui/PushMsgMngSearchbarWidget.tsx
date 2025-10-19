@@ -1,43 +1,28 @@
 import type { PushMsgListSearchParams } from "@/entities/admin/pushMsgMng/types";
-import { defaultPushMsgListSearchParams } from "@/features/admin/pushMsgMng/model/getPushMsgListHandler";
+import { useSearchPushMsgList } from "@/features/admin/pushMsgMng/lib/useSearchPushMsgList";
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
-import type { SetStateAction } from "react";
-import type { Dispatch } from "react";
-import { useMemo } from "react";
-import { memo } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import type { Dispatch, SetStateAction } from "react";
+import { memo, useMemo } from "react";
 
 interface PushMsgMngSearchbarWidgetProps {
   setPushMsgListSearchParams: Dispatch<SetStateAction<PushMsgListSearchParams>>;
 }
 const PushMsgMngSearchbarWidget = memo<PushMsgMngSearchbarWidgetProps>(
   ({ setPushMsgListSearchParams }) => {
-    const {
-      control,
-      reset,
-      handleSubmit,
-      // formState: { errors },
-    } = useForm<PushMsgListSearchParams>({
-      defaultValues: defaultPushMsgListSearchParams,
+    const { control, reset, handleSearchClick } = useSearchPushMsgList({
+      setPushMsgListSearchParams,
     });
 
     const buttonsDef: SearchbarButtonGroupProps = useMemo(
       () => ({
-        onClickSearch: () => {
-          const handleValid: SubmitHandler<PushMsgListSearchParams> = (
-            data
-          ) => {
-            setPushMsgListSearchParams(data);
-          };
-          handleSubmit(handleValid)();
-        },
+        onClickSearch: handleSearchClick,
         onClickClearSearchbar: () => {
           reset();
         },
       }),
-      [reset, handleSubmit, setPushMsgListSearchParams]
+      [reset, handleSearchClick]
     );
 
     return (
