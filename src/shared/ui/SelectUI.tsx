@@ -44,7 +44,9 @@ const StyledSelect = styled(MUISelect, {
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
     borderColor: theme.palette.primary.main,
   },
-  ...disabledInputStyles(theme),
+  "&.Mui-disabled, &.Mui-readOnly": {
+    ...disabledInputStyles(theme),
+  },
   backgroundColor: theme.palette.background.paper,
   height: "calc(1.8rem + 1.2rem + 2px)",
 }));
