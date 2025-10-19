@@ -1,9 +1,5 @@
-import {
-  useAddPushMsgDetailMutation,
-  useDeletePushMsgMutation,
-  useUpdatePushMsgDetailMutation,
-} from "@/entities/admin/pushMsgMng/lib/usePushMsgMngApiQueries";
 import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
+import { useManagePushMsgDetail } from "@/features/admin/pushMsgMng/lib/useManagePushMsgDetail";
 import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 import { checkIfDataIsNullOrEmpty } from "@/shared/lib/validationHelpers";
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
@@ -30,14 +26,12 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
     resetDetailForm: reset,
     handleSubmitDetailForm: handleSubmit,
   }) => {
-    const { mutate: addPushMsgDetail } = useAddPushMsgDetailMutation();
-    const { mutate: updatePushMsgDetail } = useUpdatePushMsgDetailMutation();
-    const { mutate: deletePushMsg } = useDeletePushMsgMutation();
-
-    const handleResetClick = useCallback(() => {
-      reset();
-      setIsUpdatingDetail(false);
-    }, [reset, setIsUpdatingDetail]);
+    const {
+      resetPushMsgDetailForm,
+      handleAddPushMsgDetail,
+      handleUpdatePushMsgDetail,
+      handleDeletePushMsgDetail,
+    } = useManagePushMsgDetail({ reset, setIsUpdatingDetail });
 
     const handleUpdateClick = useCallback(() => {
       handleSubmit((data) => {
@@ -46,21 +40,9 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
           return;
         }
 
-        console.log("수정할 데이터:", data);
-
-        updatePushMsgDetail(data, {
-          onSuccess: (res) => {
-            const data = res.data.data;
-            if (data === true) {
-              alert("정상적으로 수정되었습니다.");
-              handleResetClick();
-              return;
-            }
-            alert("오류 발생");
-          },
-        });
+        handleUpdatePushMsgDetail(data);
       })();
-    }, [handleSubmit, handleResetClick]);
+    }, [handleSubmit, handleUpdatePushMsgDetail]);
 
     const handleDeleteClick = useCallback(() => {
       handleSubmit((data) => {
@@ -69,28 +51,13 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
           return;
         }
 
-        console.log("삭제할 데이터의 key:", data.serviceCd);
-
         if (isNullOrEmpty(data.serviceCd)) {
           return;
         }
 
-        deletePushMsg(
-          { serviceCd: data.serviceCd },
-          {
-            onSuccess: (res) => {
-              const data = res.data.data;
-              if (data === true) {
-                alert("정상적으로 저장되었습니다.");
-                handleResetClick();
-                return;
-              }
-              alert("오류 발생");
-            },
-          }
-        );
+        handleDeletePushMsgDetail(data.serviceCd);
       })();
-    }, [handleSubmit, handleResetClick]);
+    }, [handleSubmit, handleDeletePushMsgDetail]);
 
     const handleAddClick = useCallback(() => {
       handleSubmit((data) => {
@@ -99,20 +66,9 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
           return;
         }
 
-        console.log("추가할 데이터:", data);
-        addPushMsgDetail(data, {
-          onSuccess: (res) => {
-            const data = res.data.data;
-            if (data === true) {
-              alert("정상적으로 저장되었습니다.");
-              handleResetClick();
-              return;
-            }
-            alert("오류 발생");
-          },
-        });
+        handleAddPushMsgDetail(data);
       })();
-    }, [handleSubmit, handleResetClick]);
+    }, [handleSubmit, handleAddPushMsgDetail]);
 
     return (
       <ButtonGroupRow>
@@ -120,7 +76,7 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
           size="small"
           color="success"
           variant="contained"
-          onClick={handleResetClick}
+          onClick={resetPushMsgDetailForm}
         >
           <ClearOutlinedIcon fontSize="small" />
           &nbsp;상세정보 초기화
