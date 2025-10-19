@@ -10,7 +10,7 @@ import {
   API_HEADER_AUTH_TOKEN,
   API_HEADER_AUTH_TOKEN_PREFIX,
 } from "../const/apiConst";
-import { requestDataRemoval } from "./sessionStorageShareHandlers";
+import { requestDataRemoval } from "./sessionStorageShareHandler";
 
 // NOTE - 인터셉터는 공통으로 쓰이므로 shared이지만 비즈니스 로직이 안에 들어가니깐 어쩔 수 없이 fsd 계층구조 어김.
 
