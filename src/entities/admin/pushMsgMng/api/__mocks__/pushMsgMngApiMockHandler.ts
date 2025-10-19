@@ -28,12 +28,17 @@ import { isEmpty, isNullOrEmpty } from "@/shared/lib/commonHelpers";
 //   );
 // };
 
+//NOTE - 모킹코드라 간단하게 쓰고 코드를 따로 깔끔하게 정리하진 않았음
 //NOTE - 받는 파라미터 확인할 수 있는 방식
 export const pushMsgMngApiMockHandler = (mockInstance: MockAdapter) => {
   mockInstance
     .onGet(restApiConfig.api.pushMsgMng.list)
     .reply((config: AxiosRequestConfig) => {
-      console.log("config.params", config.params);
+      console.log(
+        restApiConfig.api.pushMsgMng.add,
+        "config.params",
+        config.params
+      );
       const { serviceCd = "", seq = "" } = (
         isNullOrEmpty(config.params) ? {} : config.params
       ) as PushMsgListSearchParams;
@@ -64,6 +69,66 @@ export const pushMsgMngApiMockHandler = (mockInstance: MockAdapter) => {
                   : item.seq.startsWith(seq))
               );
             }),
+        },
+      })(config);
+    });
+
+  mockInstance
+    .onPost(restApiConfig.api.pushMsgMng.add)
+    .reply((config: AxiosRequestConfig) => {
+      console.log(
+        restApiConfig.api.pushMsgMng.add,
+        "config.data",
+        JSON.parse(config.data)
+      );
+
+      return withDelay(500, {
+        status: 200,
+        data: {
+          code: "0000",
+          message: "정상 처리 되었습니다.",
+          timestamp: "20240726092207",
+          data: true,
+        },
+      })(config);
+    });
+
+  mockInstance
+    .onPut(restApiConfig.api.pushMsgMng.update)
+    .reply((config: AxiosRequestConfig) => {
+      console.log(
+        restApiConfig.api.pushMsgMng.update,
+        "config.data",
+        JSON.parse(config.data)
+      );
+
+      return withDelay(500, {
+        status: 200,
+        data: {
+          code: "0000",
+          message: "정상 처리 되었습니다.",
+          timestamp: "20240726092207",
+          data: true,
+        },
+      })(config);
+    });
+
+  mockInstance
+    .onDelete(restApiConfig.api.pushMsgMng.delete)
+    .reply((config: AxiosRequestConfig) => {
+      console.log(
+        restApiConfig.api.pushMsgMng.delete,
+        "config.params",
+        config.params
+      );
+
+      return withDelay(500, {
+        status: 200,
+        data: {
+          code: "0000",
+          message: "정상 처리 되었습니다.",
+          timestamp: "20240726092207",
+          data: true,
         },
       })(config);
     });

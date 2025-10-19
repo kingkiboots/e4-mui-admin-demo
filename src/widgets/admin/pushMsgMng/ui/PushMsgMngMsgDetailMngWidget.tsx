@@ -1,4 +1,10 @@
+import {
+  useAddPushMsgDetailMutation,
+  useDeletePushMsgMutation,
+  useUpdatePushMsgDetailMutation,
+} from "@/entities/admin/pushMsgMng/lib/usePushMsgMngApiQueries";
 import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
+import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 import { checkIfDataIsNullOrEmpty } from "@/shared/lib/validationHelpers";
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
 import { Button } from "@/shared/ui/ButtonUI";
@@ -24,6 +30,10 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
     resetDetailForm: reset,
     handleSubmitDetailForm: handleSubmit,
   }) => {
+    const { mutate: addPushMsgDetail } = useAddPushMsgDetailMutation();
+    const { mutate: updatePushMsgDetail } = useUpdatePushMsgDetailMutation();
+    const { mutate: deletePushMsg } = useDeletePushMsgMutation();
+
     const handleResetClick = useCallback(() => {
       reset();
       setIsUpdatingDetail(false);
@@ -37,8 +47,20 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
         }
 
         console.log("수정할 데이터:", data);
+
+        updatePushMsgDetail(data, {
+          onSuccess: (res) => {
+            const data = res.data.data;
+            if (data === true) {
+              alert("정상적으로 수정되었습니다.");
+              handleResetClick();
+              return;
+            }
+            alert("오류 발생");
+          },
+        });
       })();
-    }, [handleSubmit]);
+    }, [handleSubmit, handleResetClick]);
 
     const handleDeleteClick = useCallback(() => {
       handleSubmit((data) => {
@@ -48,8 +70,27 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
         }
 
         console.log("삭제할 데이터의 key:", data.serviceCd);
+
+        if (isNullOrEmpty(data.serviceCd)) {
+          return;
+        }
+
+        deletePushMsg(
+          { serviceCd: data.serviceCd },
+          {
+            onSuccess: (res) => {
+              const data = res.data.data;
+              if (data === true) {
+                alert("정상적으로 저장되었습니다.");
+                handleResetClick();
+                return;
+              }
+              alert("오류 발생");
+            },
+          }
+        );
       })();
-    }, [handleSubmit]);
+    }, [handleSubmit, handleResetClick]);
 
     const handleAddClick = useCallback(() => {
       handleSubmit((data) => {
@@ -59,8 +100,19 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
         }
 
         console.log("추가할 데이터:", data);
+        addPushMsgDetail(data, {
+          onSuccess: (res) => {
+            const data = res.data.data;
+            if (data === true) {
+              alert("정상적으로 저장되었습니다.");
+              handleResetClick();
+              return;
+            }
+            alert("오류 발생");
+          },
+        });
       })();
-    }, [handleSubmit]);
+    }, [handleSubmit, handleResetClick]);
 
     return (
       <ButtonGroupRow>

@@ -38,7 +38,7 @@ export const addPushMsgDetail = async (
 export const updatePushMsgDetail = async (
   params: PushMsgDetailData
 ): Promise<ApiAxiosResponse<boolean>> => {
-  return await apiClient.put(restApiConfig.api.pushMsgMng.delete, params);
+  return await apiClient.put(restApiConfig.api.pushMsgMng.update, params);
 };
 
 /**
