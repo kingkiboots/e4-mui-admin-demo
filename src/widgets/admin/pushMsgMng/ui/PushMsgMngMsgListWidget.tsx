@@ -1,6 +1,7 @@
 import type {
   PushMsgDetailData,
   PushMsgList,
+  PushMsgListSearchParams,
 } from "@/entities/admin/pushMsgMng/types";
 import { useGetPushMsgList } from "@/features/admin/pushMsgMng/lib/useGetPushMsgList";
 import { isNullOrEmpty, isObject } from "@/shared/lib/commonHelpers";
@@ -58,12 +59,13 @@ const columns: GridColDef<PushMsgList>[] = [
 ];
 
 interface PushMsgMngMsgListWidgetProps {
+  pushMsgListSearchParams: PushMsgListSearchParams;
   setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
   detailFormSetValue: UseFormSetValue<PushMsgDetailData>;
 }
 const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
-  ({ setIsUpdatingDetail, detailFormSetValue }) => {
-    const { data: rows } = useGetPushMsgList();
+  ({ pushMsgListSearchParams, setIsUpdatingDetail, detailFormSetValue }) => {
+    const { data: rows } = useGetPushMsgList(pushMsgListSearchParams);
 
     const handleRowDoubleClick = useCallback(
       (params: GridRowCallbackParams<PushMsgList[number]>) => {
