@@ -6,3 +6,4 @@
 - [ ] shared/lib or model의 함수에 주석 달면 jsdoc 페이지 띄울 수 있는지 보기
 - [x] 커스텀 컴포넌트 했는데 왜 general style이 우선으로 먹히는지 수정
 - [ ] small, medium 얘네들 font size font-weight 일괄 적용 못하나?
+- [ ] spinner
