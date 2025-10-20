@@ -6,6 +6,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import appMockWorker from "./appMockWorker";
 import queryClient from "@/shared/config/queryClientConfig";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { SpinnerWrap } from "@/shared/ui/SpinnerUI";
 
 // api mock 데이터 등록
 appMockWorker();
@@ -15,6 +16,7 @@ function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
+          <SpinnerWrap />
           <RouterProvider router={appRouter} />
         </ThemeProvider>
         <ReactQueryDevtools />
