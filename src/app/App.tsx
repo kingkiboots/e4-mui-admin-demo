@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { QueryClientProvider } from "@tanstack/react-query";
 import appMockWorker from "./appMockWorker";
 import queryClient from "@/shared/config/queryClientConfig";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // api mock 데이터 등록
 appMockWorker();
@@ -16,6 +17,7 @@ function App() {
         <ThemeProvider>
           <RouterProvider router={appRouter} />
         </ThemeProvider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </HelmetProvider>
   );

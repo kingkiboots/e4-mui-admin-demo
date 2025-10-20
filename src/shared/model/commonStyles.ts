@@ -1,19 +1,17 @@
 import type { Theme } from "@mui/material/styles";
 
 export const disabledInputStyles = (theme: Theme) => ({
-  "&.Mui-disabled, &.Mui-readOnly": {
-    opacity: 1,
-    cursor: "not-allowed !important",
-    backgroundColor: theme.palette.text.disabled,
-
+    
     "& .Mui-disabled, & .Mui-readOnly": {
+      cursor: "not-allowed !important",
       color: theme.palette.grey[600],
+      opacity: 1,
+      backgroundColor: theme.palette.text.disabled,
       WebkitTextFillColor: `${theme.palette.grey[600]} !important`,
     },
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: `${theme.palette.grey[50]}`,
     },
-  },
 });
 
 export const inputEndAdorementStyles = (theme: Theme) => ({

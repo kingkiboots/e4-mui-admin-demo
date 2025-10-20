@@ -16,7 +16,7 @@ const handleError = async (
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: getTimeMilliseconds(3, "min"),
+      staleTime: getTimeMilliseconds(1, "min"),
       gcTime: getTimeMilliseconds(5, "min"),
       throwOnError: true,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

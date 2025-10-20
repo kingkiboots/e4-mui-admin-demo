@@ -9,7 +9,7 @@ import {
   isLoadingBarEnabled,
   handleSessionExpired,
   setSessionManagementTokenOnHeader,
-} from "../model/axiosInterceptorsHandlers.api";
+} from "../model/axiosInterceptorsHandler.api";
 import { HTTP_RESPONSE_STATUS_UNAUTHORIZED } from "../const";
 import { getLoadingState } from "../store/LoadingStateStore";
 import type { ApiRequestConfig } from "../type";

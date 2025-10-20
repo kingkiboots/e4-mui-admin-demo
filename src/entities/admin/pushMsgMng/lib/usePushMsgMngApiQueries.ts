@@ -1,18 +1,23 @@
 import type { ApiAxiosResponse } from "@/shared/type";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { useQuery } from "@tanstack/react-query";
-import { getPushMsgList } from "../api/pushMsgMngApi";
-import type { PushMsgMngList, PushMsgMngListSearchData } from "../types";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  addPushMsgDetail,
+  deletePushMsg,
+  getPushMsgList,
+  updatePushMsgDetail,
+} from "../api/pushMsgMngApi";
+import type { PushMsgList, PushMsgListSearchParams } from "../types";
 
 export const pushMsgMngApiQueryKey = createQueryKeys("pushMsgMngApiQueryKey", {
   list: (params) => [params],
 });
 
 export const useGetPushMsgListQuery = <TData>(
-  params: PushMsgMngListSearchData,
+  params: PushMsgListSearchParams,
   options?: {
     enabled?: boolean;
-    select: (res: ApiAxiosResponse<PushMsgMngList>) => TData;
+    select: (res: ApiAxiosResponse<PushMsgList>) => TData;
   }
 ) => {
   return useQuery({
@@ -20,5 +25,23 @@ export const useGetPushMsgListQuery = <TData>(
     enabled: options?.enabled,
     select: options?.select,
     queryFn: () => getPushMsgList(params),
+  });
+};
+
+export const useAddPushMsgDetailMutation = () => {
+  return useMutation({
+    mutationFn: addPushMsgDetail,
+  });
+};
+
+export const useUpdatePushMsgDetailMutation = () => {
+  return useMutation({
+    mutationFn: updatePushMsgDetail,
+  });
+};
+
+export const useDeletePushMsgMutation = () => {
+  return useMutation({
+    mutationFn: deletePushMsg,
   });
 };

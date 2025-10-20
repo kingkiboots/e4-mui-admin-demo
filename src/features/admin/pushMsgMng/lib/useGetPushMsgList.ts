@@ -1,10 +1,13 @@
 import { useGetPushMsgListQuery } from "@/entities/admin/pushMsgMng/lib/usePushMsgMngApiQueries";
-import type { PushMsgMngList } from "@/entities/admin/pushMsgMng/types";
+import type {
+  PushMsgList,
+  PushMsgListSearchParams,
+} from "@/entities/admin/pushMsgMng/types";
 import type { ApiAxiosResponse } from "@/shared/type";
 import { useCallback } from "react";
 
-export const useGetPushMsgList = () => {
-  const select = useCallback((res: ApiAxiosResponse<PushMsgMngList>) => {
+export const useGetPushMsgList = (params: PushMsgListSearchParams) => {
+  const select = useCallback((res: ApiAxiosResponse<PushMsgList>) => {
     const data = res.data.data;
     if (!data) {
       return undefined;
@@ -13,10 +16,6 @@ export const useGetPushMsgList = () => {
     return data;
   }, []);
 
-  const params = {
-    seq: "",
-    serviceCd: "",
-  };
   const query = useGetPushMsgListQuery(params, {
     select,
   });

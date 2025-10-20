@@ -1,7 +1,7 @@
 import {
   requestDataRemoval,
   requestDataSharing,
-} from "../model/sessionStorageShareHandlers";
+} from "../model/sessionStorageShareHandler";
 
 export type StorageType = "local" | "session";
 type StorageValue<T> = T | null;
