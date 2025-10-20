@@ -1,4 +1,7 @@
-import type { ProductMngList } from "@/entities/admin/productMng/types";
+import type {
+  ProductMngList,
+  ProductMngListSearchData,
+} from "@/entities/admin/productMng/types";
 import { useGetProductList } from "@/features/admin/productMng/lib/useGetProductList";
 import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
 import { memo } from "react";
@@ -95,24 +98,31 @@ const columns: GridColDef<ProductMngList>[] = [
     headerName: "최종변경사용자",
   },
 ];
-const ProductMngListWidget = memo(() => {
-  const { data: rows } = useGetProductList();
 
-  return (
-    <DataGrid
-      title="메시지 목록"
-      getRowId={(row) => row.eventId}
-      columns={columns}
-      rows={rows}
-      key={`product-mng-list-key`}
-      information={
-        <>
-          조회한 상품 목록 중 <span>전시정보/사용여부</span>를 변경할 수
-          있습니다.
-        </>
-      }
-    />
-  );
-});
+interface PushMsgMngMsgListWidgetProps {
+  productListSearchParams: ProductMngListSearchData;
+}
+
+const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
+  ({ productListSearchParams }) => {
+    const { data: rows } = useGetProductList(productListSearchParams);
+
+    return (
+      <DataGrid
+        title="메시지 목록"
+        getRowId={(row) => row.eventId}
+        columns={columns}
+        rows={rows}
+        key={`product-mng-list-key`}
+        information={
+          <>
+            조회한 상품 목록 중 <span>전시정보/사용여부</span>를 변경할 수
+            있습니다.
+          </>
+        }
+      />
+    );
+  }
+);
 
 export default ProductMngListWidget;

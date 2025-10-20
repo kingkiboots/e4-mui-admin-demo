@@ -8,19 +8,29 @@ import ProductMngListWidget from "@/widgets/admin/productMng/ui/ProductMngListWi
 import ProductMngButtonGroupWidget from "@/widgets/admin/productMng/ui/ProductMngButtonGroupWidget";
 import { Dialog } from "@/shared/ui/DialogUI";
 import { useState } from "react";
+import type { ProductMngListSearchData } from "@/entities/admin/productMng/types";
+import { defaultProductListSearchParams } from "@/features/admin/productMng/model/getProductListHandler";
 
 const ProductMngPage = () => {
   const [alerts, setAlerts] = useState(false);
 
+  //NOTE - 목록 검색 params state
+  const [productListSearchParams, setProductListSearchParams] =
+    useState<ProductMngListSearchData>(defaultProductListSearchParams);
+
   return (
     <Meta>
       <PageContentLayout>
-        <ProductMngSearchbarWidget />
+        <ProductMngSearchbarWidget
+          setProductListSearchParams={setProductListSearchParams}
+        />
         <ProductMngDetailEventWidget />
         <ProductMngDetailCompWidget />
         <ProductMngDetailTypeWidget />
         <ProductMngButtonGroupWidget setAlert={setAlerts} />
-        <ProductMngListWidget />
+        <ProductMngListWidget
+          productListSearchParams={productListSearchParams}
+        />
         <Dialog
           type="alert"
           title="완료"
