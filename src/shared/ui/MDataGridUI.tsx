@@ -40,7 +40,7 @@ const StyledDataGrid = styled(MUIDataGrid, {
     borderBottom: "2px solid #0114a7 !important",
   },
 
-  "& .MuiDataGrid-row:nth-child(odd)": {
+  "& .MuiDataGrid-row:nth-of-type(odd)": {
     backgroundColor: theme.palette.background.cell,
   },
 
