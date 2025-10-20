@@ -65,7 +65,9 @@ interface PushMsgMngMsgListWidgetProps {
 }
 const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
   ({ pushMsgListSearchParams, setIsUpdatingDetail, detailFormSetValue }) => {
-    const { data: rows } = useGetPushMsgList(pushMsgListSearchParams);
+    const { data: rows, isLoading } = useGetPushMsgList(
+      pushMsgListSearchParams
+    );
 
     const handleRowDoubleClick = useCallback(
       (params: GridRowCallbackParams<PushMsgList[number]>) => {
@@ -92,6 +94,7 @@ const PushMsgMngMsgListWidget = memo<PushMsgMngMsgListWidgetProps>(
         getRowId={(row) => row.serviceCd}
         columns={columns}
         rows={rows}
+        loading={isLoading}
         onRowDoubleClick={handleRowDoubleClick}
         disableRowSelectionOnClick
         information={

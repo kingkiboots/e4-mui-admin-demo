@@ -105,7 +105,9 @@ interface PushMsgMngMsgListWidgetProps {
 
 const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
   ({ productListSearchParams }) => {
-    const { data: rows } = useGetProductList(productListSearchParams);
+    const { data: rows, isLoading } = useGetProductList(
+      productListSearchParams
+    );
 
     return (
       <DataGrid
@@ -113,6 +115,7 @@ const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
         getRowId={(row) => row.eventId}
         columns={columns}
         rows={rows}
+        loading={isLoading}
         key={`product-mng-list-key`}
         information={
           <>

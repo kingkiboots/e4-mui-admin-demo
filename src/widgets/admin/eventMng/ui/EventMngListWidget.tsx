@@ -110,7 +110,7 @@ export const EventMngListWidget = memo<EventMngListWidgetProps>(
   ({ eventListSearchParams }) => {
     const [alerts, setAlerts] = useState(false);
 
-    const { data } = useGetEventList(eventListSearchParams);
+    const { data, isLoading } = useGetEventList(eventListSearchParams);
 
     const { rows, columns, handleAdd, handleRemove } = useAddRemoveRows(
       baseDataColumns,
@@ -133,6 +133,7 @@ export const EventMngListWidget = memo<EventMngListWidgetProps>(
           title="혜택 목록"
           rows={rows}
           columns={columns}
+          loading={isLoading}
           getRowId={(row) => row.id}
         />
         <Dialog
