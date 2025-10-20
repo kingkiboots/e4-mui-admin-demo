@@ -1,4 +1,7 @@
-import type { EventMngData } from "@/entities/admin/eventMng/types";
+import type {
+  EventMngData,
+  EventMngListSearchData,
+} from "@/entities/admin/eventMng/types";
 import { useAddRemoveRows } from "@/features/admin/eventMng/lib/useAddRemoveRows";
 import { useGetEventList } from "@/features/admin/eventMng/lib/useGetEventList";
 import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
@@ -99,44 +102,50 @@ const baseDataColumns: GridColDef<EventMngData>[] = [
   },
 ];
 
-export const EventMngListWidget = memo(() => {
-  const [alerts, setAlerts] = useState(false);
+interface EventMngListWidgetProps {
+  eventListSearchParams: EventMngListSearchData;
+}
 
-  const { data } = useGetEventList();
+export const EventMngListWidget = memo<EventMngListWidgetProps>(
+  ({ eventListSearchParams }) => {
+    const [alerts, setAlerts] = useState(false);
 
-  const { rows, columns, handleAdd, handleRemove } = useAddRemoveRows(
-    baseDataColumns,
-    data
-  );
+    const { data } = useGetEventList(eventListSearchParams);
 
-  // 이벤트 핸들러
-  const handleSave = useCallback(() => {
-    setAlerts(true);
-  }, []);
+    const { rows, columns, handleAdd, handleRemove } = useAddRemoveRows(
+      baseDataColumns,
+      data
+    );
 
-  return (
-    <>
-      <EventMngButtonGroupWidget
-        onAdd={handleAdd}
-        onSave={handleSave}
-        onRemove={handleRemove}
-      />
-      <DataGrid
-        title="혜택 목록"
-        rows={rows}
-        columns={columns}
-        getRowId={(row) => row.id}
-      />
-      <Dialog
-        type="alert"
-        title="완료"
-        description="저장이 완료 되었습니다."
-        open={alerts}
-        setOpen={setAlerts}
-      />
-    </>
-  );
-});
+    // 이벤트 핸들러
+    const handleSave = useCallback(() => {
+      setAlerts(true);
+    }, []);
+
+    return (
+      <>
+        <EventMngButtonGroupWidget
+          onAdd={handleAdd}
+          onSave={handleSave}
+          onRemove={handleRemove}
+        />
+        <DataGrid
+          title="혜택 목록"
+          rows={rows}
+          columns={columns}
+          getRowId={(row) => row.id}
+        />
+        <Dialog
+          type="alert"
+          title="완료"
+          description="저장이 완료 되었습니다."
+          open={alerts}
+          setOpen={setAlerts}
+        />
+      </>
+    );
+  }
+);
 
 EventMngListWidget.displayName = "EventMngListWidget";
 export default EventMngListWidget;

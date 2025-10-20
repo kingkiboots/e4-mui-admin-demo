@@ -1,57 +1,61 @@
 import type { EventMngListSearchData } from "@/entities/admin/eventMng/types";
+import { useSearchEventList } from "@/features/admin/eventMng/lib/useSearchEventList";
 import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroupUI";
 import { Searchbar } from "@/shared/ui/SearchbarUI";
-import { Select, type SelectOption } from "@/shared/ui/SelectUI";
-import { memo } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { Select } from "@/shared/ui/SelectUI";
+import type { Dispatch, SetStateAction } from "react";
+import { memo, useMemo } from "react";
 
-const EventMngSearchbarWidget = memo(() => {
-  const { control, reset, handleSubmit } = useForm<EventMngListSearchData>();
+interface EventMngSearchbarWidgetProps {
+  setEventListSearchParams: Dispatch<SetStateAction<EventMngListSearchData>>;
+}
 
-  const options: SelectOption[] = [
-    { value: "0", label: "전체" },
-    { value: "1", label: "이벤트_1" },
-    { value: "2", label: "이벤트_2" },
-    { value: "3", label: "이벤트_3" },
-  ];
+const EventMngSearchbarWidget = memo<EventMngSearchbarWidgetProps>(
+  ({ setEventListSearchParams }) => {
+    const { control, reset, handleSearchClick } = useSearchEventList({
+      setEventListSearchParams,
+    });
 
-  const buttonsDef: SearchbarButtonGroupProps = {
-    onClickSearch: () => {
-      const handleValid: SubmitHandler<EventMngListSearchData> = (data) => {
-        console.log(data);
-      };
-      handleSubmit(handleValid)();
-    },
-    onClickClearSearchbar: () => {
-      reset();
-    },
-  };
+    const buttonsDef: SearchbarButtonGroupProps = useMemo(
+      () => ({
+        onClickSearch: handleSearchClick,
+        onClickClearSearchbar: () => {
+          reset();
+        },
+      }),
+      [reset, handleSearchClick]
+    );
 
-  return (
-    <Searchbar
-      buttonsDef={buttonsDef}
-      information={
-        <>
-          표준데이터 시스템에 <span>혜택이벤트 코드</span>를 등록 후 이벤트
-          설정이 가능합니다.
-        </>
-      }
-    >
-      <Searchbar.InputsArea>
-        <Select
-          name="eventType"
-          control={control}
-          label="이벤트"
-          options={options}
-          defaultValue={"0"}
-          totalColSpan={{ xs: 12, sm: 4 }}
-          labelColSpan={{ xs: 12, sm: 4 }}
-          inputColSpan={{ xs: 12, sm: 8 }}
-        />
-      </Searchbar.InputsArea>
-    </Searchbar>
-  );
-});
+    return (
+      <Searchbar
+        buttonsDef={buttonsDef}
+        information={
+          <>
+            표준데이터 시스템에 <span>혜택이벤트 코드</span>를 등록 후 이벤트
+            설정이 가능합니다.
+          </>
+        }
+      >
+        <Searchbar.InputsArea>
+          <Select
+            name="eventType"
+            control={control}
+            label="이벤트"
+            options={[
+              { value: "전체", label: "전체" },
+              { value: "EVT001", label: "EVT001" },
+              { value: "EVT002", label: "EVT002" },
+            ]}
+            defaultValue={"전체"}
+            totalColSpan={{ xs: 12, sm: 4 }}
+            labelColSpan={{ xs: 12, sm: 4 }}
+            inputColSpan={{ xs: 12, sm: 8 }}
+          />
+        </Searchbar.InputsArea>
+      </Searchbar>
+    );
+  }
+);
 
 EventMngSearchbarWidget.displayName = "EventMngSearchbarWidget";
 export default EventMngSearchbarWidget;
