@@ -17,7 +17,8 @@ import { requestDataRemoval } from "./sessionStorageShareHandler";
 const browserStorage = getBrowserStorageController("session");
 export const isLoadingBarEnabled = (config: ApiRequestConfig) =>
   config.showLoading ||
-  (config.showLoading !== false && config.method !== "get");
+  // (config.showLoading !== false && config.method !== "get");
+  config.showLoading !== false;
 
 //SECTION - 세션 관리: 리프레쉬토큰을 header.Authorization에 담음
 export const setSessionManagementTokenOnHeader = (
