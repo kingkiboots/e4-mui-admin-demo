@@ -40,7 +40,7 @@ export const paletteConfig: PaletteOptions = {
   },
   primary: {
     main: "#0018CE",
-    dark: "#000f80ff",
+    dark: "#000f80",
   },
   secondary: {
     main: "#7C757D",
