@@ -1,4 +1,3 @@
-import type { ProductEvtKeySearchData } from "@/entities/admin/productMng/types";
 import {
   DataGrid,
   type GridColDef,
@@ -9,10 +8,8 @@ import type { SearchbarButtonGroupProps } from "@/shared/ui/SearchbarButtonGroup
 import { Searchbar } from "@/shared/ui/SearchbarUI";
 import type { SearchModalProps } from "@/shared/ui/SearchInputUI";
 import { TextField } from "@/shared/ui/TextFieldUI";
-import ErrorFallback from "@/widgets/error/5xx/ui/ErrorFallback";
-import { useCallback, type ComponentType } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { memo, useCallback, type ComponentType } from "react";
+import { useForm } from "react-hook-form";
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
   {
@@ -23,7 +20,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     headerAlign: "center",
   },
   {
-    field: "account",
+    field: "evt",
     headerName: "이벤트식별자",
     flex: 1,
     align: "center",
@@ -33,42 +30,39 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
 ];
 
 const rows = [
-  { id: 1, account: "EVT20251014A01" },
-  { id: 2, account: "EVT20251014A02" },
-  { id: 3, account: "EVT20251014A03" },
+  { id: 1, evt: "EVT20251014A01" },
+  { id: 2, evt: "EVT20251014A02" },
 ];
 
-export const ProductMngEventSearchModal: ComponentType<SearchModalProps> = ({
-  isOpen,
-  setIsOpen,
-}) => {
-  const { control, handleSubmit } = useForm<ProductEvtKeySearchData>();
+const ProductMngEventSearchModal: ComponentType<SearchModalProps> = memo(
+  ({ isOpen, setIsOpen, onSelectValue }) => {
+    const { control, getValues } = useForm<{ evt: string }>();
 
-  const searchButtonsDef: SearchbarButtonGroupProps = {
-    onClickSearch: () => {
-      const handleValid: SubmitHandler<ProductEvtKeySearchData> = (data) => {
-        console.log(data);
-      };
-      handleSubmit(handleValid)();
-    },
-  };
+    const searchButtonsDef: SearchbarButtonGroupProps = {
+      onClickSearch: () => {
+        console.log(getValues("evt"));
+      },
+    };
 
-  const handleRowDoubleClick = useCallback(
-    (params: GridRowCallbackParams<typeof rows>) => {
-      console.log("params", params);
-    },
-    []
-  );
+    const handleRowDoubleClick = useCallback(
+      (params: GridRowCallbackParams<(typeof rows)[number]>) => {
+        console.log("params", params.columns);
+        console.log("params", params.id);
+        console.log("params", params.row);
 
-  return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="이벤트식별자 검색">
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        onSelectValue({ value: params.row.evt });
+      },
+      []
+    );
+
+    return (
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="매체식별자 검색">
         <Searchbar buttonsDef={searchButtonsDef}>
           <Searchbar.InputsArea>
             <TextField
-              name="evtKey"
-              control={control}
+              name="evt"
               label="이벤트식별자"
+              control={control}
               totalColSpan={12}
               labelColSpan={{ xs: 12, sm: 2 }}
               inputColSpan={{ xs: 12, sm: 10 }}
@@ -89,7 +83,10 @@ export const ProductMngEventSearchModal: ComponentType<SearchModalProps> = ({
             </>
           }
         />
-      </ErrorBoundary>
-    </Modal>
-  );
-};
+      </Modal>
+    );
+  }
+);
+
+ProductMngEventSearchModal.displayName = "ProductMngAccountSearchModal";
+export default ProductMngEventSearchModal;

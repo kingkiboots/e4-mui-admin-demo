@@ -5,7 +5,7 @@ import { SearchInput } from "@/shared/ui/SearchInputUI";
 import { memo, useCallback } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import ProductMngAccountSearchModal from "../modal/ProductMngAccountSearchModal";
-import { ProductMngEventSearchModal } from "../modal/ProductMngEventSearchModal";
+import ProductMngEventSearchModal from "../modal/ProductMngEventSearchModal";
 
 const ProductMngSearchbarWidget = memo(() => {
   const { reset, control, handleSubmit } = useForm<ProductMngListSearchData>();
