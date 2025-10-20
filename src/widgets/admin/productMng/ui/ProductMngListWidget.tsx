@@ -111,7 +111,7 @@ const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
 
     return (
       <DataGrid
-        title="메시지 목록"
+        title="상품전시 목록"
         getRowId={(row) => row.eventId}
         columns={columns}
         rows={rows}
