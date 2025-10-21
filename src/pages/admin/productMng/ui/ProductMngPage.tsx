@@ -8,15 +8,26 @@ import ProductMngListWidget from "@/widgets/admin/productMng/ui/ProductMngListWi
 import ProductMngButtonGroupWidget from "@/widgets/admin/productMng/ui/ProductMngButtonGroupWidget";
 import { Dialog } from "@/shared/ui/DialogUI";
 import { useState } from "react";
-import type { ProductMngListSearchData } from "@/entities/admin/productMng/types";
+import type {
+  ProductMngDetailData,
+  ProductMngListSearchData,
+} from "@/entities/admin/productMng/types";
 import { defaultProductListSearchParams } from "@/features/admin/productMng/model/getProductListHandler";
+import { useForm } from "react-hook-form";
 
 const ProductMngPage = () => {
   const [alerts, setAlerts] = useState(false);
 
+  //NOTE - 상세정보 UseForm
+  const { control, setValue, handleSubmit, reset } =
+    useForm<ProductMngDetailData>();
+
   //NOTE - 목록 검색 params state
   const [productListSearchParams, setProductListSearchParams] =
     useState<ProductMngListSearchData>(defaultProductListSearchParams);
+
+  //NOTE - state that indicates whether row in the list is double clicked (han-geul not working T.T)
+  const [isUpdatingDetail, setIsUpdatingDetail] = useState<boolean>(false);
 
   return (
     <Meta>
@@ -24,12 +35,29 @@ const ProductMngPage = () => {
         <ProductMngSearchbarWidget
           setProductListSearchParams={setProductListSearchParams}
         />
-        <ProductMngDetailEventWidget />
-        <ProductMngDetailCompWidget />
-        <ProductMngDetailTypeWidget />
-        <ProductMngButtonGroupWidget setAlert={setAlerts} />
+        <ProductMngDetailEventWidget
+          isUpdatingDetail={isUpdatingDetail}
+          detailFormControl={control}
+        />
+        <ProductMngDetailCompWidget
+          isUpdatingDetail={isUpdatingDetail}
+          detailFormControl={control}
+        />
+        <ProductMngDetailTypeWidget
+          isUpdatingDetail={isUpdatingDetail}
+          detailFormControl={control}
+        />
+        <ProductMngButtonGroupWidget
+          setAlert={setAlerts}
+          isUpdatingDetail={isUpdatingDetail}
+          setIsUpdatingDetail={setIsUpdatingDetail}
+          resetDetailForm={reset}
+          handleSubmitDetailForm={handleSubmit}
+        />
         <ProductMngListWidget
           productListSearchParams={productListSearchParams}
+          setIsUpdatingDetail={setIsUpdatingDetail}
+          detailFormSetValue={setValue}
         />
         <Dialog
           type="alert"

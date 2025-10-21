@@ -1,8 +1,12 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { ProductMngList, ProductMngListSearchData } from "../types";
 import type { ApiAxiosResponse } from "@/shared/type";
-import { getProductList } from "../api/productMngApi";
+import {
+  addProductDetail,
+  getProductList,
+  updateProductDetail,
+} from "../api/productMngApi";
 
 export const productMngApiQueryKey = createQueryKeys("productMngApiQueryKey", {
   list: (params) => [params],
@@ -20,5 +24,17 @@ export const useGetProductMngQuery = <TData>(
     enabled: options?.enabled,
     select: options?.select,
     queryFn: () => getProductList(params),
+  });
+};
+
+export const useAddProductDetailMutation = () => {
+  return useMutation({
+    mutationFn: addProductDetail,
+  });
+};
+
+export const useUpdateProductDetailMutation = () => {
+  return useMutation({
+    mutationFn: updateProductDetail,
   });
 };

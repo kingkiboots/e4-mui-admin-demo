@@ -1,10 +1,21 @@
 import type {
+  ProductMngDetailData,
   ProductMngList,
   ProductMngListSearchData,
 } from "@/entities/admin/productMng/types";
 import { useGetProductList } from "@/features/admin/productMng/lib/useGetProductList";
-import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
+import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
+import {
+  DataGrid,
+  type GridColDef,
+  type GridRowCallbackParams,
+} from "@/shared/ui/DataGridUI";
+import { isObject } from "@mui/x-data-grid/internals";
+import type { SetStateAction } from "react";
+import type { Dispatch } from "react";
+import { useCallback } from "react";
 import { memo } from "react";
+import type { UseFormSetValue } from "react-hook-form";
 
 const columns: GridColDef<ProductMngList>[] = [
   {
@@ -101,12 +112,46 @@ const columns: GridColDef<ProductMngList>[] = [
 
 interface PushMsgMngMsgListWidgetProps {
   productListSearchParams: ProductMngListSearchData;
+  setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
+  detailFormSetValue: UseFormSetValue<ProductMngDetailData>;
 }
 
 const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
-  ({ productListSearchParams }) => {
+  ({ productListSearchParams, setIsUpdatingDetail, detailFormSetValue }) => {
     const { data: rows, isLoading } = useGetProductList(
       productListSearchParams
+    );
+
+    const handleRowDoubleClick = useCallback(
+      (params: GridRowCallbackParams<ProductMngList[number]>) => {
+        if (isNullOrEmpty(params?.row) && !isObject(params?.row)) {
+          return;
+        }
+        const { row } = params;
+
+        setIsUpdatingDetail(true);
+
+        detailFormSetValue("brandId", row.brandId);
+        detailFormSetValue("brandName", row.brandName);
+        detailFormSetValue("eventId", row.eventId);
+        detailFormSetValue("giftId", row.giftId);
+        detailFormSetValue("giftSubTypeCd", row.giftSubTypeCd);
+        detailFormSetValue("giftTypeCd", row.giftTypeCd);
+        detailFormSetValue("gifttName", row.gifttName);
+        detailFormSetValue("img250", row.img250);
+        detailFormSetValue("img500", row.img500);
+        detailFormSetValue("mediaId", row.mediaId);
+        detailFormSetValue("regStepDt", row.regStepDt);
+        detailFormSetValue("regStepId", row.regStepId);
+        detailFormSetValue("saleDisAmt", row.saleDisAmt);
+        detailFormSetValue("saleEndDate", row.saleEndDate);
+        detailFormSetValue("salePrice", row.salePrice);
+        detailFormSetValue("subTypeNm", row.subTypeNm);
+        detailFormSetValue("updStepDt", row.updStepDt);
+        detailFormSetValue("updStepId", row.updStepId);
+        detailFormSetValue("useYn", row.useYn);
+      },
+      []
     );
 
     return (
@@ -116,6 +161,7 @@ const ProductMngListWidget = memo<PushMsgMngMsgListWidgetProps>(
         columns={columns}
         rows={rows}
         loading={isLoading}
+        onRowDoubleClick={handleRowDoubleClick}
         key={`product-mng-list-key`}
         information={
           <>

@@ -8,6 +8,8 @@ export const restApiConfig = {
     },
     productMng: {
       list: "/api/productMng/list",
+      add: "/api/productMng/add",
+      update: "/api/productMng/update",
     },
     pushMsgMng: {
       list: "/api/pushMsgMng/list",
