@@ -22,31 +22,29 @@ export const Dialog = memo(
     };
 
     return (
-      <React.Fragment>
-        <MUIDialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {description}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            {type == "confirm" ? (
-              <Button onClick={handleClose}>취소</Button>
-            ) : (
-              <></>
-            )}
-            <Button onClick={handleClose} autoFocus>
-              확인
-            </Button>
-          </DialogActions>
-        </MUIDialog>
-      </React.Fragment>
+      <MUIDialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {description}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          {type == "confirm" ? (
+            <Button onClick={handleClose}>취소</Button>
+          ) : (
+            <></>
+          )}
+          <Button onClick={handleClose} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </MUIDialog>
     );
   }
 );

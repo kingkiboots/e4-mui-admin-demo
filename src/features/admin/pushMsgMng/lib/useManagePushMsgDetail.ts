@@ -4,6 +4,7 @@ import {
   useUpdatePushMsgDetailMutation,
 } from "@/entities/admin/pushMsgMng/lib/usePushMsgMngApiQueries";
 import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
+import { useDialog } from "@/shared/lib/dialogHelpers";
 import type { Dispatch, SetStateAction } from "react";
 import { useCallback } from "react";
 import type { UseFormReset } from "react-hook-form";
@@ -15,6 +16,8 @@ export const useManagePushMsgDetail = ({
   reset: UseFormReset<PushMsgDetailData>;
   setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const { alert } = useDialog();
+
   const { mutate: addPushMsgDetail } = useAddPushMsgDetailMutation();
   const { mutate: updatePushMsgDetail } = useUpdatePushMsgDetailMutation();
   const { mutate: deletePushMsg } = useDeletePushMsgMutation();
