@@ -15,7 +15,7 @@ import { memo, useCallback } from "react";
 import EventMngButtonGroupWidget from "./EventMngButtonGroupWidget";
 import { useState } from "react";
 import { Dialog } from "@/shared/ui/DialogUI";
-import type { UseFormSetValue } from "react-hook-form";
+import type { UseFormReset, UseFormSetValue } from "react-hook-form";
 import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
 import { isObject } from "@mui/x-data-grid/internals";
 
@@ -114,10 +114,11 @@ const baseDataColumns: GridColDef<EventMngData>[] = [
 interface EventMngListWidgetProps {
   eventListSearchParams: EventMngListSearchData;
   detailFormSetValue: UseFormSetValue<EventMngDetailData>;
+  resetDetailForm: UseFormReset<EventMngDetailData>;
 }
 
 export const EventMngListWidget = memo<EventMngListWidgetProps>(
-  ({ eventListSearchParams, detailFormSetValue }) => {
+  ({ eventListSearchParams, detailFormSetValue, resetDetailForm: reset }) => {
     const [alerts, setAlerts] = useState(false);
 
     const { data, isLoading } = useGetEventList(eventListSearchParams);
@@ -153,6 +154,7 @@ export const EventMngListWidget = memo<EventMngListWidgetProps>(
     // 이벤트 핸들러
     const handleSave = useCallback(() => {
       setAlerts(true);
+      reset();
     }, []);
 
     return (

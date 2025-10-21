@@ -17,7 +17,7 @@ const EventMngPage = () => {
     useState<EventMngListSearchData>(defaultEventListSearchParams);
 
   //NOTE - 상세정보 UseForm
-  const { control, setValue } = useForm<EventMngDetailData>();
+  const { control, setValue, reset } = useForm<EventMngDetailData>();
 
   return (
     <Meta>
@@ -29,6 +29,7 @@ const EventMngPage = () => {
         <EventMngListWidget
           eventListSearchParams={eventListSearchParams}
           detailFormSetValue={setValue}
+          resetDetailForm={reset}
         />
       </PageContentLayout>
     </Meta>
