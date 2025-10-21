@@ -5,12 +5,19 @@ import EventMngInfoWidget from "@/widgets/admin/eventMng/ui/EventMngDetailWidget
 import { EventMngListWidget } from "@/widgets/admin/eventMng/ui/EventMngListWidget";
 import { useState } from "react";
 import { defaultEventListSearchParams } from "@/features/admin/eventMng/model/getEventListHandler";
-import type { EventMngListSearchData } from "@/entities/admin/eventMng/types";
+import type {
+  EventMngDetailData,
+  EventMngListSearchData,
+} from "@/entities/admin/eventMng/types";
+import { useForm } from "react-hook-form";
 
 const EventMngPage = () => {
   //NOTE - 목록 검색 params state
   const [eventListSearchParams, setEventListSearchParams] =
     useState<EventMngListSearchData>(defaultEventListSearchParams);
+
+  //NOTE - 상세정보 UseForm
+  const { control, setValue } = useForm<EventMngDetailData>();
 
   return (
     <Meta>
@@ -18,8 +25,11 @@ const EventMngPage = () => {
         <EventMngSearchbarWidget
           setEventListSearchParams={setEventListSearchParams}
         />
-        <EventMngInfoWidget />
-        <EventMngListWidget eventListSearchParams={eventListSearchParams} />
+        <EventMngInfoWidget detailFormControl={control} />
+        <EventMngListWidget
+          eventListSearchParams={eventListSearchParams}
+          detailFormSetValue={setValue}
+        />
       </PageContentLayout>
     </Meta>
   );

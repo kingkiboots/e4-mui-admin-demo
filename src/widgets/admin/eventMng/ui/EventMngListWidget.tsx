@@ -1,14 +1,23 @@
 import type {
   EventMngData,
+  EventMngDetailData,
+  EventMngList,
   EventMngListSearchData,
 } from "@/entities/admin/eventMng/types";
 import { useAddRemoveRows } from "@/features/admin/eventMng/lib/useAddRemoveRows";
 import { useGetEventList } from "@/features/admin/eventMng/lib/useGetEventList";
-import { DataGrid, type GridColDef } from "@/shared/ui/DataGridUI";
+import {
+  DataGrid,
+  type GridColDef,
+  type GridRowCallbackParams,
+} from "@/shared/ui/DataGridUI";
 import { memo, useCallback } from "react";
 import EventMngButtonGroupWidget from "./EventMngButtonGroupWidget";
 import { useState } from "react";
 import { Dialog } from "@/shared/ui/DialogUI";
+import type { UseFormSetValue } from "react-hook-form";
+import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
+import { isObject } from "@mui/x-data-grid/internals";
 
 const baseDataColumns: GridColDef<EventMngData>[] = [
   {
@@ -104,10 +113,11 @@ const baseDataColumns: GridColDef<EventMngData>[] = [
 
 interface EventMngListWidgetProps {
   eventListSearchParams: EventMngListSearchData;
+  detailFormSetValue: UseFormSetValue<EventMngDetailData>;
 }
 
 export const EventMngListWidget = memo<EventMngListWidgetProps>(
-  ({ eventListSearchParams }) => {
+  ({ eventListSearchParams, detailFormSetValue }) => {
     const [alerts, setAlerts] = useState(false);
 
     const { data, isLoading } = useGetEventList(eventListSearchParams);
@@ -115,6 +125,29 @@ export const EventMngListWidget = memo<EventMngListWidgetProps>(
     const { rows, columns, handleAdd, handleRemove } = useAddRemoveRows(
       baseDataColumns,
       data
+    );
+
+    const handleRowDoubleClick = useCallback(
+      (params: GridRowCallbackParams<EventMngList[number]>) => {
+        if (isNullOrEmpty(params?.row) && !isObject(params?.row)) {
+          return;
+        }
+        const { row } = params;
+
+        detailFormSetValue("code", row.code);
+        detailFormSetValue("difCode", row.difCode);
+        detailFormSetValue("edDt", row.edDt);
+        detailFormSetValue("id", row.id);
+        detailFormSetValue("name", row.name);
+        detailFormSetValue("searchCode", row.searchCode);
+        detailFormSetValue("setdef", row.setdef);
+        detailFormSetValue("stDt", row.stDt);
+        detailFormSetValue("suName", row.suName);
+        detailFormSetValue("suSearchCode", row.suSearchCode);
+        detailFormSetValue("typeName", row.typeName);
+        detailFormSetValue("useYn", row.useYn);
+      },
+      []
     );
 
     // 이벤트 핸들러
@@ -134,6 +167,7 @@ export const EventMngListWidget = memo<EventMngListWidgetProps>(
           rows={rows}
           columns={columns}
           loading={isLoading}
+          onRowDoubleClick={handleRowDoubleClick}
           getRowId={(row) => row.id}
         />
         <Dialog
