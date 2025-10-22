@@ -1,5 +1,6 @@
 import type { ProductMngDetailData } from "@/entities/admin/productMng/types";
 import { useManageProductDetail } from "@/features/admin/productMng/lib/useManageProductDetail";
+import { useDialog } from "@/shared/lib/dialogHelpers";
 import { checkIfDataIsNullOrEmpty } from "@/shared/lib/validationHelpers";
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
 import { Button } from "@/shared/ui/ButtonUI";
@@ -25,6 +26,7 @@ const ProductMngButtonGroupWidget = memo(
     resetDetailForm: reset,
     handleSubmitDetailForm: handleSubmit,
   }: ProductMngButtonGroupWidgetProps) => {
+    const { alert } = useDialog();
     const {
       resetPushMsgDetailForm,
       handleAddProductDetail,

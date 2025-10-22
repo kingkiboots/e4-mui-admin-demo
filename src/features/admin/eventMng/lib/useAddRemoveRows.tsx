@@ -2,6 +2,7 @@ import type {
   EventMngData,
   EventMngList,
 } from "@/entities/admin/eventMng/types";
+import { useDialog } from "@/shared/lib/dialogHelpers";
 import type { GridColDef } from "@/shared/ui/DataGridUI";
 import Checkbox from "@mui/material/Checkbox";
 import type { GridRowId } from "@mui/x-data-grid";
@@ -27,6 +28,7 @@ export const useAddRemoveRows = (
   baseDataColumns: GridColDef<EventMngData>[],
   data?: EventMngList
 ) => {
+  const { alert } = useDialog();
   const [rows, setRows] = useState<EventMngData[]>([]);
   const [selectionSet, setSelectionSet] = useState<Set<GridRowId>>(new Set());
 

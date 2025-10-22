@@ -3,6 +3,7 @@ import {
   useUpdateProductDetailMutation,
 } from "@/entities/admin/productMng/lib/useProductMngApiQueries";
 import type { ProductMngDetailData } from "@/entities/admin/productMng/types";
+import { useDialog } from "@/shared/lib/dialogHelpers";
 import type { Dispatch, SetStateAction } from "react";
 import { useCallback } from "react";
 import type { UseFormReset } from "react-hook-form";
@@ -14,6 +15,8 @@ export const useManageProductDetail = ({
   reset: UseFormReset<ProductMngDetailData>;
   setIsUpdatingDetail: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const { alert } = useDialog();
+
   const { mutate: addProductDetail } = useAddProductDetailMutation();
   const { mutate: updateProductDetail } = useUpdateProductDetailMutation();
 

@@ -1,6 +1,7 @@
 import type { PushMsgDetailData } from "@/entities/admin/pushMsgMng/types";
 import { useManagePushMsgDetail } from "@/features/admin/pushMsgMng/lib/useManagePushMsgDetail";
 import { isNullOrEmpty } from "@/shared/lib/commonHelpers";
+import { useDialog } from "@/shared/lib/dialogHelpers";
 import { checkIfDataIsNullOrEmpty } from "@/shared/lib/validationHelpers";
 import { ButtonGroupRow } from "@/shared/ui/ButtonGroupRowUI";
 import { Button } from "@/shared/ui/ButtonUI";
@@ -26,6 +27,7 @@ const PushMsgMngMsgDetailMngWidget = memo<PushMsgMngMsgDetailMngWidgetProps>(
     resetDetailForm: reset,
     handleSubmitDetailForm: handleSubmit,
   }) => {
+    const { alert } = useDialog();
     const {
       resetPushMsgDetailForm,
       handleAddPushMsgDetail,
